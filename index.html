@@ -696,7 +696,6 @@ function drawDonut(){
   const cx=W/2, cy=100, R=82, r=50;
   // Totais filtrados pelo período (usa PROD_DATA para períodos filtrados)
   const catTotals = CAT_INFO.map(c=>{
-    if(!filtro) return c.total;
     const {start,end}=getFilterSlice();
     let sum=0;
     for(const [nome,d] of Object.entries(PROD_DATA)){
