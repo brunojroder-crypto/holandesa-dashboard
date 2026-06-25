@@ -747,7 +747,7 @@ function drawDonut(){
   } else {
     ctx.fillStyle='rgba(255,255,255,0.45)'; ctx.font='10px system-ui';
     ctx.fillText('TOTAL', cx, cy-8);
-    const totalReal=catTotals.reduce((a,b)=>a+b,0);
+    const totalReal=filtro===0?TOTAL_GERAL:catTotals.reduce((a,b)=>a+b,0);
     const tStr=fmtBRL(totalReal);
     const fs=tStr.length>10?12:14;
     ctx.fillStyle='#fff'; ctx.font=`bold ${fs}px system-ui`;
@@ -1216,14 +1216,14 @@ function drawLancamentos(){
       <td class="dt">${l.dt}</td>
       <td>${l.pr}</td>
       <td class="qt">${l.qt}</td>
-      <td class="vl">R$ ${l.vl.toFixed(2).replace(".",",")}</td>
+      <td class="vl">R$ ${l.vl.toFixed(2).replace('.',',')}</td>
     </tr>`;
-  }).join("");
+  }).join('');
 
   tfoot.innerHTML = `<tr>
     <td colspan="2" class="tf-label">TOTAL DO MÊS</td>
     <td class="qt" style="font-weight:700">${totalQt}</td>
-    <td class="vl" style="font-weight:700;color:var(--cyan)">R$ ${totalVl.toFixed(2).replace(".",",")}</td>
+    <td class="vl" style="font-weight:700;color:var(--cyan)">R$ ${totalVl.toFixed(2).replace('.',',')}</td>
   </tr>`;
 }
 
