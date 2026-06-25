@@ -690,12 +690,13 @@ function drawEvolucao(){
 function drawDonut(){
   const canvas=document.getElementById('cDo');
   const W=canvas.parentElement.clientWidth-44;
-  canvas.width=W; canvas.height=240;
+  canvas.width=W; canvas.height=260;
   const ctx=canvas.getContext('2d');
   ctx.clearRect(0,0,W,240);
   const cx=W/2, cy=100, R=82, r=50;
-  // Totais filtrados pelo período (usa PROD_DATA para períodos filtrados)
+  // Totais filtrados pelo período
   const catTotals = CAT_INFO.map(c=>{
+    if(!filtro) return c.total;  // filtro=0: usa total hardcoded (inclui todos os produtos)
     const {start,end}=getFilterSlice();
     let sum=0;
     for(const [nome,d] of Object.entries(PROD_DATA)){
@@ -753,7 +754,7 @@ function drawDonut(){
     ctx.fillText(tStr, cx, cy+10);
   }
 
-  const lh=17, lstart=cy+R+18;
+  const lh=26, lstart=cy+R+18;
   CAT_INFO.forEach((c,i)=>{
     const col=i<2?0:1, row=i%2;
     const lx=col===0?10:W/2+4, ly=lstart+row*lh;
@@ -761,8 +762,15 @@ function drawDonut(){
     ctx.globalAlpha=isA?1:0.35;
     ctx.beginPath(); ctx.arc(lx+5,ly-4,5,0,Math.PI*2);
     ctx.fillStyle=c.color; ctx.fill();
-    ctx.textAlign='left'; ctx.fillStyle=isA?'#c0c0d8':'#7070a0'; ctx.font='11px system-ui';
-    ctx.fillText(`${c.name}  ${(catTotals[i]/total*100).toFixed(1)}%`,lx+14,ly);
+    ctx.textAlign='left';
+    // Nome da categoria
+    ctx.fillStyle=isA?'#c0c0d8':'#7070a0'; ctx.font='10px system-ui';
+    ctx.fillText(c.name.split(' ')[0],lx+14,ly);
+    // Valor em R$ (linha abaixo)
+    const vStr=catTotals[i]>=1000?'R$'+(catTotals[i]/1000).toFixed(1)+'k':'R$'+catTotals[i].toFixed(0);
+    const pStr=(catTotals[i]/total*100).toFixed(1)+'%';
+    ctx.fillStyle=isA?c.color:'#7070a0'; ctx.font='bold 11px system-ui';
+    ctx.fillText(`${vStr}  ${pStr}`,lx+14,ly+12);
     ctx.globalAlpha=1;
   });
 
@@ -1208,14 +1216,14 @@ function drawLancamentos(){
       <td class="dt">${l.dt}</td>
       <td>${l.pr}</td>
       <td class="qt">${l.qt}</td>
-      <td class="vl">R$ ${l.vl.toFixed(2).replace('.',',')}</td>
+      <td class="vl">R$ ${l.vl.toFixed(2).replace(".",",")}</td>
     </tr>`;
-  }).join('');
+  }).join("");
 
   tfoot.innerHTML = `<tr>
     <td colspan="2" class="tf-label">TOTAL DO MÊS</td>
     <td class="qt" style="font-weight:700">${totalQt}</td>
-    <td class="vl" style="font-weight:700;color:var(--cyan)">R$ ${totalVl.toFixed(2).replace('.',',')}</td>
+    <td class="vl" style="font-weight:700;color:var(--cyan)">R$ ${totalVl.toFixed(2).replace(".",",")}</td>
   </tr>`;
 }
 
