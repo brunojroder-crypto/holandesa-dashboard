@@ -25,6 +25,8 @@ body{font-family:system-ui,'Segoe UI',sans-serif;background:var(--bg);color:var(
 .fbtn{background:var(--card);border:1px solid var(--border);color:var(--muted);border-radius:8px;padding:7px 16px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit}
 .fbtn:hover{border-color:var(--cyan);color:var(--text)}
 .fbtn.on{background:var(--green);border-color:var(--green);color:#000;box-shadow:0 0 24px rgba(0,255,153,.6),0 0 8px rgba(0,255,153,.4)}
+.btn-lanc{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,rgba(0,207,255,.15),rgba(0,255,153,.1));border:1px solid rgba(0,207,255,.5);color:var(--cyan);border-radius:8px;padding:7px 18px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;font-family:inherit;margin-left:auto}
+.btn-lanc:hover{background:linear-gradient(135deg,rgba(0,207,255,.3),rgba(0,255,153,.2));border-color:var(--cyan);box-shadow:0 0 20px rgba(0,207,255,.4);color:#fff}
 
 /* BANNER DE FILTRO DE CATEGORIA */
 #catBanner{display:none;align-items:center;gap:12px;background:rgba(0,180,255,0.1);border:1px solid rgba(0,180,255,0.35);border-radius:10px;padding:10px 16px;margin-bottom:14px;animation:fadeUp .25s ease}
@@ -172,7 +174,11 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
     <h1>🥐 Panificadora Holandesa</h1>
     <div class="sub">Controle de Desperdício · Jun/2024 — Jun/2026 · 77 produtos · 626 dias</div>
   </div>
-  <div class="badge">📅 Atualizado em 25/06/2026</div>
+  <div style="display:flex;align-items:center;gap:12px">
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="badge">📅 Atualizado em 29/06/2026</div>
+    <a href="lancamento_desperdicio.html" class="btn-lanc">✏️ Novo Lançamento</a>
+  </div>
 </div>
 
 <!-- FILTROS DE PERÍODO -->
@@ -577,6 +583,10 @@ function setF(n){
 {dt:"05/06",pr:"Broa De Fuba",qt:2,vl:20.5},
 {dt:"03/06",pr:"Brioche Calabresa",qt:5,vl:139.0}
 ];
+window.LANCAMENTOS_MES = LANCAMENTOS_MES;
+window.LANCAMENTOS_MES = LANCAMENTOS_MES;
+window.LANCAMENTOS_MES = LANCAMENTOS_MES;
+window.LANCAMENTOS_MES = LANCAMENTOS_MES;
 window.LANCAMENTOS_MES = LANCAMENTOS_MES;
 updateAll();
 }
