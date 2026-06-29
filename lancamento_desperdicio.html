@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lançamento de Desperdício — Panificadora Holandesa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:       #080810;
+      --surface:  #111120;
+      --card:     #16162a;
+      --border:   rgba(255,255,255,0.07);
+      --text:     #e8e8f0;
+      --muted:    #6b6b8a;
+      --green:    #22d97e;
+      --blue:     #4f8ef7;
+      --orange:   #ff9846;
+      --red:      #ff5e7d;
+    }
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 28px 32px 48px;
+      font-size: 14px;
+    }
+
+    /* HEADER */
+    .header {
+      display:flex; align-items:flex-end; justify-content:space-between;
+      margin-bottom:28px; flex-wrap:wrap; gap:12px;
+    }
+    .header h1 {
+      font-size:24px; font-weight:800; letter-spacing:-0.5px;
+      background: linear-gradient(135deg, #fff 30%, #4f8ef7 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .header .sub { color:var(--muted); font-size:13px; margin-top:4px; }
+    .date-badge {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:10px; padding:8px 16px; font-size:13px;
+      color:var(--text); font-weight:500;
+    }
+
+    /* INSTRUÇÃO */
+    .instrucao-card {
+      background: linear-gradient(135deg, rgba(79,142,247,0.12), rgba(167,139,250,0.06));
+      border: 1px solid rgba(79,142,247,0.25);
+      border-radius:16px; padding:20px 24px;
+      margin-bottom:24px;
+    }
+    .instrucao-card h3 {
+      font-size:14px; font-weight:700; color:var(--blue); margin-bottom:10px;
+    }
+    .steps { display:flex; flex-wrap:wrap; gap:12px; }
+    .step {
+      display:flex; align-items:flex-start; gap:10px;
+      background:rgba(255,255,255,0.03); border:1px solid var(--border);
+      border-radius:10px; padding:12px 14px; flex:1; min-width:200px;
+    }
+    .step-num {
+      width:26px; height:26px; border-radius:8px;
+      background:var(--blue); color:#fff;
+      display:flex; align-items:center; justify-content:center;
+      font-size:12px; font-weight:700; flex-shrink:0;
+    }
+    .step-text { font-size:12px; color:var(--muted); line-height:1.5; }
+    .step-text strong { color:var(--text); display:block; margin-bottom:2px; }
+
+    /* ENTRADA MANUAL */
+    .section-label {
+      font-size:11px; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.8px; color:var(--muted); margin-bottom:12px;
+    }
+    .form-card {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:16px; padding:24px; margin-bottom:20px;
+    }
+    .form-grid {
+      display:grid; grid-template-columns:2fr 1fr 1fr auto;
+      gap:12px; align-items:end;
+    }
+    @media (max-width:700px) { .form-grid { grid-template-columns:1fr 1fr; } }
+    .field label {
+      display:block; font-size:11px; font-weight:600;
+      text-transform:uppercase; letter-spacing:0.6px;
+      color:var(--muted); margin-bottom:6px;
+    }
+    .field input, .field select {
+      width:100%; background:rgba(255,255,255,0.04);
+      border:1px solid var(--border); border-radius:10px;
+      color:var(--text); font-family:inherit; font-size:13px;
+      padding:10px 14px; outline:none;
+      transition:border-color 0.2s;
+    }
+    .field input:focus, .field select:focus {
+      border-color:var(--blue);
+      background:rgba(79,142,247,0.06);
+    }
+    .field input::placeholder { color:var(--muted); }
+    .btn-add {
+      background:var(--blue); color:#fff; border:none;
+      border-radius:10px; padding:10px 20px;
+      font-family:inherit; font-size:13px; font-weight:600;
+      cursor:pointer; transition:all 0.2s; white-space:nowrap;
+    }
+    .btn-add:hover { background:#6ba3f9; box-shadow:0 0 16px rgba(79,142,247,0.4); }
+
+    /* LISTA DE HOJE */
+    .table-card {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:16px; padding:24px; margin-bottom:20px;
+      overflow-x:auto;
+    }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    thead th {
+      text-align:left; padding:9px 12px;
+      font-size:10px; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.7px; color:var(--muted);
+      border-bottom:1px solid var(--border);
+    }
+    tbody tr { border-bottom:1px solid var(--border); }
+    tbody tr:last-child { border-bottom:none; }
+    tbody tr:hover { background:rgba(255,255,255,0.02); }
+    tbody td { padding:10px 12px; color:var(--text); }
+    .td-right { text-align:right; }
+    .status-manual { color:var(--blue); font-size:10px; font-weight:600; }
+    .status-foto   { color:var(--green);font-size:10px; font-weight:600; }
+    .btn-del {
+      background:none; border:none; color:var(--muted);
+      cursor:pointer; font-size:14px; padding:2px 6px;
+      border-radius:4px; transition:color 0.15s;
+    }
+    .btn-del:hover { color:var(--red); }
+
+    /* TOTALIZADOR */
+    .totais-row {
+      display:flex; gap:16px; flex-wrap:wrap; margin-bottom:20px;
+    }
+    .total-mini {
+      background:var(--card); border:1px solid var(--border);
+      border-radius:12px; padding:14px 18px; flex:1; min-width:140px;
+    }
+    .total-mini .lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.7px; color:var(--muted); margin-bottom:4px; }
+    .total-mini .val { font-size:20px; font-weight:800; color:#fff; letter-spacing:-0.5px; }
+
+    /* EXPORTAR */
+    .export-row { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px; }
+    .btn-export {
+      background:var(--card); border:1px solid var(--border);
+      color:var(--text); border-radius:10px;
+      padding:9px 18px; font-family:inherit; font-size:12px;
+      font-weight:600; cursor:pointer; transition:all 0.2s;
+    }
+    .btn-export:hover { border-color:var(--orange); color:var(--orange); }
+    .btn-export.primary {
+      background:var(--green); border-color:var(--green);
+      color:#000;
+    }
+    .btn-export.primary:hover { background:#1fc46e; box-shadow:0 0 16px rgba(34,217,126,0.3); }
+    .btn-export.primary:disabled { opacity:0.5; cursor:not-allowed; }
+    #save-status.ok  { background:rgba(34,217,126,0.12); border:1px solid rgba(34,217,126,0.3); color:var(--green); }
+    #save-status.err { background:rgba(255,94,125,0.12); border:1px solid rgba(255,94,125,0.3); color:var(--red); }
+    .btn-salvar-preco {
+      background:rgba(255,136,0,0.15); border:1px solid rgba(255,136,0,0.35);
+      color:var(--orange); border-radius:8px; padding:8px 10px;
+      cursor:pointer; font-size:14px; white-space:nowrap;
+      transition:all 0.2s; flex-shrink:0;
+    }
+    .btn-salvar-preco:hover { background:rgba(255,136,0,0.28); }
+    .form-grid { grid-template-columns: 2fr 0.7fr 0.9fr 0.9fr auto !important; }
+
+    /* CADASTRO DE PRODUTOS */
+    .produtos-toggle {
+      display:flex; align-items:center; justify-content:space-between;
+      background:var(--card); border:1px solid var(--border);
+      border-radius:14px; padding:14px 20px; cursor:pointer;
+      margin-bottom:0; transition:border-color 0.2s; user-select:none;
+    }
+    .produtos-toggle:hover { border-color:var(--blue); }
+    .produtos-toggle .tog-title {
+      font-size:14px; font-weight:700; color:var(--text);
+      display:flex; align-items:center; gap:10px;
+    }
+    .produtos-toggle .tog-count {
+      background:rgba(79,142,247,0.15); color:var(--blue);
+      font-size:11px; font-weight:700; border-radius:6px; padding:2px 8px;
+    }
+    .produtos-toggle .tog-arrow {
+      color:var(--muted); font-size:18px; transition:transform 0.25s;
+    }
+    .produtos-toggle.open .tog-arrow { transform:rotate(180deg); }
+
+    .produtos-panel {
+      background:var(--card); border:1px solid var(--border);
+      border-top:none; border-radius:0 0 14px 14px;
+      padding:20px; display:none; margin-bottom:20px;
+    }
+    .produtos-panel.open { display:block; }
+
+    .prod-form-row {
+      display:grid; grid-template-columns:1fr 0.6fr auto;
+      gap:10px; align-items:end; margin-bottom:18px;
+    }
+    @media(max-width:600px){ .prod-form-row { grid-template-columns:1fr 1fr; } }
+    .prod-field label {
+      display:block; font-size:10px; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.6px; color:var(--muted); margin-bottom:5px;
+    }
+    .prod-field input {
+      width:100%; background:rgba(255,255,255,0.04);
+      border:1px solid var(--border); border-radius:10px;
+      color:var(--text); font-family:inherit; font-size:13px;
+      padding:9px 13px; outline:none; transition:border-color 0.2s;
+    }
+    .prod-field input:focus { border-color:var(--blue); background:rgba(79,142,247,0.06); }
+    .btn-cadastrar {
+      background:var(--green); color:#000; border:none;
+      border-radius:10px; padding:9px 18px;
+      font-family:inherit; font-size:13px; font-weight:700;
+      cursor:pointer; transition:all 0.2s; white-space:nowrap;
+    }
+    .btn-cadastrar:hover { background:#1fc46e; box-shadow:0 0 14px rgba(34,217,126,0.3); }
+
+    .prod-search {
+      width:100%; background:rgba(255,255,255,0.04);
+      border:1px solid var(--border); border-radius:10px;
+      color:var(--text); font-family:inherit; font-size:13px;
+      padding:8px 13px; outline:none; margin-bottom:12px;
+      transition:border-color 0.2s;
+    }
+    .prod-search:focus { border-color:var(--blue); }
+
+    .prod-table-wrap { overflow-x:auto; max-height:360px; overflow-y:auto; }
+    .prod-table { width:100%; border-collapse:collapse; font-size:12px; }
+    .prod-table thead th {
+      position:sticky; top:0; background:var(--card);
+      text-align:left; padding:8px 10px;
+      font-size:10px; font-weight:700; text-transform:uppercase;
+      letter-spacing:0.7px; color:var(--muted);
+      border-bottom:1px solid var(--border);
+    }
+    .prod-table tbody tr { border-bottom:1px solid rgba(255,255,255,0.04); }
+    .prod-table tbody tr:hover { background:rgba(255,255,255,0.02); }
+    .prod-table td { padding:8px 10px; vertical-align:middle; }
+    .badge-default {
+      background:rgba(107,107,138,0.18); color:var(--muted);
+      font-size:9px; font-weight:700; border-radius:5px;
+      padding:2px 6px; text-transform:uppercase;
+    }
+    .badge-custom {
+      background:rgba(34,217,126,0.12); color:var(--green);
+      font-size:9px; font-weight:700; border-radius:5px;
+      padding:2px 6px; text-transform:uppercase;
+    }
+    .inp-preco-edit {
+      background:rgba(255,255,255,0.04); border:1px solid var(--border);
+      border-radius:7px; color:var(--text); font-family:inherit;
+      font-size:12px; padding:5px 8px; width:90px; outline:none;
+    }
+    .inp-preco-edit:focus { border-color:var(--orange); }
+    .btn-save-prod {
+      background:none; border:1px solid var(--border);
+      color:var(--muted); border-radius:7px; padding:5px 9px;
+      cursor:pointer; font-size:12px; transition:all 0.2s;
+    }
+    .btn-save-prod:hover { border-color:var(--orange); color:var(--orange); }
+    .btn-del-prod {
+      background:none; border:none; color:var(--muted);
+      cursor:pointer; font-size:13px; padding:3px 7px;
+      border-radius:5px; transition:color 0.15s;
+    }
+    .btn-del-prod:hover { color:var(--red); }
+    .prod-msg-erro {
+      color:var(--red); font-size:12px; margin-top:6px; display:none;
+    }
+    .prod-msg-ok {
+      color:var(--green); font-size:12px; margin-top:6px; display:none;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align:center; color:var(--muted); font-size:11px;
+      margin-top:40px; padding-top:16px; border-top:1px solid var(--border);
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(10px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .fade-in { animation:fadeUp 0.3s ease both; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <h1>📋 Lançamento de Desperdício</h1>
+    <div class="sub">Panificadora Holandesa · Setor de Compras &amp; Estoque</div>
+  </div>
+  <div class="date-badge" id="dateBadge">⏰ carregando...</div>
+</div>
+
+<!-- INSTRUÇÃO DO FLUXO -->
+<div class="instrucao-card">
+  <h3>📸 Como lançar por foto</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        <strong>Tire a foto</strong>
+        Planilha escrita à mão ou foto dos produtos com etiqueta de preço visível
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        <strong>Mande no chat</strong>
+        Cole ou arraste a foto direto na conversa com o assistente
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        <strong>Confirme os dados</strong>
+        O assistente mostra o que leu. Você corrige se precisar e confirma
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">
+        <strong>Salvo automaticamente</strong>
+        Os dados são gravados na base Excel e somados ao dashboard
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ENTRADA MANUAL -->
+<div class="section-label">Lançamento Manual</div>
+<div class="form-card">
+  <div class="form-grid">
+    <div class="field">
+      <label>Produto</label>
+      <input type="text" id="inp-produto" placeholder="Ex: Pão de Queijo Grande" list="prod-list" autocomplete="off"/>
+      <datalist id="prod-list">
+        <option value="PÃO DE QUEIJO GRANDE"/>
+        <option value="MINI RISOLIS"/>
+        <option value="MINI PÃO DE QUEIJO"/>
+        <option value="MINI KIBE"/>
+        <option value="SALGADO GRANDE FRITO"/>
+        <option value="SALGADO GRANDE ASSADO"/>
+        <option value="BOLO DE FUBA"/>
+        <option value="BOLO DE LARANJA"/>
+        <option value="MINI BOLINHA DE QUEIJO"/>
+        <option value="MINI COXINHA"/>
+        <option value="BOLO DE CENOURA"/>
+        <option value="BOLO DE CHOCOLATE"/>
+        <option value="PÃO FAZENDA"/>
+        <option value="CUECA VIRADA"/>
+        <option value="MINI PASTEL"/>
+        <option value="PÃO CUCA"/>
+        <option value="BOLO GLUTEM LESS"/>
+        <option value="BOLO DE AIPIM"/>
+        <option value="BRIOCHE DE CALABRESA"/>
+        <option value="PAO CASEIRO"/>
+        <option value="PAO ALEMAO"/>
+        <option value="MASSA DE PIZZA"/>
+        <option value="MEDIALUNA"/>
+        <option value="BISNAGUINHA"/>
+        <option value="BROA DE FUBA"/>
+        <option value="TORTA INTEIRA"/>
+        <option value="CAROLINA AÇUCARADA"/>
+        <option value="CROISSANT"/>
+        <option value="FATIA HUNGARA"/>
+        <option value="GRAVATINHA"/>
+        <option value="LUA DE MEL"/>
+        <option value="MINI ROSCA DE CREME"/>
+        <option value="PAO DE LEITE NINHO"/>
+        <option value="PIROGUE"/>
+        <option value="ROCAMBOLE"/>
+        <option value="TRANÇA DE CREME"/>
+        <option value="CUCA"/>
+        <option value="BOLO TIRA MISTO"/>
+        <option value="BOLO REDONDO MISTO"/>
+        <option value="BOLO NEGA MALUCA"/>
+        <option value="BOLO DE IOGURTE"/>
+        <option value="LANCHE NATURAL"/>
+        <option value="SALADA DE FRUTAS"/>
+        <option value="FATIA HUNGARA"/>
+      </datalist>
+    </div>
+    <div class="field">
+      <label>Quantidade (un)</label>
+      <input type="number" id="inp-qtd" placeholder="0" min="1"/>
+    </div>
+    <div class="field">
+      <label>Preço/Un (R$)</label>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <input type="number" id="inp-preco-un" placeholder="0,00" step="0.01" min="0" style="flex:1;"/>
+        <button class="btn-salvar-preco" id="btn-salvar-preco" onclick="salvarPrecoUn()" title="Salvar novo preço para este produto" style="display:none;">💾</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Total (R$)</label>
+      <input type="number" id="inp-valor" placeholder="0,00" step="0.01" min="0" style="background:rgba(0,207,255,0.04);border-color:rgba(0,207,255,0.2);"/>
+    </div>
+    <div class="field">
+      <button class="btn-add" onclick="addItem()">＋ Adicionar</button>
+    </div>
+  </div>
+  <div id="form-erro" style="color:var(--red);font-size:12px;margin-top:8px;display:none;"></div>
+</div>
+
+<!-- TOTAIS DO DIA -->
+<div class="totais-row" id="totaisRow" style="display:none!important">
+  <div class="total-mini">
+    <div class="lbl">Total do Dia</div>
+    <div class="val" id="tot-valor">R$ 0,00</div>
+  </div>
+  <div class="total-mini">
+    <div class="lbl">Itens (un)</div>
+    <div class="val" id="tot-itens">0</div>
+  </div>
+  <div class="total-mini">
+    <div class="lbl">Produtos</div>
+    <div class="val" id="tot-produtos">0</div>
+  </div>
+</div>
+
+<!-- TABELA DO DIA -->
+<div class="section-label">Lançamentos de Hoje</div>
+<div class="table-card">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Produto</th>
+        <th class="td-right">Qtd (un)</th>
+        <th class="td-right">Valor (R$)</th>
+        <th class="td-right">R$/un</th>
+        <th>Origem</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="tabBody">
+      <tr id="tr-vazio">
+        <td colspan="7" style="text-align:center;padding:28px;color:var(--muted);font-size:13px;">
+          Nenhum lançamento ainda. Use o formulário acima ou envie uma foto no chat.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- BOTÕES DE EXPORTAR -->
+<div class="section-label">Exportar / Salvar</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+  <span id="pasta-badge" style="font-size:12px;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:8px;padding:5px 12px;">📂 nenhuma pasta conectada</span>
+  <button class="btn-export" onclick="trocarPasta()" style="padding:5px 12px;font-size:11px;">🔗 Trocar pasta</button>
+</div>
+<div class="export-row">
+  <button class="btn-export primary" id="btnSalvar" onclick="salvarNoProjeto()">💾 Salvar no Projeto</button>
+  <button class="btn-export" onclick="exportCSV()">⬇ Exportar CSV</button>
+  <button class="btn-export" onclick="exportTxt()">📄 Texto para o Chat</button>
+  <button class="btn-export" onclick="limparDia()">🗑 Limpar Tudo</button>
+</div>
+<div id="save-status" style="display:none;border-radius:10px;padding:12px 16px;font-size:13px;font-weight:600;margin-bottom:12px;"></div>
+<div id="txt-output" style="display:none;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;font-family:monospace;font-size:12px;color:var(--muted);white-space:pre;margin-bottom:20px;"></div>
+
+<!-- CADASTRO DE PRODUTOS -->
+<div class="section-label" style="margin-top:28px;">Cadastro de Produtos</div>
+
+<div class="produtos-toggle" id="prodToggle" onclick="toggleProdutos()">
+  <div class="tog-title">
+    🏷️ Gerenciar Produtos
+    <span class="tog-count" id="prodCount">0 produtos</span>
+  </div>
+  <span class="tog-arrow">▾</span>
+</div>
+
+<div class="produtos-panel" id="prodPanel">
+  <!-- Formulário cadastro -->
+  <div style="margin-bottom:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--muted);">Adicionar Novo Produto</div>
+  <div class="prod-form-row">
+    <div class="prod-field">
+      <label>Nome do Produto</label>
+      <input type="text" id="inp-novo-prod" placeholder="Ex: SONHO DE PADARIA" autocomplete="off" onkeydown="if(event.key==='Enter')cadastrarProduto()"/>
+    </div>
+    <div class="prod-field">
+      <label>Preço/Un (R$)</label>
+      <input type="number" id="inp-novo-preco" placeholder="0,00" step="0.01" min="0" onkeydown="if(event.key==='Enter')cadastrarProduto()"/>
+    </div>
+    <button class="btn-cadastrar" onclick="cadastrarProduto()">＋ Cadastrar</button>
+  </div>
+  <div class="prod-msg-erro" id="prod-msg-erro"></div>
+  <div class="prod-msg-ok" id="prod-msg-ok"></div>
+
+  <!-- Busca -->
+  <input type="text" class="prod-search" id="prod-search" placeholder="🔍 Buscar produto..." oninput="renderProdutos()"/>
+
+  <!-- Tabela -->
+  <div class="prod-table-wrap">
+    <table class="prod-table">
+      <thead>
+        <tr>
+          <th style="width:40%">Produto</th>
+          <th>Tipo</th>
+          <th style="width:130px">Preço/Un</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="prodTableBody"></tbody>
+    </table>
+  </div>
+  <div style="margin-top:10px;font-size:11px;color:var(--muted);">
+    💡 Produtos <span style="color:var(--green);font-weight:600;">Cadastrado</span> podem ser excluídos. Produtos <span style="color:var(--muted);font-weight:600;">Padrão</span> só têm o preço editável.
+  </div>
+</div>
+
+<footer>
+  Panificadora Holandesa · Setor de Compras &amp; Estoque · <span id="footerDate"></span>
+</footer>
+
+<script>
+// ══════════════════════════════
+// TABELA DE PREÇOS (R$/unidade)
+// ══════════════════════════════
+const PRECOS = {
+  'MINI COXINHA':              1.30,
+  'MINI RISOLIS':              1.30,
+  'MINI PASTEL':               1.80,
+  'MINI KIBE':                 1.30,
+  'MINI BOLINHA DE QUEIJO':    1.30,
+  'SALGADO GRANDE FRITO':     12.80,
+  'SALGADO GRANDE ASSADO':    16.10,
+  'SALGADO ASSADO GRANDE':    16.10,
+  'MINI PÃO DE QUEIJO':        2.50,
+  'PÃO DE QUEIJO GRANDE':      9.21,
+  'BOLO DE LARANJA':          28.00,
+  'CUECA VIRADA':              4.03,
+  'BOLO DE CHOCOLATE':        25.00,
+  'BOLO DE IOGURTE':          28.00,
+  'BOLO DE CENOURA':          28.00,
+  'BOLO REDONDO MISTO':       28.00,
+  'BOLO TIRA MISTO':          25.00,
+  'MEDIALUNA':                 7.50,
+  'BOLO DE FUBA':             28.00,
+  'BOLO DE AIPIM':            28.00,
+  'BOLO GLUTEM LESS':         28.00,
+  'PAO CASEIRO':              18.25,
+  'PAO DE NATA':              18.90,
+  'PÃO FAZENDA':              18.90,
+  'PAO CUCA':                 19.75,
+  'PÃO CUCA':                 19.75,
+  'BRIOCHE DE CALABRESA':     27.80,
+  'MASSA DE PIZZA':            7.00,
+  'PAO ALEMAO':               19.75,
+  'BISNAGUINHA':              14.36,
+  'BROA DE FUBA':             10.25,
+  'CAROLINA AÇUCARADA':       12.00,
+  'CROISSANT':                29.37,
+  'FATIA HUNGARA':             5.60,
+  'GRAVATINHA':                1.17,
+  'LUA DE MEL':                6.42,
+  'MINI ROSCA DE CREME':       3.50,
+  'PAO DE LEITE NINHO':        6.50,
+  'PAO DOCE':                 10.72,
+  'PIROGUE':                   2.46,
+  'ROCAMBOLE':                14.00,
+  'ROSQUINHA DE PINGA':       10.00,
+  'TRANÇA DE CREME':           3.50,
+  'CUCA':                     28.50,
+  'BOLO NEGA MALUCA':         28.00,
+  'BOLO DE IOGURT':           28.00,
+  'TORTA INTEIRA':           114.48,
+  'LANCHE NATURAL':           12.00,
+  'SALADA DE FRUTAS':         12.00,
+};
+
+// Preços customizados salvos pelo usuário sobrepõem a tabela padrão
+const PRECOS_CUSTOM = JSON.parse(localStorage.getItem('precos_custom') || '{}');
+
+function getPreco(nomeProduto) {
+  const n = nomeProduto.toUpperCase().trim();
+  return PRECOS_CUSTOM[n] !== undefined ? PRECOS_CUSTOM[n] : (PRECOS[n] || null);
+}
+
+function atualizarPreco() {
+  const prod   = document.getElementById('inp-produto').value;
+  const qtd    = parseFloat(document.getElementById('inp-qtd').value) || 0;
+  const inpPU  = document.getElementById('inp-preco-un');
+  const inpTot = document.getElementById('inp-valor');
+  const btnSP  = document.getElementById('btn-salvar-preco');
+  const preco  = getPreco(prod);
+
+  // Preenche preço/un se produto reconhecido
+  if (preco !== null && inpPU.dataset.edited !== 'true') {
+    inpPU.value = preco.toFixed(2);
+  }
+
+  // Mostra botão de salvar preço ao editar manualmente
+  btnSP.style.display = prod.trim() ? 'inline-flex' : 'none';
+
+  // Recalcula total
+  const pu = parseFloat(inpPU.value) || 0;
+  if (pu > 0 && qtd > 0) {
+    inpTot.value = (pu * qtd).toFixed(2);
+  }
+}
+
+function salvarPrecoUn() {
+  const prod = document.getElementById('inp-produto').value.toUpperCase().trim();
+  const pu   = parseFloat(document.getElementById('inp-preco-un').value);
+  if (!prod || !pu || pu <= 0) return mostrarErro('Informe produto e preço antes de salvar.');
+  PRECOS_CUSTOM[prod] = pu;
+  localStorage.setItem('precos_custom', JSON.stringify(PRECOS_CUSTOM));
+  const btn = document.getElementById('btn-salvar-preco');
+  btn.textContent = '✅';
+  setTimeout(() => { btn.textContent = '💾'; }, 1500);
+}
+
+// ═══════════════════
+// ESTADO
+// ═══════════════════
+let itens = JSON.parse(localStorage.getItem('lanc_hoje') || '[]');
+const hoje = new Date().toLocaleDateString('pt-BR');
+
+// Verifica se é outro dia — limpa se mudou
+const dataArmazenada = localStorage.getItem('lanc_data');
+if (dataArmazenada && dataArmazenada !== hoje) {
+  itens = [];
+  localStorage.setItem('lanc_hoje', '[]');
+}
+localStorage.setItem('lanc_data', hoje);
+
+// Header de data
+document.getElementById('dateBadge').textContent = '📅 ' + new Date().toLocaleDateString('pt-BR', {weekday:'long', day:'2-digit', month:'long', year:'numeric'});
+document.getElementById('footerDate').textContent = hoje;
+
+// ═══════════════════
+// UTILITÁRIOS
+// ═══════════════════
+function fmtBRL(v) {
+  return 'R$ ' + Number(v).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+function salvar() {
+  localStorage.setItem('lanc_hoje', JSON.stringify(itens));
+}
+function mostrarErro(msg) {
+  const el = document.getElementById('form-erro');
+  el.textContent = msg;
+  el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 3000);
+}
+
+// ═══════════════════
+// ADD ITEM
+// ═══════════════════
+function addItem(produto, qtd, valor, origem) {
+  if (!produto) {
+    produto = document.getElementById('inp-produto').value.trim().toUpperCase();
+    qtd     = parseFloat(document.getElementById('inp-qtd').value);
+    valor   = parseFloat(document.getElementById('inp-valor').value);
+    origem  = 'manual';
+  }
+  if (!produto) return mostrarErro('Informe o nome do produto.');
+  if (!qtd || qtd <= 0) return mostrarErro('Informe a quantidade.');
+  if (!valor || valor <= 0) return mostrarErro('Informe o valor total.');
+
+  itens.push({ produto, qtd, valor, origem: origem || 'manual', id: Date.now() });
+  salvar();
+  renderTabela();
+  // Limpa form
+  document.getElementById('inp-produto').value = '';
+  document.getElementById('inp-qtd').value = '';
+  document.getElementById('inp-preco-un').value = '';
+  document.getElementById('inp-preco-un').dataset.edited = '';
+  document.getElementById('inp-valor').value = '';
+  document.getElementById('btn-salvar-preco').style.display = 'none';
+}
+
+// ═══════════════════
+// REMOVER
+// ═══════════════════
+function removerItem(id) {
+  itens = itens.filter(i => i.id !== id);
+  salvar();
+  renderTabela();
+}
+
+// ═══════════════════
+// RENDER TABELA
+// ═══════════════════
+function renderTabela() {
+  const tbody = document.getElementById('tabBody');
+  const totRow = document.getElementById('totaisRow');
+
+  if (itens.length === 0) {
+    tbody.innerHTML = `<tr id="tr-vazio"><td colspan="7" style="text-align:center;padding:28px;color:var(--muted);font-size:13px;">Nenhum lançamento ainda. Use o formulário acima ou envie uma foto no chat.</td></tr>`;
+    totRow.style.cssText = 'display:none!important';
+    return;
+  }
+
+  totRow.style.cssText = '';
+  let html = '';
+  let totV = 0, totQ = 0;
+  itens.forEach((it, i) => {
+    totV += it.valor;
+    totQ += it.qtd;
+    const uv = (it.valor / it.qtd).toFixed(2);
+    const origemBadge = it.origem === 'foto'
+      ? '<span class="status-foto">📸 Foto</span>'
+      : '<span class="status-manual">⌨ Manual</span>';
+    html += `<tr class="fade-in">
+      <td style="color:var(--muted)">${i+1}</td>
+      <td style="font-weight:600">${it.produto}</td>
+      <td class="td-right">${it.qtd}</td>
+      <td class="td-right" style="color:#fff;font-weight:600">${fmtBRL(it.valor)}</td>
+      <td class="td-right" style="color:var(--muted)">${fmtBRL(parseFloat(uv))}</td>
+      <td>${origemBadge}</td>
+      <td><button class="btn-del" onclick="removerItem(${it.id})" title="Remover">✕</button></td>
+    </tr>`;
+  });
+
+  // Linha de total
+  html += `<tr style="border-top:2px solid var(--border)">
+    <td colspan="2" style="padding:12px;font-weight:700;color:var(--muted)">TOTAL DO DIA</td>
+    <td class="td-right" style="font-weight:700">${totQ}</td>
+    <td class="td-right" style="font-weight:800;color:var(--orange)">${fmtBRL(totV)}</td>
+    <td colspan="3"></td>
+  </tr>`;
+
+  tbody.innerHTML = html;
+
+  // Mini totais
+  document.getElementById('tot-valor').textContent    = fmtBRL(totV);
+  document.getElementById('tot-itens').textContent    = totQ;
+  document.getElementById('tot-produtos').textContent = itens.length;
+}
+
+
+// ═══════════════════
+// EXPORTAR CSV
+// ═══════════════════
+function exportCSV() {
+  if (itens.length === 0) return alert('Nenhum item para exportar.');
+  const dataISO = new Date().toISOString().split('T')[0];
+  let csv = 'DATA,PRODUTO,QUANTIDADE,VALOR (R$)\n';
+  itens.forEach(it => {
+    csv += `${dataISO},${it.produto},${it.qtd},${it.valor.toFixed(2)}\n`;
+  });
+  const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `desperdicio_${dataISO}.csv`;
+  a.click();
+}
+
+// ═══════════════════
+// GERAR TEXTO PARA O CHAT
+// ═══════════════════
+function exportTxt() {
+  if (itens.length === 0) return alert('Nenhum item para exportar.');
+  const dataISO = new Date().toISOString().split('T')[0];
+  let txt = `LANÇAMENTO DE DESPERDÍCIO — ${dataISO}\n`;
+  txt += '─'.repeat(45) + '\n';
+  txt += 'PRODUTO'.padEnd(30) + 'QTD'.padStart(5) + 'VALOR'.padStart(10) + '\n';
+  txt += '─'.repeat(45) + '\n';
+  itens.forEach(it => {
+    txt += it.produto.padEnd(30) + String(it.qtd).padStart(5) + ('R$'+it.valor.toFixed(2)).padStart(10) + '\n';
+  });
+  txt += '─'.repeat(45) + '\n';
+  const totV = itens.reduce((a,b)=>a+b.valor, 0);
+  const totQ = itens.reduce((a,b)=>a+b.qtd, 0);
+  txt += 'TOTAL'.padEnd(30) + String(totQ).padStart(5) + ('R$'+totV.toFixed(2)).padStart(10) + '\n';
+  const out = document.getElementById('txt-output');
+  out.textContent = txt;
+  out.style.display = 'block';
+  navigator.clipboard.writeText(txt).catch(()=>{});
+}
+
+// ══════════════════════════════════════════
+// SALVAR NO PROJETO — IndexedDB + File API
+// ══════════════════════════════════════════
+const DB_NAME = 'holandesa_fs';
+const DB_STORE = 'handles';
+const HANDLE_KEY = 'projeto_dir';
+
+function abrirDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, 1);
+    req.onupgradeneeded = e => e.target.result.createObjectStore(DB_STORE);
+    req.onsuccess = e => resolve(e.target.result);
+    req.onerror   = () => reject(req.error);
+  });
+}
+
+async function getDirHandle() {
+  const db = await abrirDB();
+  return new Promise(resolve => {
+    const tx = db.transaction(DB_STORE, 'readonly');
+    const req = tx.objectStore(DB_STORE).get(HANDLE_KEY);
+    req.onsuccess = () => resolve(req.result || null);
+    req.onerror   = () => resolve(null);
+  });
+}
+
+async function salvarDirHandle(handle) {
+  const db = await abrirDB();
+  return new Promise(resolve => {
+    const tx = db.transaction(DB_STORE, 'readwrite');
+    tx.objectStore(DB_STORE).put(handle, HANDLE_KEY);
+    tx.oncomplete = resolve;
+  });
+}
+
+async function csvConteudo() {
+  const dataISO = new Date().toISOString().split('T')[0];
+  let csv = 'DATA,PRODUTO,QUANTIDADE,VALOR (R$)\n';
+  itens.forEach(it => {
+    csv += `${dataISO},${it.produto},${it.qtd},${it.valor.toFixed(2)}\n`;
+  });
+  return { conteudo: '﻿' + csv, nome: `lancamentos_pendentes_${dataISO}.csv` };
+}
+
+async function salvarNoProjeto() {
+  if (itens.length === 0) return mostrarErro('Nenhum item para salvar.');
+  if (!('showDirectoryPicker' in window)) {
+    const { conteudo, nome } = await csvConteudo();
+    const blob = new Blob([conteudo], { type: 'text/csv;charset=utf-8;' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = nome; a.click();
+    mostrarStatus('ok', `Arquivo ${nome} baixado.`);
+    return;
+  }
+  try {
+    let dirHandle = await getDirHandle();
+    if (dirHandle) {
+      const perm = await dirHandle.queryPermission({ mode: 'readwrite' });
+      if (perm !== 'granted') {
+        const req = await dirHandle.requestPermission({ mode: 'readwrite' });
+        if (req !== 'granted') dirHandle = null;
+      }
+    }
+    if (!dirHandle) {
+      mostrarStatus('ok', 'Selecione a pasta PANIFICADORA HOLANDESA COMPRAS...');
+      dirHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
+      await salvarDirHandle(dirHandle);
+    }
+    const { conteudo, nome } = await csvConteudo();
+    const fileHandle = await dirHandle.getFileHandle(nome, { create: true });
+    const writable   = await fileHandle.createWritable();
+    await writable.write(conteudo);
+    await writable.close();
+    mostrarStatus('ok', `Salvo em "${dirHandle.name}/${nome}"`);
+  } catch (e) {
+    if (e.name === 'AbortError') return;
+    mostrarStatus('err', `Erro ao salvar: ${e.message}`);
+  }
+}
+
+async function trocarPasta() {
+  if (!('showDirectoryPicker' in window)) return;
+  try {
+    const dirHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
+    await salvarDirHandle(dirHandle);
+    mostrarStatus('ok', `Pasta atualizada: "${dirHandle.name}"`);
+  } catch(e) { if (e.name !== 'AbortError') mostrarStatus('err', e.message); }
+}
+
+function mostrarStatus(tipo, msg) {
+  const el = document.getElementById('save-status');
+  el.className = tipo;
+  el.textContent = msg;
+  el.style.display = 'block';
+  if (tipo === 'ok') setTimeout(() => el.style.display = 'none', 7000);
+}
+
+(async () => {
+  const h = await getDirHandle().catch(() => null);
+  if (h) {
+    const badge = document.getElementById('pasta-badge');
+    if (badge) badge.textContent = `📂 ${h.name}`;
+  }
+})();
+
+// ═══════════════════
+// LIMPAR
+// ═══════════════════
+function limparDia() {
+  if (!confirm('Apagar todos os lançamentos de hoje?')) return;
+  itens = [];
+  salvar();
+  renderTabela();
+  document.getElementById('txt-output').style.display = 'none';
+}
+
+// ════════════════════════════════════════
+// CADASTRO DE PRODUTOS
+// ════════════════════════════════════════
+let PRODUTOS_NOVOS = JSON.parse(localStorage.getItem('produtos_novos') || '{}');
+
+function salvarProdutosNovos() {
+  localStorage.setItem('produtos_novos', JSON.stringify(PRODUTOS_NOVOS));
+}
+
+function getTodosProdutos() {
+  const map = {};
+  Object.entries(PRECOS).forEach(([k, v]) => { map[k.toUpperCase().trim()] = { preco: v, tipo: 'padrao' }; });
+  Object.entries(PRODUTOS_NOVOS).forEach(([k, v]) => { map[k.toUpperCase().trim()] = { preco: v, tipo: 'custom' }; });
+  Object.entries(PRECOS_CUSTOM).forEach(([k, v]) => {
+    if (map[k.toUpperCase().trim()]) map[k.toUpperCase().trim()].preco = v;
+  });
+  return map;
+}
+
+function atualizarDatalist() {
+  const dl = document.getElementById('prod-list');
+  const todos = getTodosProdutos();
+  dl.innerHTML = Object.keys(todos).sort().map(n => '<option value="' + n + '"/>').join('');
+  const total = Object.keys(todos).length;
+  const el = document.getElementById('prodCount');
+  if (el) el.textContent = total + ' produto' + (total !== 1 ? 's' : '');
+}
+
+function toggleProdutos() {
+  const toggle = document.getElementById('prodToggle');
+  const panel  = document.getElementById('prodPanel');
+  toggle.classList.toggle('open');
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) renderProdutos();
+}
+
+function renderProdutos() {
+  const busca = (document.getElementById('prod-search').value || '').toUpperCase().trim();
+  const todos  = getTodosProdutos();
+  const tbody  = document.getElementById('prodTableBody');
+  let rows = Object.entries(todos)
+    .filter(function(e){ return !busca || e[0].includes(busca); })
+    .sort(function(a,b){ return a[0].localeCompare(b[0]); });
+  if (rows.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:20px;color:var(--muted);">Nenhum produto encontrado.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = rows.map(function(entry) {
+    var nome = entry[0]; var info = entry[1];
+    var badge = info.tipo === 'custom'
+      ? '<span class="badge-custom">Cadastrado</span>'
+      : '<span class="badge-default">Padrão</span>';
+    var precoAtual = (PRECOS_CUSTOM[nome] !== undefined ? PRECOS_CUSTOM[nome] : info.preco) || 0;
+    var safeId   = nome.replace(/[^a-zA-Z0-9]/g,'_');
+    var safeName = nome.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+    var btnDel = info.tipo === 'custom'
+      ? '<button class="btn-del-prod" onclick="excluirProduto(\'' + safeName + '\')">✕</button>'
+      : '<span style="width:28px;display:inline-block;"></span>';
+    return '<tr>' +
+      '<td style="font-weight:600;font-size:12px;">' + nome + '</td>' +
+      '<td>' + badge + '</td>' +
+      '<td><div style="display:flex;gap:5px;align-items:center;">' +
+        '<input class="inp-preco-edit" type="number" step="0.01" min="0"' +
+        ' value="' + precoAtual.toFixed(2) + '"' +
+        ' id="preco_' + safeId + '"' +
+        ' onkeydown="if(event.key===\'Enter\')salvarPrecoProd(\'' + safeName + '\')" />' +
+        '<button class="btn-save-prod" onclick="salvarPrecoProd(\'' + safeName + '\')">💾</button>' +
+      '</div></td>' +
+      '<td>' + btnDel + '</td>' +
+    '</tr>';
+  }).join('');
+}
+
+function cadastrarProduto() {
+  var nome  = document.getElementById('inp-novo-prod').value.trim().toUpperCase();
+  var preco = parseFloat(document.getElementById('inp-novo-preco').value);
+  var erroEl = document.getElementById('prod-msg-erro');
+  var okEl   = document.getElementById('prod-msg-ok');
+  erroEl.style.display = 'none';
+  okEl.style.display   = 'none';
+  if (!nome)            { erroEl.textContent = 'Informe o nome do produto.';     erroEl.style.display='block'; return; }
+  if (!preco || preco <= 0) { erroEl.textContent = 'Informe o preço por unidade.'; erroEl.style.display='block'; return; }
+  var todos = getTodosProdutos();
+  if (todos[nome] && !PRODUTOS_NOVOS[nome]) {
+    erroEl.textContent = '"' + nome + '" já existe na lista padrão. Edite o preço na tabela.';
+    erroEl.style.display = 'block'; return;
+  }
+  PRODUTOS_NOVOS[nome] = preco;
+  salvarProdutosNovos();
+  atualizarDatalist();
+  renderProdutos();
+  document.getElementById('inp-novo-prod').value  = '';
+  document.getElementById('inp-novo-preco').value = '';
+  okEl.textContent = '"' + nome + '" cadastrado com sucesso!';
+  okEl.style.display = 'block';
+  setTimeout(function(){ okEl.style.display = 'none'; }, 3000);
+}
+
+function salvarPrecoProd(nome) {
+  var safeId = nome.replace(/[^a-zA-Z0-9]/g,'_');
+  var inp    = document.getElementById('preco_' + safeId);
+  if (!inp) return;
+  var preco = parseFloat(inp.value);
+  if (!preco || preco <= 0) return;
+  PRECOS_CUSTOM[nome] = preco;
+  localStorage.setItem('precos_custom', JSON.stringify(PRECOS_CUSTOM));
+  if (PRODUTOS_NOVOS[nome] !== undefined) { PRODUTOS_NOVOS[nome] = preco; salvarProdutosNovos(); }
+  inp.style.borderColor = 'var(--green)';
+  setTimeout(function(){ inp.style.borderColor = ''; }, 1500);
+}
+
+function excluirProduto(nome) {
+  if (!confirm('Excluir o produto "' + nome + '"?')) return;
+  delete PRODUTOS_NOVOS[nome];
+  salvarProdutosNovos();
+  if (PRECOS_CUSTOM[nome] !== undefined) {
+    delete PRECOS_CUSTOM[nome];
+    localStorage.setItem('precos_custom', JSON.stringify(PRECOS_CUSTOM));
+  }
+  atualizarDatalist();
+  renderProdutos();
+}
+
+// ═══════════════════
+// INIT
+// ═══════════════════
+atualizarDatalist();
+renderTabela();
+
+document.getElementById('inp-produto').addEventListener('input',  function(){ document.getElementById('inp-preco-un').dataset.edited=''; atualizarPreco(); });
+document.getElementById('inp-produto').addEventListener('change', function(){ document.getElementById('inp-preco-un').dataset.edited=''; atualizarPreco(); });
+document.getElementById('inp-qtd').addEventListener('input', atualizarPreco);
+document.getElementById('inp-preco-un').addEventListener('input', function(){
+  document.getElementById('inp-preco-un').dataset.edited = 'true';
+  atualizarPreco();
+});
+</script>
+</body>
+</html>
