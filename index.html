@@ -1,9 +1,9 @@
-<!DOCTYPE html><!-- rebuild:1782836081728 -->
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Panificadora Holandesa â Dashboard de DesperdÃ­cio</title>
+<title>Panificadora Holandesa — Dashboard de Desperdício</title>
 <style>
 :root{
   --bg:#03030c;--card:#0f0f28;--card2:#161630;--border:rgba(255,255,255,0.10);
@@ -106,7 +106,7 @@ tbody td{padding:9px 12px}
 footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;padding-top:14px;border-top:1px solid var(--border)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-/* ââ MODAL DE PRODUTO ââââââââââââââââââââââââââ */
+/* ── MODAL DE PRODUTO ────────────────────────── */
 #prodModal{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
 #prodModal.open{display:flex;animation:fadeUp .2s ease}
 .pm-card{background:#0d0d24;border:1px solid rgba(255,255,255,.14);border-radius:18px;width:100%;max-width:680px;max-height:90vh;overflow-y:auto;padding:28px 28px 24px;position:relative}
@@ -123,7 +123,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
 .kcard:nth-child(1){animation-delay:.04s}.kcard:nth-child(2){animation-delay:.08s}
 .kcard:nth-child(3){animation-delay:.12s}.kcard:nth-child(4){animation-delay:.16s}
 
-/* ââ RANKING POR PERÃODO ââââââââââââââââââââââ */
+/* ── RANKING POR PERÍODO ────────────────────── */
 .rk-fbtns{display:flex;gap:6px;flex-wrap:wrap}
 .rk-fbtn{background:var(--card2);border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:5px 13px;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit}
 .rk-fbtn:hover{border-color:var(--blue);color:var(--blue)}
@@ -145,7 +145,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
 .rk-hist-table .rh-ver{color:var(--blue);font-size:10px;opacity:0;transition:opacity .15s}
 .rk-hist-table .rh-row:hover .rh-ver{opacity:1}
 
-/* BARRA DE LANÃAMENTOS DO MÃS */
+/* BARRA DE LANÇAMENTOS DO MÊS */
 .lanc-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px 24px;margin-bottom:20px}
 .lanc-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px}
 .lanc-sub{font-size:11px;color:var(--muted);margin-bottom:14px}
@@ -179,28 +179,28 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
 <!-- HEADER -->
 <div class="hdr">
   <div>
-    <h1>ð¥ Panificadora Holandesa</h1>
-    <div class="sub">Controle de DesperdÃ­cio Â· Jun/2024 â Jun/2026 Â· 77 produtos Â· 626 dias</div>
+    <h1>🥐 Panificadora Holandesa</h1>
+    <div class="sub">Controle de Desperdício · Jun/2024 — Jun/2026 · 77 produtos · 626 dias</div>
   </div>
   <div style="display:flex;align-items:center;gap:12px">
   <div style="display:flex;align-items:center;gap:10px">
-    <div class="badge">ð Atualizado em 30/06/2026</div>
-    <a href="lancamento_desperdicio.html" class="btn-lanc">âï¸ Novo LanÃ§amento</a>
+    <div class="badge">📅 Atualizado em 30/06/2026</div>
+    <a href="lancamento_desperdicio.html" class="btn-lanc">✏️ Novo Lançamento</a>
   </div>
 </div>
 
-<!-- FILTROS DE PERÃODO -->
+<!-- FILTROS DE PERÍODO -->
 <div class="frow">
-  <span class="flbl">PerÃ­odo</span>
-  <button class="fbtn" id="bM"  onclick="setF(1)">MÃªs Atual</button>
+  <span class="flbl">Período</span>
+  <button class="fbtn" id="bM"  onclick="setF(1)">Mês Atual</button>
   <button class="fbtn" id="b6"  onclick="setF(6)">6 Meses</button>
   <button class="fbtn" id="b12" onclick="setF(12)">12 Meses</button>
   <button class="fbtn on" id="bT" onclick="setF(0)">Tudo</button>
-  <span style="margin-left:8px;color:var(--border)">â</span>
+  <span style="margin-left:8px;color:var(--border)">│</span>
   <span class="flbl" style="margin-left:8px">Intervalo</span>
-  <input type="month" id="dateFrom" class="date-input" min="2024-06" max="2026-06" title="Data inicial">
-  <span style="color:var(--muted);font-size:12px;padding:0 2px">â</span>
-  <input type="month" id="dateTo"   class="date-input" min="2024-06" max="2026-06" title="Data final">
+  <input type="date"  id="dateFrom" class="date-input" min="2024-06-01" max="2026-06-30" title="Data inicial">
+  <span style="color:var(--muted);font-size:12px;padding:0 2px">→</span>
+  <input type="date"  id="dateTo"   class="date-input" min="2024-06-01" max="2026-06-30" title="Data final">
   <button class="btn-aplicar" id="bCust" onclick="applyCustomRange()">Aplicar</button>
 </div>
 
@@ -208,38 +208,38 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
 <div id="catBanner">
   <span class="cb-dot" id="cbDot"></span>
   <span class="cb-label">Filtrando por: <strong id="cbName"></strong></span>
-  <button class="btn-clear" onclick="clearCat()">â Limpar Filtro</button>
+  <button class="btn-clear" onclick="clearCat()">✕ Limpar Filtro</button>
 </div>
 
 <!-- KPIs -->
 <div class="slbl">Indicadores Gerais</div>
 <div class="kgrid">
-  <div class="kcard kc1"><div class="kico">ð¸</div><div class="klbl">DesperdÃ­cio Total</div><div class="kval" id="kv1"></div><span class="kdelta dne" id="kd1">perÃ­odo</span><div class="ksub" id="ks1"></div></div>
-  <div class="kcard kc2"><div class="kico">ð¦</div><div class="klbl">Itens DesperdiÃ§ados</div><div class="kval" id="kv2"></div><span class="kdelta dne">unidades</span><div class="ksub" id="ks2"></div></div>
-  <div class="kcard kc3"><div class="kico">ð</div><div class="klbl">MÃ©dia por Dia</div><div class="kval" id="kv3"></div><span class="kdelta" id="kd3">â</span><div class="ksub" id="ks3"></div></div>
-  <div class="kcard kc4"><div class="kico">ð</div><div class="klbl">Maior MÃªs</div><div class="kval" id="kv4">â</div><span class="kdelta dne" id="kd4">pico</span><div class="ksub" id="ks4"></div></div>
+  <div class="kcard kc1"><div class="kico">💸</div><div class="klbl">Desperdício Total</div><div class="kval" id="kv1"></div><span class="kdelta dne" id="kd1">período</span><div class="ksub" id="ks1"></div></div>
+  <div class="kcard kc2"><div class="kico">📦</div><div class="klbl">Itens Desperdiçados</div><div class="kval" id="kv2"></div><span class="kdelta dne">unidades</span><div class="ksub" id="ks2"></div></div>
+  <div class="kcard kc3"><div class="kico">📊</div><div class="klbl">Média por Dia</div><div class="kval" id="kv3"></div><span class="kdelta" id="kd3">—</span><div class="ksub" id="ks3"></div></div>
+  <div class="kcard kc4"><div class="kico">📅</div><div class="klbl">Maior Mês</div><div class="kval" id="kv4">—</div><span class="kdelta dne" id="kd4">pico</span><div class="ksub" id="ks4"></div></div>
 </div>
 
-<!-- LINHA 1: EvoluÃ§Ã£o + Top 10 + Donut (3 colunas) -->
-<div class="slbl">AnÃ¡lise Temporal e por Categoria</div>
+<!-- LINHA 1: Evolução + Top 10 + Donut (3 colunas) -->
+<div class="slbl">Análise Temporal e por Categoria</div>
 <div class="cg3">
   <div class="cc" id="ccEv" style="animation-delay:.20s">
     <div class="cchdr">
-      <div><div class="cctitle">EvoluÃ§Ã£o Mensal do DesperdÃ­cio</div><div class="ccinsight" id="insEv">Dezembro/2025: maior pico â R$ 13.507, 2,4Ã a mÃ©dia.</div></div>
+      <div><div class="cctitle">Evolução Mensal do Desperdício</div><div class="ccinsight" id="insEv">Dezembro/2025: maior pico — R$ 13.507, 2,4× a média.</div></div>
       <span class="cctag">R$ + Qtd</span>
     </div>
     <canvas id="cEv" height="210"></canvas>
   </div>
   <div class="cc" id="ccT10" style="animation-delay:.24s">
     <div class="cchdr">
-      <div><div class="cctitle" id="titleT10">Top 10 â Maior DesperdÃ­cio</div><div class="ccinsight" id="insT10">PÃ£o de Queijo Grande lidera com R$ 17.591.</div></div>
-      <span class="cctag" id="tagT10">Todo perÃ­odo</span>
+      <div><div class="cctitle" id="titleT10">Top 10 — Maior Desperdício</div><div class="ccinsight" id="insT10">Pão de Queijo Grande lidera com R$ 17.591.</div></div>
+      <span class="cctag" id="tagT10">Todo período</span>
     </div>
     <canvas id="cT10" height="210"></canvas>
   </div>
   <div class="cc" style="animation-delay:.28s">
     <div class="cchdr">
-      <div><div class="cctitle">DesperdÃ­cio por Categoria</div><div class="ccinsight">Clique em uma fatia para filtrar todos os grÃ¡ficos.</div></div>
+      <div><div class="cctitle">Desperdício por Categoria</div><div class="ccinsight">Clique em uma fatia para filtrar todos os gráficos.</div></div>
     </div>
     <canvas id="cDo" height="210" class="clickable"></canvas>
   </div>
@@ -249,8 +249,8 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
 <div class="cgeq">
   <div class="cc" id="ccCmp" style="animation-delay:.32s">
     <div class="cchdr">
-      <div><div class="cctitle">Comparativo 2025 vs 2026</div><div class="ccinsight" id="insCmp">ReduÃ§Ã£o de 11,8% no acumulado JanâJun.</div></div>
-      <span class="cctag">JanâJun</span>
+      <div><div class="cctitle">Comparativo 2025 vs 2026</div><div class="ccinsight" id="insCmp">Redução de 11,8% no acumulado Jan–Jun.</div></div>
+      <span class="cctag">Jan–Jun</span>
     </div>
     <canvas id="cCmp" height="240"></canvas>
   </div>
@@ -258,18 +258,18 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
   <div class="cc" style="animation-delay:.34s">
     <div class="cchdr">
       <div>
-        <div class="cctitle" id="titleRank">Ranking â Ãltimo MÃªs</div>
-        <div class="ccinsight" id="insRank">Selecione o perÃ­odo para filtrar e ver histÃ³rico completo.</div>
+        <div class="cctitle" id="titleRank">Ranking — Último Mês</div>
+        <div class="ccinsight" id="insRank">Selecione o período para filtrar e ver histórico completo.</div>
       </div>
       <div class="rk-fbtns">
-        <button class="rk-fbtn active" onclick="setRank(1)" id="rkb1">Ãltimo mÃªs</button>
+        <button class="rk-fbtn active" onclick="setRank(1)" id="rkb1">Último mês</button>
         <button class="rk-fbtn" onclick="setRank(3)" id="rkb3">3 meses</button>
         <button class="rk-fbtn" onclick="setRank(6)" id="rkb6">6 meses</button>
       </div>
     </div>
     <canvas id="cRank" height="240"></canvas>
     <div class="rk-hist-wrap">
-      <div class="rk-hist-title">ð HistÃ³rico Mensal por Produto</div>
+      <div class="rk-hist-title">📋 Histórico Mensal por Produto</div>
       <div class="rk-hist-scroll">
         <table class="rk-hist-table" id="rankHistTable"></table>
       </div>
@@ -281,10 +281,10 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
 <div class="slbl">Resumo Mensal Detalhado</div>
 <div class="tc" style="animation-delay:.36s">
   <div class="cchdr" style="margin-bottom:14px">
-    <div><div class="cctitle">HistÃ³rico Mensal</div><div class="ccinsight">VariaÃ§Ã£o em relaÃ§Ã£o ao mÃªs anterior.</div></div>
+    <div><div class="cctitle">Histórico Mensal</div><div class="ccinsight">Variação em relação ao mês anterior.</div></div>
   </div>
   <table>
-    <thead><tr><th>MÃªs</th><th class="tr">DesperdÃ­cio</th><th class="tr">Itens (un)</th><th class="tc2">Dias</th><th class="tr">MÃ©dia/Dia</th><th class="tr">Var. Ant.</th><th>Share</th></tr></thead>
+    <thead><tr><th>Mês</th><th class="tr">Desperdício</th><th class="tr">Itens (un)</th><th class="tc2">Dias</th><th class="tr">Média/Dia</th><th class="tr">Var. Ant.</th><th>Share</th></tr></thead>
     <tbody id="tbody"></tbody>
   </table>
 </div>
@@ -292,15 +292,15 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
 <!-- MODAL DE PRODUTO -->
 <div id="prodModal" onclick="if(event.target===this)closeProdModal()">
   <div class="pm-card">
-    <button class="pm-close" onclick="closeProdModal()">â</button>
+    <button class="pm-close" onclick="closeProdModal()">✕</button>
     <div class="pm-title" id="pmTitle"></div>
     <div class="pm-sub" id="pmSub"></div>
     <div class="pm-kpis">
-      <div class="pm-kpi"><div class="pk-lbl">Total DesperdiÃ§ado</div><div class="pk-val" id="pmTotal"></div></div>
-      <div class="pm-kpi"><div class="pk-lbl">MÃ©dia por Dia</div><div class="pk-val" id="pmMedia"></div></div>
+      <div class="pm-kpi"><div class="pk-lbl">Total Desperdiçado</div><div class="pk-val" id="pmTotal"></div></div>
+      <div class="pm-kpi"><div class="pk-lbl">Média por Dia</div><div class="pk-val" id="pmMedia"></div></div>
       <div class="pm-kpi"><div class="pk-lbl">Qtd Total (un)</div><div class="pk-val" id="pmQtd"></div></div>
     </div>
-    <div class="pm-section">EvoluÃ§Ã£o Mensal</div>
+    <div class="pm-section">Evolução Mensal</div>
     <canvas id="pmEv" height="160" style="width:100%;display:block;border-radius:8px"></canvas>
     <div class="pm-section">Total por Ano</div>
     <canvas id="pmAnual" height="90" style="width:100%;display:block;border-radius:8px"></canvas>
@@ -308,8 +308,8 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
 </div>
 
 <div class="lanc-card">
-  <div class="lanc-title">ð LanÃ§amentos do MÃªs</div>
-  <div class="lanc-sub" id="lancSubtitle">Todos os registros do mÃªs atual</div>
+  <div class="lanc-title">📋 Lançamentos do Mês</div>
+  <div class="lanc-sub" id="lancSubtitle">Todos os registros do mês atual</div>
   <div class="lanc-scroll">
     <table class="lanc-table">
       <thead><tr>
@@ -324,12 +324,12 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
   </div>
 </div>
 
-<footer>Dados reais extraÃ­dos da base interna Â· Panificadora Holandesa â Setor de Compras &amp; Estoque Â· Gerado em 10/06/2026</footer>
+<footer>Dados reais extraídos da base interna · Panificadora Holandesa — Setor de Compras &amp; Estoque · Gerado em 10/06/2026</footer>
 
 <script>
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
 // DADOS COMPLETOS
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
 const LABELS = ['Jun/24','Jul/24','Ago/24','Set/24','Out/24','Nov/24','Jan/25','Fev/25','Mar/25','Abr/25','Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26','Mai/26','Jun/26*'];
 const DIAS   = [24,24,25,26,30,30,28,22,31,27,30,26,31,29,23,30,27,30,29,28,26,26,20,14];
 
@@ -340,7 +340,7 @@ const ALL = {
 
 // Dados por categoria (mensais)
 const CAT_MENSAL = {
-  'PADARIA / PÃES': {
+  'PADARIA / PÃES': {
     vl:[2119.25,1708.78,1926.27,2840.08,2538.55,1911.4,1765.38,1653.68,1624.04,1984.13,1338.68,1620.14,2319.84,1436.7,2186.46,1999.81,1568.63,4732.56,1381.09,4462.12,2527.81,2733.27,1971.04,579.4],
     qt:[578,222,372,779,579,414,300,376,306,309,264,300,351,269,328,457,267,861,206,421,439,319,296,24]
   },
@@ -359,28 +359,28 @@ const CAT_MENSAL = {
 };
 
 const TOP_GERAL = {
-  pr:["PÃ£o Queijo Gde", "Mini Risolis", "Mini PÃ£o Queijo", "Mini Kibe", "Mini Coxinha", "Salgado Gde Assado", "Salgado Gde Frito", "Bolo de FubÃ¡", "Bolo de Laranja", "Mini Bolinha Queijo"],
+  pr:["Pão Queijo Gde", "Mini Risolis", "Mini Pão Queijo", "Mini Kibe", "Mini Coxinha", "Salgado Gde Assado", "Salgado Gde Frito", "Bolo de Fubá", "Bolo de Laranja", "Mini Bolinha Queijo"],
   vl:[17710.8,11557.0,11470.0,8915.4,8762.0,7470.4,6976.0,6188.0,6020.0,5729.1]
 };
 const TOP_CAT = {
-  "PADARIA / PÃES":{pr:["PÃ£o Queijo Gde", "Mini PÃ£o Queijo", "PÃ£o Cuca", "PÃ£o Fazenda", "Cueca Virada", "Brioche Calabresa", "Pao Cuca/ Cenoura", "Massa de Pizza", "PÃ£o Caseiro", "Mini PÃ£o De Queijo C/ Goib", "Pao De Nata", "Medialuna", "Croissant", "PÃ£o De Queijo Palito", "Rocambole", "PÃ£o Fiesta", "Pao De Leite Ninho", "Pirogue", "Cuca", "PÃ£o Integral De Forma", "PÃ£o De Forma", "Pao De Forma Integral", "Baguete Lanche", "PÃ£o De Nata", "Lua De Mel", "Pao De Milho", "Pao Doce", "PÃ£o Integral", "Broa De Fuba", "Panqueca", "TranÃ§a De Creme", "BeliscÃ£o", "Bisnaguinha", "Mini Rosca De Creme", "Gravatinha"],vl:[17710.8,11470.0,3752.5,2929.5,2897.6,2029.4,1975.0,1876.0,1514.8,1373.1,945.0,855.0,587.4,437.0,390.9,289.0,279.5,263.2,256.5,238.0,216.0,210.0,132.0,94.5,70.6,65.1,64.3,42.0,41.0,30.0,28.0,16.9,14.4,7.0,3.5]},
-  "CONFEITARIA / BOLOS":{pr:["Bolo de FubÃ¡", "Bolo de Laranja", "Bolo de Cenoura", "Bolo de Chocolate", "Bolo Tira Misto", "Torta Inteira", "Bolo de Aipim", "Bolo Gluten Less", "Bolo Redondo Misto", "Bolo de Iogurte", "Bolo Nega Maluca", "Queijadinha", "Bolo Toalha Felpuda", "Bolo De LimÃ£o Tira", "Bolo De Milho", "Carolina AÃ§ucarada", "Bolo Formigueiro", "Bolo De Tangerina", "Crunch Cake Potinho", "Bolo De Iogurt", "Bolo De MaÃ§Ã£", "Bala De Brigadeiro 100G", "PavÃª Russo", "Rosquinha De Pinga", "Crunch Cake", "Bolo De Laranja2", "Palha Italiana De Pistache"],vl:[6188.0,6020.0,3472.0,3075.0,2700.0,2518.6,2268.0,2268.0,2100.0,1960.0,1820.0,1751.5,1260.0,700.0,588.0,528.0,504.0,364.0,303.6,84.0,84.0,74.5,74.2,70.0,59.7,56.0,51.7]},
+  "PADARIA / PÃES":{pr:["Pão Queijo Gde", "Mini Pão Queijo", "Pão Cuca", "Pão Fazenda", "Cueca Virada", "Brioche Calabresa", "Pao Cuca/ Cenoura", "Massa de Pizza", "Pão Caseiro", "Mini Pão De Queijo C/ Goib", "Pao De Nata", "Medialuna", "Croissant", "Pão De Queijo Palito", "Rocambole", "Pão Fiesta", "Pao De Leite Ninho", "Pirogue", "Cuca", "Pão Integral De Forma", "Pão De Forma", "Pao De Forma Integral", "Baguete Lanche", "Pão De Nata", "Lua De Mel", "Pao De Milho", "Pao Doce", "Pão Integral", "Broa De Fuba", "Panqueca", "Trança De Creme", "Beliscão", "Bisnaguinha", "Mini Rosca De Creme", "Gravatinha"],vl:[17710.8,11470.0,3752.5,2929.5,2897.6,2029.4,1975.0,1876.0,1514.8,1373.1,945.0,855.0,587.4,437.0,390.9,289.0,279.5,263.2,256.5,238.0,216.0,210.0,132.0,94.5,70.6,65.1,64.3,42.0,41.0,30.0,28.0,16.9,14.4,7.0,3.5]},
+  "CONFEITARIA / BOLOS":{pr:["Bolo de Fubá", "Bolo de Laranja", "Bolo de Cenoura", "Bolo de Chocolate", "Bolo Tira Misto", "Torta Inteira", "Bolo de Aipim", "Bolo Gluten Less", "Bolo Redondo Misto", "Bolo de Iogurte", "Bolo Nega Maluca", "Queijadinha", "Bolo Toalha Felpuda", "Bolo De Limão Tira", "Bolo De Milho", "Carolina Açucarada", "Bolo Formigueiro", "Bolo De Tangerina", "Crunch Cake Potinho", "Bolo De Iogurt", "Bolo De Maçã", "Bala De Brigadeiro 100G", "Pavê Russo", "Rosquinha De Pinga", "Crunch Cake", "Bolo De Laranja2", "Palha Italiana De Pistache"],vl:[6188.0,6020.0,3472.0,3075.0,2700.0,2518.6,2268.0,2268.0,2100.0,1960.0,1820.0,1751.5,1260.0,700.0,588.0,528.0,504.0,364.0,303.6,84.0,84.0,74.5,74.2,70.0,59.7,56.0,51.7]},
   "SALGADOS":{pr:["Mini Risolis", "Mini Kibe", "Mini Coxinha", "Salgado Gde Assado", "Salgado Gde Frito", "Mini Bolinha Queijo", "Mini Pastel", "Mini Salgado Assado", "Salgado Frito Grande", "Salgado Frito", "Mini Trouxinha Frango Com Palmito", "Mini Quiche Legumes", "Mini Empada De Frango"],vl:[11557.0,8915.4,8762.0,7470.4,6976.0,5729.1,2520.0,499.1,422.4,409.6,63.7,26.9,2.5]},
-  "FRIOS & EMBUTIDOS":{pr:["Salada de Frutas", "Lanche Natural", "Fatia HÃºngara"],vl:[94.8,84.0,84.0]}
+  "FRIOS & EMBUTIDOS":{pr:["Salada de Frutas", "Lanche Natural", "Fatia Húngara"],vl:[94.8,84.0,84.0]}
 };
 const CMP_GERAL = {lb:['Jan','Fev','Mar','Abr','Mai','Jun*'],a25:[6205.38,4773.78,9733.74,5329.03,4296.28,4702.34],a26:[5742.91,9561.40,5275.97,5916.57,3394.54,1027.40]};
 const CMP_CAT = {
-  'PADARIA / PÃES':      {a25:[1765.38,1653.68,1624.04,1984.13,1338.68,1620.14],a26:[1381.09,4462.12,2527.81,2733.27,1971.04,579.4]},
+  'PADARIA / PÃES':      {a25:[1765.38,1653.68,1624.04,1984.13,1338.68,1620.14],a26:[1381.09,4462.12,2527.81,2733.27,1971.04,579.4]},
   'CONFEITARIA / BOLOS': {a25:[2400,1540,2550.5,1674,1722,1343],a26:[2191.72,2212.78,977.06,1859.35,731.05,448]},
   'SALGADOS':            {a25:[2040,1580.1,5553.6,1670.9,1235.6,1739.2],a26:[2170.1,2858.5,1720.7,1323.95,692.45,0]},
   'FRIOS & EMBUTIDOS':   {a25:[0,0,5.6,0,0,0],a26:[0,28,50.4,0,0,0]}
 };
 
 const CAT_INFO = [
-  {name:'PADARIA / PÃES', color:'#00cfff', total:53105.46, icon:'ð'},
-  {name:'CONFEITARIA / BOLOS', color:'#ff8800', total:40942.78, icon:'ð'},
-  {name:'SALGADOS', color:'#00ff99', total:53354.1, icon:'ð¥'},
-  {name:'FRIOS & EMBUTIDOS', color:'#c800ff', total:262.8, icon:'ð§'}
+  {name:'PADARIA / PÃES', color:'#00cfff', total:53105.46, icon:'🍞'},
+  {name:'CONFEITARIA / BOLOS', color:'#ff8800', total:40942.78, icon:'🎂'},
+  {name:'SALGADOS', color:'#00ff99', total:53354.1, icon:'🥐'},
+  {name:'FRIOS & EMBUTIDOS', color:'#c800ff', total:262.8, icon:'🧀'}
 ];
 const TOTAL_GERAL = 147665.14;
 
@@ -388,12 +388,12 @@ const TOTAL_GERAL = 147665.14;
 const PROD_DATA = {
   "Baguete Lanche":{vl:[0.0,0.0,0.0,0.0,132.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[0,0,0,0,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],an:[132.0,0.0,0.0],aqt:[11,0,0],tv:132.0,tq:11,dias:1,md:132.0},
   "Bala De Brigadeiro 100G":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,74.5],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5],an:[0.0,0.0,74.5],aqt:[0,0,5],tv:74.5,tq:5,dias:1,md:74.5},
-  "BeliscÃ£o":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,16.85,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0],an:[0.0,0.0,16.85],aqt:[0,0,1],tv:16.85,tq:1,dias:1,md:16.85},
+  "Beliscão":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,16.85,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0],an:[0.0,0.0,16.85],aqt:[0,0,1],tv:16.85,tq:1,dias:1,md:16.85},
   "Bisnaguinha":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.36,0.0,0.0,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0],an:[0.0,0.0,14.36],aqt:[0,0,1],tv:14.36,tq:1,dias:1,md:14.36},
   "Bolo De Iogurt":{vl:[0.0,84.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],an:[84.0,0.0,0.0],aqt:[3,0,0],tv:84.0,tq:3,dias:1,md:84.0},
   "Bolo De Laranja2":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,56.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],an:[0.0,56.0,0.0],aqt:[0,2,0],tv:56.0,tq:2,dias:2,md:28.0},
-  "Bolo De LimÃ£o Tira":{vl:[100.0,25.0,50.0,150.0,175.0,0.0,25.0,0.0,75.0,50.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,50.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[4,1,2,6,7,0,1,0,3,2,0,0,0,0,0,0,0,2,0,0,0,0,0,0],an:[500.0,200.0,0.0],aqt:[20,8,0],tv:700.0,tq:28,dias:18,md:38.89},
-  "Bolo De MaÃ§Ã£":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,84.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],an:[0.0,84.0,0.0],aqt:[0,3,0],tv:84.0,tq:3,dias:1,md:84.0},
+  "Bolo De Limão Tira":{vl:[100.0,25.0,50.0,150.0,175.0,0.0,25.0,0.0,75.0,50.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,50.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[4,1,2,6,7,0,1,0,3,2,0,0,0,0,0,0,0,2,0,0,0,0,0,0],an:[500.0,200.0,0.0],aqt:[20,8,0],tv:700.0,tq:28,dias:18,md:38.89},
+  "Bolo De Maçã":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,84.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],an:[0.0,84.0,0.0],aqt:[0,3,0],tv:84.0,tq:3,dias:1,md:84.0},
   "Bolo De Milho":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,280.0,252.0,0.0,56.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,9,0,2],an:[0.0,0.0,588.0],aqt:[0,0,21],tv:588.0,tq:21,dias:9,md:65.33},
   "Bolo De Tangerina":{vl:[0.0,0.0,0.0,140.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,56.0,168.0,0.0,0.0],qt:[0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,6,0,0],an:[140.0,0.0,224.0],aqt:[5,0,8],tv:364.0,tq:13,dias:5,md:72.8},
   "Bolo Formigueiro":{vl:[0.0,0.0,0.0,0.0,0.0,252.0,252.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[0,0,0,0,0,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],an:[252.0,252.0,0.0],aqt:[9,9,0],tv:504.0,tq:18,dias:9,md:56.0},
@@ -405,18 +405,18 @@ const PROD_DATA = {
   "Bolo de Aipim":{vl:[28.0,84.0,112.0,196.0,280.0,0.0,28.0,0.0,84.0,28.0,84.0,140.0,28.0,0.0,0.0,168.0,224.0,336.0,28.0,28.0,84.0,28.0,112.0,168.0],qt:[1,3,4,7,10,0,1,0,3,1,3,5,1,0,0,6,8,12,1,1,3,1,4,6],an:[700.0,1120.0,448.0],aqt:[25,40,16],tv:2268.0,tq:81,dias:39,md:58.15},
   "Bolo de Cenoura":{vl:[0.0,168.0,0.0,84.0,280.0,0.0,252.0,280.0,252.0,196.0,56.0,84.0,0.0,0.0,84.0,140.0,56.0,644.0,504.0,168.0,28.0,28.0,84.0,84.0],qt:[0,6,0,3,10,0,9,10,9,7,2,3,0,0,3,5,2,23,18,6,1,1,3,3],an:[532.0,2044.0,896.0],aqt:[19,73,32],tv:3472.0,tq:124,dias:62,md:56.0},
   "Bolo de Chocolate":{vl:[0.0,0.0,275.0,100.0,0.0,0.0,275.0,0.0,0.0,0.0,75.0,175.0,0.0,100.0,100.0,175.0,150.0,275.0,750.0,475.0,75.0,75.0,0.0,0.0],qt:[0,0,11,4,0,0,11,0,0,0,3,7,0,4,4,7,6,11,30,19,3,3,0,0],an:[375.0,1325.0,1375.0],aqt:[15,53,55],tv:3075.0,tq:123,dias:50,md:61.5},
-  "Bolo de FubÃ¡":{vl:[112.0,196.0,0.0,560.0,420.0,84.0,420.0,560.0,0.0,168.0,224.0,0.0,196.0,140.0,280.0,532.0,560.0,448.0,56.0,196.0,196.0,644.0,112.0,84.0],qt:[4,7,0,20,15,3,15,20,0,6,8,0,7,5,10,19,20,16,2,7,7,23,4,3],an:[1372.0,3528.0,1288.0],aqt:[49,126,46],tv:6188.0,tq:221,dias:102,md:60.67},
+  "Bolo de Fubá":{vl:[112.0,196.0,0.0,560.0,420.0,84.0,420.0,560.0,0.0,168.0,224.0,0.0,196.0,140.0,280.0,532.0,560.0,448.0,56.0,196.0,196.0,644.0,112.0,84.0],qt:[4,7,0,20,15,3,15,20,0,6,8,0,7,5,10,19,20,16,2,7,7,23,4,3],an:[1372.0,3528.0,1288.0],aqt:[49,126,46],tv:6188.0,tq:221,dias:102,md:60.67},
   "Bolo de Iogurte":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,56.0,420.0,0.0,280.0,420.0,84.0,56.0,0.0,28.0,56.0,0.0,280.0,140.0,28.0,0.0,112.0,0.0,0.0],qt:[0,0,0,0,0,0,2,15,0,10,15,3,2,0,1,2,0,10,5,1,0,4,0,0],an:[0.0,1680.0,280.0],aqt:[0,60,10],tv:1960.0,tq:70,dias:25,md:78.4},
   "Bolo de Laranja":{vl:[0.0,0.0,0.0,308.0,168.0,252.0,308.0,56.0,1764.0,448.0,224.0,168.0,112.0,224.0,56.0,112.0,140.0,784.0,112.0,420.0,56.0,168.0,112.0,28.0],qt:[0,0,0,11,6,9,11,2,63,16,8,6,4,8,2,4,5,28,4,15,2,6,4,1],an:[728.0,4396.0,896.0],aqt:[26,157,32],tv:6020.0,tq:215,dias:79,md:76.2},
   "Brioche Calabresa":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,139.0,639.4,111.2,500.4,111.2,528.2],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,23,4,18,4,19],an:[0.0,0.0,2029.4],aqt:[0,0,73],tv:2029.4,tq:73,dias:24,md:84.56},
   "Broa De Fuba":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.25,0.0,0.0,10.25,0.0,20.5],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,2],an:[0.0,0.0,41.0],aqt:[0,0,4],tv:41.0,tq:4,dias:3,md:13.67},
-  "Carolina AÃ§ucarada":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,228.0,180.0,60.0,36.0,24.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,19,15,5,3,2,0],an:[0.0,0.0,528.0],aqt:[0,0,44],tv:528.0,tq:44,dias:8,md:66.0},
+  "Carolina Açucarada":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,228.0,180.0,60.0,36.0,24.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,19,15,5,3,2,0],an:[0.0,0.0,528.0],aqt:[0,0,44],tv:528.0,tq:44,dias:8,md:66.0},
   "Croissant":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,88.11,205.59,29.37,0.0,0.0,264.33],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,7,1,0,0,9],an:[0.0,0.0,587.4],aqt:[0,0,20],tv:587.4,tq:20,dias:5,md:117.48},
   "Crunch Cake":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,59.7,0.0,0.0,0.0,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0],an:[0.0,0.0,59.7],aqt:[0,0,3],tv:59.7,tq:3,dias:1,md:59.7},
   "Crunch Cake Potinho":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,303.6],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12],an:[0.0,0.0,303.6],aqt:[0,0,12],tv:303.6,tq:12,dias:1,md:303.6},
   "Cuca":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,256.5],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9],an:[0.0,0.0,256.5],aqt:[0,0,9],tv:256.5,tq:9,dias:2,md:128.25},
   "Cueca Virada":{vl:[28.21,0.0,52.39,92.69,354.64,253.89,52.39,76.57,4.03,193.44,128.96,64.48,213.59,88.66,229.71,36.27,145.08,439.27,40.3,120.9,48.36,169.26,8.06,56.42],qt:[7,0,13,23,88,63,13,19,1,48,32,16,53,22,57,9,36,109,10,30,12,42,2,14],an:[781.82,1672.45,443.3],aqt:[194,415,110],tv:2897.57,tq:719,dias:114,md:25.42},
-  "Fatia HÃºngara":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,5.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.0,50.4,0.0,0.0,0.0],qt:[0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,5,9,0,0,0],an:[0.0,5.6,78.4],aqt:[0,1,14],tv:84.0,tq:15,dias:4,md:21.0},
+  "Fatia Húngara":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,5.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.0,50.4,0.0,0.0,0.0],qt:[0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,5,9,0,0,0],an:[0.0,5.6,78.4],aqt:[0,1,14],tv:84.0,tq:15,dias:4,md:21.0},
   "Gravatinha":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,3.51,0.0,0.0,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0],an:[0.0,0.0,3.51],aqt:[0,0,3],tv:3.51,tq:3,dias:1,md:3.51},
   "Lanche Natural":{vl:[0.0,84.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],an:[84.0,0.0,0.0],aqt:[7,0,0],tv:84.0,tq:7,dias:1,md:84.0},
   "Lua De Mel":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,32.1,0.0,0.0,38.52,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,6,0],an:[0.0,0.0,70.62],aqt:[0,0,11],tv:70.62,tq:11,dias:2,md:35.31},
@@ -427,8 +427,8 @@ const PROD_DATA = {
   "Mini Empada De Frango":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.45,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0],an:[0.0,0.0,2.45],aqt:[0,0,1],tv:2.45,tq:1,dias:1,md:2.45},
   "Mini Kibe":{vl:[513.5,605.8,356.2,250.9,504.4,503.1,400.4,371.8,503.1,241.8,196.3,260.0,595.4,274.3,232.7,514.8,292.5,890.5,195.0,293.8,273.0,228.8,274.3,143.0],qt:[395,466,274,193,388,387,308,286,387,186,151,200,458,211,179,396,225,685,150,226,210,176,211,110],an:[2733.9,4773.6,1407.9],aqt:[2103,3672,1083],tv:8915.4,tq:6858,dias:346,md:25.77},
   "Mini Pastel":{vl:[138.6,39.6,275.4,57.6,219.6,108.0,183.6,81.0,108.0,32.4,75.6,68.4,30.6,106.2,88.2,131.4,113.4,91.8,88.2,77.4,91.8,187.2,57.6,68.4],qt:[77,22,153,32,122,60,102,45,60,18,42,38,17,59,49,73,63,51,49,43,51,104,32,38],an:[838.8,1110.6,570.6],aqt:[466,617,317],tv:2520.0,tq:1400,dias:143,md:17.62},
-  "Mini PÃ£o De Queijo C/ Goib":{vl:[142.6,0.0,149.5,512.9,568.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[62,0,65,223,247,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],an:[1373.1,0.0,0.0],aqt:[597,0,0],tv:1373.1,tq:597,dias:37,md:37.11},
-  "Mini PÃ£o Queijo":{vl:[580.0,210.0,385.0,1020.0,315.0,667.5,437.5,702.5,522.5,397.5,385.0,410.0,392.5,435.0,317.5,822.5,302.5,1207.5,292.5,220.0,607.5,215.0,327.5,297.5],qt:[232,84,154,408,126,267,175,281,209,159,154,164,157,174,127,329,121,483,117,88,243,86,131,119],an:[3177.5,6332.5,1960.0],aqt:[1271,2533,784],tv:11470.0,tq:4588,dias:240,md:47.79},
+  "Mini Pão De Queijo C/ Goib":{vl:[142.6,0.0,149.5,512.9,568.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[62,0,65,223,247,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],an:[1373.1,0.0,0.0],aqt:[597,0,0],tv:1373.1,tq:597,dias:37,md:37.11},
+  "Mini Pão Queijo":{vl:[580.0,210.0,385.0,1020.0,315.0,667.5,437.5,702.5,522.5,397.5,385.0,410.0,392.5,435.0,317.5,822.5,302.5,1207.5,292.5,220.0,607.5,215.0,327.5,297.5],qt:[232,84,154,408,126,267,175,281,209,159,154,164,157,174,127,329,121,483,117,88,243,86,131,119],an:[3177.5,6332.5,1960.0],aqt:[1271,2533,784],tv:11470.0,tq:4588,dias:240,md:47.79},
   "Mini Quiche Legumes":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,26.95,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,0,0],an:[0.0,0.0,26.95],aqt:[0,0,11],tv:26.95,tq:11,dias:2,md:13.47},
   "Mini Risolis":{vl:[535.6,833.3,500.5,516.1,414.7,481.0,618.8,296.4,227.5,187.2,387.4,629.2,631.8,313.3,427.7,811.2,518.7,1171.3,423.8,466.7,436.8,426.4,184.6,117.0],qt:[412,641,385,397,319,370,476,228,175,144,298,484,486,241,329,624,399,901,326,359,336,328,142,90],an:[3281.2,6220.5,2055.3],aqt:[2524,4785,1581],tv:11557.0,tq:8890,dias:404,md:28.61},
   "Mini Rosca De Creme":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.0,0.0,0.0,0.0,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0],an:[0.0,0.0,7.0],aqt:[0,0,2],tv:7.0,tq:2,dias:1,md:7.0},
@@ -442,18 +442,18 @@ const PROD_DATA = {
   "Pao De Milho":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,65.08],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],an:[0.0,0.0,65.08],aqt:[0,0,3],tv:65.08,tq:3,dias:3,md:21.69},
   "Pao De Nata":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,18.9,56.7,75.6,37.8,94.5,0.0,18.9,75.6,0.0,0.0,18.9,94.5,0.0,434.7,0.0,0.0,0.0,18.9],qt:[0,0,0,0,0,0,1,3,4,2,5,0,1,4,0,0,1,5,0,23,0,0,0,1],an:[0.0,491.4,453.6],aqt:[0,26,24],tv:945.0,tq:50,dias:22,md:42.95},
   "Pao Doce":{vl:[0.0,0.0,0.0,0.0,0.0,21.44,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,32.16,0.0,10.72,0.0,0.0],qt:[0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,1,0,0],an:[21.44,0.0,42.88],aqt:[2,0,4],tv:64.32,tq:6,dias:3,md:21.44},
-  "PavÃª Russo":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,74.2,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0],an:[0.0,0.0,74.2],aqt:[0,0,4],tv:74.2,tq:4,dias:1,md:74.2},
+  "Pavê Russo":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,74.2,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0],an:[0.0,0.0,74.2],aqt:[0,0,4],tv:74.2,tq:4,dias:1,md:74.2},
   "Pirogue":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,91.02,41.82,88.56,17.22,24.6,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,37,17,36,7,10,0],an:[0.0,0.0,263.22],aqt:[0,0,107],tv:263.22,tq:107,dias:6,md:43.87},
-  "PÃ£o Caseiro":{vl:[54.75,346.75,0.0,0.0,0.0,0.0,0.0,36.5,0.0,127.75,54.75,0.0,54.75,200.75,438.0,0.0,0.0,127.75,18.25,0.0,36.5,18.25,0.0,0.0],qt:[3,19,0,0,0,0,0,2,0,7,3,0,3,11,24,0,0,7,1,0,2,1,0,0],an:[401.5,1040.25,73.0],aqt:[22,57,4],tv:1514.75,tq:83,dias:24,md:63.11},
-  "PÃ£o Cuca":{vl:[98.75,59.25,118.5,98.75,177.75,138.25,138.25,79.0,138.25,395.0,0.0,0.0,612.25,59.25,217.25,118.5,158.0,632.0,118.5,0.0,39.5,79.0,118.5,158.0],qt:[5,3,6,5,9,7,7,4,7,20,0,0,31,3,11,6,8,32,6,0,2,4,6,8],an:[691.25,2547.75,513.5],aqt:[35,129,26],tv:3752.5,tq:190,dias:83,md:45.21},
-  "PÃ£o De Forma":{vl:[0.0,48.0,0.0,0.0,72.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,84.0,0.0,12.0],qt:[0,4,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,1],an:[120.0,0.0,96.0],aqt:[10,0,8],tv:216.0,tq:18,dias:8,md:27.0},
-  "PÃ£o De Nata":{vl:[0.0,18.9,0.0,0.0,0.0,75.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[0,1,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],an:[94.5,0.0,0.0],aqt:[5,0,0],tv:94.5,tq:5,dias:3,md:31.5},
-  "PÃ£o De Queijo Palito":{vl:[418.6,18.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[182,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],an:[437.0,0.0,0.0],aqt:[190,0,0],tv:437.0,tq:190,dias:16,md:27.31},
-  "PÃ£o Fazenda":{vl:[37.8,170.1,0.0,37.8,170.1,226.8,189.0,226.8,226.8,321.3,94.5,113.4,0.0,151.2,0.0,37.8,113.4,396.9,245.7,75.6,37.8,18.9,0.0,37.8],qt:[2,9,0,2,9,12,10,12,12,17,5,6,0,8,0,2,6,21,13,4,2,1,0,2],an:[642.6,1871.1,415.8],aqt:[34,99,22],tv:2929.5,tq:155,dias:65,md:45.07},
-  "PÃ£o Fiesta":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,68.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,119.0,0.0,68.0,34.0],qt:[0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,4,2],an:[0.0,68.0,221.0],aqt:[0,4,13],tv:289.0,tq:17,dias:6,md:48.17},
-  "PÃ£o Integral":{vl:[0.0,14.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.0,14.0,0.0,0.0],qt:[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0],an:[14.0,0.0,28.0],aqt:[1,0,2],tv:42.0,tq:3,dias:3,md:14.0},
-  "PÃ£o Integral De Forma":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,224.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.0],qt:[0,0,0,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],an:[0.0,224.0,14.0],aqt:[0,16,1],tv:238.0,tq:17,dias:8,md:29.75},
-  "PÃ£o Queijo Gde":{vl:[681.54,718.38,1178.88,1049.94,699.96,478.92,497.34,377.61,607.86,497.34,524.97,976.26,782.85,405.24,921.0,865.74,690.75,1694.64,349.98,598.65,902.58,1095.99,994.68,119.73],qt:[74,78,128,114,76,52,54,41,66,54,57,106,85,44,100,94,75,184,38,65,98,119,108,13],an:[4807.62,8841.6,4061.61],aqt:[522,960,441],tv:17710.83,tq:1923,dias:267,md:66.33},
+  "Pão Caseiro":{vl:[54.75,346.75,0.0,0.0,0.0,0.0,0.0,36.5,0.0,127.75,54.75,0.0,54.75,200.75,438.0,0.0,0.0,127.75,18.25,0.0,36.5,18.25,0.0,0.0],qt:[3,19,0,0,0,0,0,2,0,7,3,0,3,11,24,0,0,7,1,0,2,1,0,0],an:[401.5,1040.25,73.0],aqt:[22,57,4],tv:1514.75,tq:83,dias:24,md:63.11},
+  "Pão Cuca":{vl:[98.75,59.25,118.5,98.75,177.75,138.25,138.25,79.0,138.25,395.0,0.0,0.0,612.25,59.25,217.25,118.5,158.0,632.0,118.5,0.0,39.5,79.0,118.5,158.0],qt:[5,3,6,5,9,7,7,4,7,20,0,0,31,3,11,6,8,32,6,0,2,4,6,8],an:[691.25,2547.75,513.5],aqt:[35,129,26],tv:3752.5,tq:190,dias:83,md:45.21},
+  "Pão De Forma":{vl:[0.0,48.0,0.0,0.0,72.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,84.0,0.0,12.0],qt:[0,4,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,1],an:[120.0,0.0,96.0],aqt:[10,0,8],tv:216.0,tq:18,dias:8,md:27.0},
+  "Pão De Nata":{vl:[0.0,18.9,0.0,0.0,0.0,75.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[0,1,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],an:[94.5,0.0,0.0],aqt:[5,0,0],tv:94.5,tq:5,dias:3,md:31.5},
+  "Pão De Queijo Palito":{vl:[418.6,18.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[182,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],an:[437.0,0.0,0.0],aqt:[190,0,0],tv:437.0,tq:190,dias:16,md:27.31},
+  "Pão Fazenda":{vl:[37.8,170.1,0.0,37.8,170.1,226.8,189.0,226.8,226.8,321.3,94.5,113.4,0.0,151.2,0.0,37.8,113.4,396.9,245.7,75.6,37.8,18.9,0.0,37.8],qt:[2,9,0,2,9,12,10,12,12,17,5,6,0,8,0,2,6,21,13,4,2,1,0,2],an:[642.6,1871.1,415.8],aqt:[34,99,22],tv:2929.5,tq:155,dias:65,md:45.07},
+  "Pão Fiesta":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,68.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,119.0,0.0,68.0,34.0],qt:[0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,4,2],an:[0.0,68.0,221.0],aqt:[0,4,13],tv:289.0,tq:17,dias:6,md:48.17},
+  "Pão Integral":{vl:[0.0,14.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.0,14.0,0.0,0.0],qt:[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0],an:[14.0,0.0,28.0],aqt:[1,0,2],tv:42.0,tq:3,dias:3,md:14.0},
+  "Pão Integral De Forma":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,224.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.0],qt:[0,0,0,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],an:[0.0,224.0,14.0],aqt:[0,16,1],tv:238.0,tq:17,dias:8,md:29.75},
+  "Pão Queijo Gde":{vl:[681.54,718.38,1178.88,1049.94,699.96,478.92,497.34,377.61,607.86,497.34,524.97,976.26,782.85,405.24,921.0,865.74,690.75,1694.64,349.98,598.65,902.58,1095.99,994.68,119.73],qt:[74,78,128,114,76,52,54,41,66,54,57,106,85,44,100,94,75,184,38,65,98,119,108,13],an:[4807.62,8841.6,4061.61],aqt:[522,960,441],tv:17710.83,tq:1923,dias:267,md:66.33},
   "Queijadinha":{vl:[15.5,0.0,0.0,0.0,108.5,0.0,0.0,0.0,46.5,0.0,62.0,62.0,899.0,15.5,0.0,0.0,294.5,232.5,0.0,0.0,15.5,0.0,0.0,0.0],qt:[1,0,0,0,7,0,0,0,3,0,4,4,58,1,0,0,19,15,0,0,1,0,0,0],an:[124.0,1612.0,15.5],aqt:[8,104,1],tv:1751.5,tq:113,dias:23,md:76.15},
   "Rocambole":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,84.0,56.0,14.0,56.0,42.0,138.95],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,4,1,4,3,7],an:[0.0,0.0,390.95],aqt:[0,0,25],tv:390.95,tq:25,dias:8,md:48.87},
   "Rosquinha De Pinga":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,70.0,0.0,0.0,0.0,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0],an:[0.0,0.0,70.0],aqt:[0,0,7],tv:70.0,tq:7,dias:1,md:70.0},
@@ -463,19 +463,19 @@ const PROD_DATA = {
   "Salgado Gde Assado":{vl:[0.0,0.0,0.0,0.0,0.0,531.3,193.2,161.0,837.2,386.4,144.9,402.5,466.9,547.4,177.1,466.9,370.3,756.7,644.0,1030.4,225.4,0.0,0.0,128.8],qt:[0,0,0,0,0,33,12,10,52,24,9,25,29,34,11,29,23,47,40,64,14,0,0,8],an:[531.3,4910.5,2028.6],aqt:[33,305,126],tv:7470.4,tq:464,dias:125,md:59.76},
   "Salgado Gde Frito":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,217.6,140.8,3417.6,320.0,179.2,115.2,256.0,307.2,192.0,217.6,140.8,371.2,358.4,396.8,294.4,0.0,0.0,51.2],qt:[0,0,0,0,0,0,17,11,267,25,14,9,20,24,15,17,11,29,28,31,23,0,0,4],an:[0.0,5875.2,1100.8],aqt:[0,459,86],tv:6976.0,tq:545,dias:106,md:65.81},
   "Torta Inteira":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2518.56],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,22],an:[0.0,0.0,2518.56],aqt:[0,0,22],tv:2518.56,tq:22,dias:1,md:2518.56},
-  "TranÃ§a De Creme":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.0,0.0,0.0,0.0,0.0,0.0],qt:[0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0],an:[0.0,21.0,7.0],aqt:[0,6,2],tv:28.0,tq:8,dias:2,md:14.0}
+  "Trança De Creme":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,21.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.0,0.0,0.0,0.0,0.0,0.0],qt:[0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0],an:[0.0,21.0,7.0],aqt:[0,6,2],tv:28.0,tq:8,dias:2,md:14.0}
 };
 
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
 // ESTADO
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
 let filtro  = 0;    // meses: 0=tudo, 6, 12
 let activeCat = null; // null = todas as categorias
 let filtroCustom = null; // {start: idx, end: idx} range de meses customizado
 
-// âââââââââââââââââââââââââââââââââââââââââââ
-// UTILITÃRIOS
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
+// UTILITÁRIOS
+// ═══════════════════════════════════════════
 const R$ = v=>'R$ '+Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 const N  = v=>Number(v).toLocaleString('pt-BR');
 
@@ -490,7 +490,7 @@ function getEvData(){
   return {lb:LABELS.slice(s), vl:src.vl.slice(s), qt:src.qt.slice(s), di:DIAS.slice(s)};
 }
 
-// Mapa produto â categoria (para filtro dinÃ¢mico do Top10)
+// Mapa produto → categoria (para filtro dinâmico do Top10)
 const PROD_CAT_MAP = {};
 Object.entries(TOP_CAT).forEach(([cat,data])=>{ data.pr.forEach(p=>{ PROD_CAT_MAP[p]=cat; }); });
 
@@ -502,7 +502,7 @@ function getFilterSlice(){
 }
 
 function getTop10(){
-  // Sem filtro de perÃ­odo: usa dados prÃ©-calculados
+  // Sem filtro de período: usa dados pré-calculados
   if(!filtro) return activeCat ? TOP_CAT[activeCat] : TOP_GERAL;
   // Com filtro: calcula dinamicamente do PROD_DATA
   const {start, end} = getFilterSlice();
@@ -523,27 +523,28 @@ function computeCmp(){
   if(!filtro) return getCmp();
   const src = activeCat ? CAT_MENSAL[activeCat] : ALL;
   if(filtro === 1){
-    // Jun/25 (Ã­ndice 11) vs Jun/26* (Ã­ndice 23)
+    // Jun/25 (índice 11) vs Jun/26* (índice 23)
     return {lb:['Jun*'], a25:[src.vl[11]], a26:[src.vl[23]]};
   }
   if(filtro === 6){
-    // JanâJun 2025 (6-11) vs JanâJun 2026 (18-23)
+    // Jan–Jun 2025 (6-11) vs Jan–Jun 2026 (18-23)
     return {lb:['Jan','Fev','Mar','Abr','Mai','Jun*'], a25:src.vl.slice(6,12), a26:src.vl.slice(18,24)};
   }
   if(filtro === 12){
-    // Jul/24âJun/25 (1-12) vs Jul/25âJun/26 (13-24)
+    // Jul/24–Jun/25 (1-12) vs Jul/25–Jun/26 (13-24)
     return {lb:['Jul','Ago','Set','Out','Nov','Dez','Jan','Fev','Mar','Abr','Mai','Jun'],
             a25:src.vl.slice(1,13), a26:src.vl.slice(13,25)};
   }
   return getCmp();
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
 // FILTRO DE DATA CUSTOMIZADO
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
 function monthToIdx(ym){
   const months=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-  const [y,m]=ym.split('-');
+  const parts=ym.split('-'); // suporta YYYY-MM e YYYY-MM-DD
+  const y=parts[0], m=parts[1];
   const label=months[parseInt(m)-1]+'/'+y.slice(2);
   // Tentar label exato ou com asterisco (ex: Jun/26*)
   let idx=LABELS.indexOf(label);
@@ -556,17 +557,17 @@ function applyCustomRange(){
   const to=document.getElementById('dateTo').value;
   if(!from||!to){return;}
   const s=monthToIdx(from), e=monthToIdx(to);
-  if(s<0||e<0){alert('PerÃ­odo fora do intervalo disponÃ­vel (Jun/2024 â Jun/2026).');return;}
-  if(s>e){alert('A data inicial deve ser anterior Ã  data final.');return;}
+  if(s<0||e<0){alert('Período fora do intervalo disponível (Jun/2024 – Jun/2026).');return;}
+  if(s>e){alert('A data inicial deve ser anterior à data final.');return;}
   filtroCustom={start:s,end:e};
   document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));
   document.getElementById('bCust').classList.add('on');
   renderAll();
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââ
-// FILTRO DE PERÃODO
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
+// FILTRO DE PERÍODO
+// ═══════════════════════════════════════════
 function setF(n){
   filtroCustom=null;
   filtro=n;
@@ -578,8 +579,8 @@ function setF(n){
 {dt:"29/06",pr:"Mini Risolis",qt:5,vl:6.5},
 {dt:"29/06",pr:"Mini Bolinha Queijo",qt:3,vl:3.9},
 {dt:"29/06",pr:"Mini Kibe",qt:51,vl:66.3},
-{dt:"29/06",pr:"PÃ£o Cuca",qt:1,vl:19.75},
-{dt:"29/06",pr:"PÃ£o Cuca",qt:1,vl:19.75},
+{dt:"29/06",pr:"Pão Cuca",qt:1,vl:19.75},
+{dt:"29/06",pr:"Pão Cuca",qt:1,vl:19.75},
 {dt:"29/06",pr:"Mini Coxinha",qt:17,vl:22.1},
 {dt:"29/06",pr:"Mini Kibe",qt:21,vl:27.3},
 {dt:"29/06",pr:"Mini Risolis",qt:11,vl:14.3},
@@ -590,7 +591,7 @@ function setF(n){
 {dt:"24/06",pr:"Mini Kibe",qt:8,vl:10.4},
 {dt:"24/06",pr:"Mini Risolis",qt:15,vl:19.5},
 {dt:"24/06",pr:"Mini Coxinha",qt:4,vl:5.2},
-{dt:"24/06",pr:"PÃ£o Cuca",qt:1,vl:19.75},
+{dt:"24/06",pr:"Pão Cuca",qt:1,vl:19.75},
 {dt:"24/06",pr:"Mini Risolis",qt:11,vl:14.3},
 {dt:"24/06",pr:"Mini Kibe",qt:9,vl:11.7},
 {dt:"24/06",pr:"Mini Bolinha Queijo",qt:7,vl:9.1},
@@ -606,48 +607,48 @@ function setF(n){
 {dt:"24/06",pr:"Crunch Cake Potinho",qt:12,vl:303.6},
 {dt:"24/06",pr:"Bala De Brigadeiro 100G",qt:5,vl:74.5},
 {dt:"22/06",pr:"Pao De Milho",qt:1,vl:19.8},
-{dt:"22/06",pr:"Mini PÃ£o Queijo",qt:31,vl:77.5},
+{dt:"22/06",pr:"Mini Pão Queijo",qt:31,vl:77.5},
 {dt:"22/06",pr:"Brioche Calabresa",qt:6,vl:166.8},
 {dt:"22/06",pr:"Croissant",qt:4,vl:117.48},
-{dt:"19/06",pr:"Bolo de FubÃ¡",qt:3,vl:84.0},
-{dt:"19/06",pr:"PÃ£o Queijo Gde",qt:2,vl:18.42},
+{dt:"19/06",pr:"Bolo de Fubá",qt:3,vl:84.0},
+{dt:"19/06",pr:"Pão Queijo Gde",qt:2,vl:18.42},
 {dt:"19/06",pr:"Mini Kibe",qt:3,vl:3.9},
-{dt:"19/06",pr:"Mini PÃ£o Queijo",qt:19,vl:47.5},
+{dt:"19/06",pr:"Mini Pão Queijo",qt:19,vl:47.5},
 {dt:"19/06",pr:"Rocambole",qt:7,vl:138.95},
 {dt:"18/06",pr:"Torta Inteira",qt:22,vl:2518.56},
-{dt:"18/06",pr:"Mini PÃ£o Queijo",qt:9,vl:22.5},
+{dt:"18/06",pr:"Mini Pão Queijo",qt:9,vl:22.5},
 {dt:"18/06",pr:"Mini Pastel",qt:12,vl:21.6},
 {dt:"18/06",pr:"Mini Risolis",qt:6,vl:7.8},
-{dt:"18/06",pr:"PÃ£o Queijo Gde",qt:3,vl:27.63},
+{dt:"18/06",pr:"Pão Queijo Gde",qt:3,vl:27.63},
 {dt:"18/06",pr:"Mini Risolis",qt:10,vl:13.0},
 {dt:"18/06",pr:"Mini Coxinha",qt:6,vl:7.8},
-{dt:"18/06",pr:"PÃ£o Cuca",qt:1,vl:19.75},
-{dt:"18/06",pr:"PÃ£o Fazenda",qt:1,vl:18.9},
+{dt:"18/06",pr:"Pão Cuca",qt:1,vl:19.75},
+{dt:"18/06",pr:"Pão Fazenda",qt:1,vl:18.9},
 {dt:"17/06",pr:"Pao De Milho",qt:1,vl:25.28},
 {dt:"15/06",pr:"Mini Coxinha",qt:27,vl:35.1},
 {dt:"15/06",pr:"Mini Risolis",qt:14,vl:18.2},
-{dt:"15/06",pr:"Mini PÃ£o Queijo",qt:42,vl:105.0},
-{dt:"15/06",pr:"PÃ£o Queijo Gde",qt:8,vl:73.68},
+{dt:"15/06",pr:"Mini Pão Queijo",qt:42,vl:105.0},
+{dt:"15/06",pr:"Pão Queijo Gde",qt:8,vl:73.68},
 {dt:"15/06",pr:"Cueca Virada",qt:3,vl:12.09},
-{dt:"15/06",pr:"PÃ£o Cuca",qt:1,vl:19.75},
+{dt:"15/06",pr:"Pão Cuca",qt:1,vl:19.75},
 {dt:"12/06",pr:"Bolo de Cenoura",qt:1,vl:28.0},
 {dt:"12/06",pr:"Bolo Nega Maluca",qt:1,vl:28.0},
-{dt:"12/06",pr:"PÃ£o Cuca",qt:1,vl:19.75},
-{dt:"12/06",pr:"PÃ£o Fazenda",qt:1,vl:18.9},
+{dt:"12/06",pr:"Pão Cuca",qt:1,vl:19.75},
+{dt:"12/06",pr:"Pão Fazenda",qt:1,vl:18.9},
 {dt:"12/06",pr:"Bolo Gluten Less",qt:1,vl:28.0},
-{dt:"12/06",pr:"Mini PÃ£o Queijo",qt:18,vl:45.0},
+{dt:"12/06",pr:"Mini Pão Queijo",qt:18,vl:45.0},
 {dt:"12/06",pr:"Mini Pastel",qt:13,vl:23.4},
 {dt:"12/06",pr:"Mini Kibe",qt:6,vl:7.8},
 {dt:"11/06",pr:"Mini Risolis",qt:18,vl:23.4},
 {dt:"11/06",pr:"Mini Pastel",qt:13,vl:23.4},
-{dt:"11/06",pr:"PÃ£o Cuca",qt:2,vl:39.5},
+{dt:"11/06",pr:"Pão Cuca",qt:2,vl:39.5},
 {dt:"11/06",pr:"Bolo Redondo Misto",qt:2,vl:56.0},
 {dt:"11/06",pr:"Brioche Calabresa",qt:1,vl:27.8},
 {dt:"11/06",pr:"Mini Coxinha",qt:2800,vl:3640.0},
 {dt:"10/06",pr:"Brioche Calabresa",qt:2,vl:55.6},
 {dt:"10/06",pr:"Medialuna",qt:12,vl:90.0},
 {dt:"08/06",pr:"Cuca",qt:6,vl:171.0},
-{dt:"08/06",pr:"PÃ£o Integral De Forma",qt:1,vl:14.0},
+{dt:"08/06",pr:"Pão Integral De Forma",qt:1,vl:14.0},
 {dt:"08/06",pr:"Brioche Calabresa",qt:3,vl:83.4},
 {dt:"08/06",pr:"Pao De Milho",qt:1,vl:20.0},
 {dt:"06/06",pr:"Bolo De Milho",qt:2,vl:56.0},
@@ -655,8 +656,8 @@ function setF(n){
 {dt:"06/06",pr:"Bolo Gluten Less",qt:3,vl:84.0},
 {dt:"06/06",pr:"Bolo de Cenoura",qt:2,vl:56.0},
 {dt:"06/06",pr:"Cuca",qt:3,vl:85.5},
-{dt:"06/06",pr:"PÃ£o De Forma",qt:1,vl:12.0},
-{dt:"06/06",pr:"PÃ£o Fiesta",qt:2,vl:34.0},
+{dt:"06/06",pr:"Pão De Forma",qt:1,vl:12.0},
+{dt:"06/06",pr:"Pão Fiesta",qt:2,vl:34.0},
 {dt:"05/06",pr:"Bolo Nega Maluca",qt:1,vl:28.0},
 {dt:"05/06",pr:"Bolo de Laranja",qt:1,vl:28.0},
 {dt:"05/06",pr:"Broa De Fuba",qt:2,vl:20.5},
@@ -675,9 +676,9 @@ window.LANCAMENTOS_MES = LANCAMENTOS_MES;
 updateAll();
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
 // FILTRO DE CATEGORIA (donut click)
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
 function setCat(idx){
   activeCat = idx===null ? null : CAT_INFO[idx].name;
   const banner = document.getElementById('catBanner');
@@ -697,9 +698,9 @@ function setCat(idx){
 }
 function clearCat(){ setCat(null); }
 
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
 // TOOLTIP
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
 const TT=document.getElementById('tooltip');
 function showTT(e,title,rows,hint){
   document.getElementById('tt-title').textContent=title;
@@ -715,9 +716,9 @@ function moveTT(e){
 }
 function hideTT(){TT.style.display='none';}
 
-// âââââââââââââââââââââââââââââââââââââââââââ
-// GRÃFICO 1 â EVOLUÃÃO
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
+// GRÁFICO 1 — EVOLUÇÃO
+// ═══════════════════════════════════════════
 function drawEvolucao(){
   const canvas=document.getElementById('cEv');
   const d=getEvData();
@@ -744,7 +745,7 @@ function drawEvolucao(){
   ctx.textAlign='right'; ctx.fillStyle=lineColor;
   for(let i=0;i<=4;i++){const y=PAD.t+cH*(1-i/4);const v=maxV*i/4;ctx.fillText(v>=1000?'R$'+(v/1000).toFixed(0)+'k':'R$'+v.toFixed(0),PAD.l-6,y+4);}
 
-  // Ãrea gradiente sob a linha
+  // Área gradiente sob a linha
   const grad=ctx.createLinearGradient(0,PAD.t,0,PAD.t+cH);
   grad.addColorStop(0,`rgba(${rgb},0.28)`); grad.addColorStop(0.7,`rgba(${rgb},0.08)`); grad.addColorStop(1,`rgba(${rgb},0)`);
   ctx.beginPath();
@@ -771,16 +772,16 @@ function drawEvolucao(){
     const idx=Math.round((mx-PAD.l)/cW*(n-1));
     if(idx<0||idx>=n){hideTT();return;}
     showTT(e,d.lb[idx],[
-      {color:lineColor,label:'DesperdÃ­cio',value:R$(d.vl[idx])},
+      {color:lineColor,label:'Desperdício',value:R$(d.vl[idx])},
       {color:'#c94fff',label:'Quantidade',value:N(d.qt[idx])+' un'}
     ]);
   };
   canvas.onmouseleave=hideTT;
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââ
-// GRÃFICO 2 â DONUT (clicÃ¡vel)
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
+// GRÁFICO 2 — DONUT (clicável)
+// ═══════════════════════════════════════════
 function drawDonut(){
   const canvas=document.getElementById('cDo');
   const W=canvas.parentElement.clientWidth-44;
@@ -788,7 +789,7 @@ function drawDonut(){
   const ctx=canvas.getContext('2d');
   ctx.clearRect(0,0,W,240);
   const cx=W/2, cy=100, R=82, r=50;
-  // Totais filtrados pelo perÃ­odo
+  // Totais filtrados pelo período
   const catTotals = CAT_INFO.map(c=>{
     if(!filtro) return c.total;  // filtro=0: usa total hardcoded (inclui todos os produtos)
     const {start,end}=getFilterSlice();
@@ -827,7 +828,7 @@ function drawDonut(){
   ctx.fillStyle='#12122b'; ctx.fill();
 
   ctx.textAlign='center';
-  const fmtBRL=v=>'R$Â '+v.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});
+  const fmtBRL=v=>'R$ '+v.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});
   if(activeCat){
     const ci=CAT_INFO[activIdx];
     const catVal=catTotals[activIdx];
@@ -890,8 +891,8 @@ function drawDonut(){
       const c=CAT_INFO[idx];
       showTT(e,c.name,[
         {color:c.color,label:'Valor total',value:R$(catTotals[idx])},
-        {color:c.color,label:'ParticipaÃ§Ã£o',value:(catTotals[idx]/total*100).toFixed(1)+'%'}
-      ],activIdx===idx?'Clique para remover filtro':'ð Clique para filtrar todos os grÃ¡ficos');
+        {color:c.color,label:'Participação',value:(catTotals[idx]/total*100).toFixed(1)+'%'}
+      ],activIdx===idx?'Clique para remover filtro':'👆 Clique para filtrar todos os gráficos');
     } else hideTT();
   };
   canvas.onmouseleave=function(){hoverIdx=-1;hideTT();};
@@ -907,9 +908,9 @@ function drawDonut(){
   };
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââ
-// GRÃFICO 3 â TOP 10
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
+// GRÁFICO 3 — TOP 10
+// ═══════════════════════════════════════════
 function drawTop10(){
   const canvas=document.getElementById('cT10');
   const W=canvas.parentElement.clientWidth-44;
@@ -949,8 +950,8 @@ function drawTop10(){
 
   const totalRef = filtro ? top.vl.reduce((a,b)=>a+b,0)||1 :
                    activeCat ? CAT_INFO[CAT_INFO.findIndex(c=>c.name===activeCat)].total : TOTAL_GERAL;
-  const periodoLabel = filtro===1?'MÃªs Atual':filtro===6?'Ãlt. 6 Meses':filtro===12?'Ãlt. 12 Meses':'Todo perÃ­odo';
-  document.getElementById('titleT10').textContent=activeCat?`Top ${n} â ${activeCat}`:`Top 10 â Maior DesperdÃ­cio`;
+  const periodoLabel = filtro===1?'Mês Atual':filtro===6?'Últ. 6 Meses':filtro===12?'Últ. 12 Meses':'Todo período';
+  document.getElementById('titleT10').textContent=activeCat?`Top ${n} — ${activeCat}`:`Top 10 — Maior Desperdício`;
   document.getElementById('tagT10').textContent=activeCat?activeCat:periodoLabel;
 
   canvas.style.cursor='pointer';
@@ -960,9 +961,9 @@ function drawTop10(){
     for(let i=0;i<n;i++){
       const y=PAD.t+i*(ph+gap);
       if(my>=y&&my<=y+ph){
-        const hint=PROD_DATA[top.pr[i]]?'ð Clique para ver detalhes do produto':null;
+        const hint=PROD_DATA[top.pr[i]]?'👆 Clique para ver detalhes do produto':null;
         showTT(e,top.pr[i],[
-          {color:colors[i],label:'Total desperdiÃ§ado',value:R$(top.vl[i])},
+          {color:colors[i],label:'Total desperdiçado',value:R$(top.vl[i])},
           {color:colors[i],label:'% do total',value:(top.vl[i]/totalRef*100).toFixed(1)+'%'}
         ],hint);
         return;
@@ -984,9 +985,9 @@ function drawTop10(){
   };
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââ
-// GRÃFICO 4 â COMPARATIVO
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
+// GRÁFICO 4 — COMPARATIVO
+// ═══════════════════════════════════════════
 function drawComparativo(){
   const canvas=document.getElementById('cCmp');
   const W=canvas.parentElement.clientWidth-44;
@@ -1037,18 +1038,18 @@ function drawComparativo(){
     const i=Math.floor((mx-PAD.l)/gW);
     if(i<0||i>=n){hideTT();return;}
     const v25=cmp.a25[i]||0, v26=cmp.a26[i]||0, delta=v25>0?(v26-v25)/v25:0;
-    showTT(e,cmp.lb[i]+' â Comparativo',[
+    showTT(e,cmp.lb[i]+' — Comparativo',[
       {color:'#00b4ff',label:'2025',value:R$(v25)},
       {color:'#00ffaa',label:'2026',value:R$(v26)},
-      {color:delta>=0?'#ff2d6b':'#00ffaa',label:'VariaÃ§Ã£o',value:(delta>=0?'â+':'â')+(Math.abs(delta)*100).toFixed(1)+'%'}
+      {color:delta>=0?'#ff2d6b':'#00ffaa',label:'Variação',value:(delta>=0?'↑+':'↓')+(Math.abs(delta)*100).toFixed(1)+'%'}
     ]);
   };
   canvas.onmouseleave=hideTT;
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
 // KPIs
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
 function updateKPIs(){
   const d=getEvData();
   const tv=d.vl.reduce((a,b)=>a+b,0);
@@ -1060,22 +1061,22 @@ function updateKPIs(){
   document.getElementById('kv2').textContent=N(tq);
   document.getElementById('kv3').textContent=R$(tv/td);
   document.getElementById('kv4').textContent=R$(maxV);
-  document.getElementById('kd4').textContent=d.lb[maxIdx]||'â';
-  document.getElementById('ks1').textContent=filtroCustom?`${LABELS[filtroCustom.start]} a ${LABELS[filtroCustom.end]}`:filtro===0?'Jun/2024 a Jun/2026':filtro===1?'Jun/2026 (mÃªs atual)':filtro===6?'Ãltimos 6 meses':'Ãltimos 12 meses';
+  document.getElementById('kd4').textContent=d.lb[maxIdx]||'—';
+  document.getElementById('ks1').textContent=filtroCustom?`${LABELS[filtroCustom.start]} a ${LABELS[filtroCustom.end]}`:filtro===0?'Jun/2024 a Jun/2026':filtro===1?'Jun/2026 (mês atual)':filtro===6?'Últimos 6 meses':'Últimos 12 meses';
   document.getElementById('ks2').textContent=d.lb.length+' meses';
-  document.getElementById('ks3').textContent='por dia Ãºtil registrado';
+  document.getElementById('ks3').textContent='por dia útil registrado';
 
   const avgTotal=TOTAL_GERAL/626;
   const avgPer=tv/td;
   const dl=(avgPer-avgTotal)/avgTotal;
   const kd3=document.getElementById('kd3');
-  kd3.textContent=(dl>=0?'â+':'â')+Math.abs(dl*100).toFixed(1)+'% vs mÃ©dia geral';
+  kd3.textContent=(dl>=0?'↑+':'↓')+Math.abs(dl*100).toFixed(1)+'% vs média geral';
   kd3.className='kdelta '+(dl>=0?'dup':'ddn');
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
 // TABELA
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
 function drawTabela(){
   const src=activeCat?CAT_MENSAL[activeCat]:ALL;
   const tbody=document.getElementById('tbody');
@@ -1086,21 +1087,21 @@ function drawTabela(){
     const v=src.vl[i],q=src.qt[i],d=DIAS[i],md=v/d;
     const bw=Math.round(v/maxV*100);
     const bc=v===maxV?'#ff2d6b':v>7000?'#ff7a00':'#00b4ff';
-    let varH='<span class="vna">â</span>';
-    if(i>0){const p=src.vl[i-1];if(p>0){const dl=(v-p)/p;varH=`<span class="${dl>=0?'vup':'vdn'}">${dl>=0?'â':'â'}${Math.abs(dl*100).toFixed(1)}%</span>`;}}
-    html+=`<tr><td class="thl">${lb}${v===maxV?' ð´':''}</td><td class="tr thl">${R$(v)}</td><td class="tr">${N(q)}</td><td style="text-align:center">${d}</td><td class="tr">${R$(md)}</td><td class="tr">${varH}</td><td><span class="bari" style="width:${bw}px;background:${bc}"></span><span style="color:var(--muted);font-size:10px">${(v/totalGeral*100).toFixed(1)}%</span></td></tr>`;
+    let varH='<span class="vna">—</span>';
+    if(i>0){const p=src.vl[i-1];if(p>0){const dl=(v-p)/p;varH=`<span class="${dl>=0?'vup':'vdn'}">${dl>=0?'↑':'↓'}${Math.abs(dl*100).toFixed(1)}%</span>`;}}
+    html+=`<tr><td class="thl">${lb}${v===maxV?' 🔴':''}</td><td class="tr thl">${R$(v)}</td><td class="tr">${N(q)}</td><td style="text-align:center">${d}</td><td class="tr">${R$(md)}</td><td class="tr">${varH}</td><td><span class="bari" style="width:${bw}px;background:${bc}"></span><span style="color:var(--muted);font-size:10px">${(v/totalGeral*100).toFixed(1)}%</span></td></tr>`;
   });
   tbody.innerHTML=html;
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
 // MODAL DE PRODUTO
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
 function openProdModal(name, color){
   const d = PROD_DATA[name];
   if(!d) return;
   document.getElementById('pmTitle').textContent = name;
-  document.getElementById('pmSub').textContent = `${d.dias} dias com registro Â· dados Jun/2024 â Jun/2026`;
+  document.getElementById('pmSub').textContent = `${d.dias} dias com registro · dados Jun/2024 – Jun/2026`;
   document.getElementById('pmTotal').textContent = R$(d.tv);
   document.getElementById('pmMedia').textContent = R$(d.md)+'/dia';
   document.getElementById('pmQtd').textContent = N(d.tq)+' un';
@@ -1184,15 +1185,15 @@ function drawPmAnual(d, color){
     ctx.arcTo(x,y,x+r,y,r); ctx.closePath();
     ctx.fill();
     ctx.fillStyle='rgba(255,255,255,0.55)';
-    ctx.fillText(vals[i]>0?'R$'+(vals[i]/1000).toFixed(1)+'k':'â',x+barW/2,y-4);
+    ctx.fillText(vals[i]>0?'R$'+(vals[i]/1000).toFixed(1)+'k':'—',x+barW/2,y-4);
     ctx.fillStyle='rgba(255,255,255,0.35)';
     ctx.fillText(a,x+barW/2,80);
   });
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââ
-// RANKING POR PERÃODO
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
+// RANKING POR PERÍODO
+// ═══════════════════════════════════════════
 let rankMeses = 1;
 
 function setRank(n){
@@ -1243,9 +1244,9 @@ function drawRanking(){
     else{ctx.textAlign='left';ctx.fillStyle='#c0c0d8';ctx.font='10px system-ui';ctx.fillText('R$'+(p.v/1000).toFixed(1)+'k',PAD.l+w+6,y+ph/2+4);}
   });
 
-  const mLabel = n===1?'MÃªs Anterior (Mai/26)':n===3?'Ãltimos 3 Meses':'Ãltimos 6 Meses';
-  document.getElementById('titleRank').textContent=`Top DesperdÃ­cio â ${mLabel}`;
-  document.getElementById('insRank').textContent=`${prods.length} produtos com desperdÃ­cio Â· Total: R$${(totalPer/1000).toFixed(1)}k`;
+  const mLabel = n===1?'Mês Anterior (Mai/26)':n===3?'Últimos 3 Meses':'Últimos 6 Meses';
+  document.getElementById('titleRank').textContent=`Top Desperdício — ${mLabel}`;
+  document.getElementById('insRank').textContent=`${prods.length} produtos com desperdício · Total: R$${(totalPer/1000).toFixed(1)}k`;
 
   canvas.onclick=function(e){
     const rect=canvas.getBoundingClientRect();
@@ -1261,16 +1262,16 @@ function drawRanking(){
   let thead=`<thead><tr><th>Produto</th>${cols.map(l=>`<th>${l}</th>`).join('')}<th>Total</th></tr></thead>`;
   let tbody=`<tbody>${prods.slice(0,20).map((p,i)=>{
     const meses=PROD_DATA[p.nome].vl.slice(start,end+1);
-    const cells=meses.map(v=>v>0?`<td class="tr">${R$(v)}</td>`:`<td class="tr rh-zero">â</td>`).join('');
+    const cells=meses.map(v=>v>0?`<td class="tr">${R$(v)}</td>`:`<td class="tr rh-zero">—</td>`).join('');
     return `<tr class="rh-row" onclick="openProdModal('${p.nome.replace(/'/g,"\\'")}')">`+
       `<td>${i+1}. ${p.nome}</td>${cells}<td class="tr rh-total">${R$(p.v)}</td></tr>`;
   }).join('')}</tbody>`;
   document.getElementById('rankHistTable').innerHTML=thead+tbody;
 }
 
-// âââââââââââââââââââââââââââââââââââââââââââ
-// INICIALIZAÃÃO
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
+// INICIALIZAÇÃO
+// ═══════════════════════════════════════════
 function updateAll(){
   drawEvolucao();
   drawDonut();
@@ -1284,23 +1285,23 @@ function updateAll(){
 
 setF(0);
 
-// âââââââââââââââââââââââââââââââââââââââââââ
-// LANÃAMENTOS DO MÃS
-// âââââââââââââââââââââââââââââââââââââââââââ
+// ═══════════════════════════════════════════
+// LANÇAMENTOS DO MÊS
+// ═══════════════════════════════════════════
 function drawLancamentos(){
   const tbody = document.getElementById('lancBody');
   const tfoot = document.getElementById('lancFoot');
   const sub   = document.getElementById('lancSubtitle');
   if(!tbody) return;
   if(!window.LANCAMENTOS_MES || LANCAMENTOS_MES.length === 0){
-    tbody.innerHTML = '<tr><td colspan="4" class="lanc-empty">Nenhum lanÃ§amento registrado neste mÃªs.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="4" class="lanc-empty">Nenhum lançamento registrado neste mês.</td></tr>';
     tfoot.innerHTML = '';
     return;
   }
-  // MÃªs/ano do primeiro lanÃ§amento
+  // Mês/ano do primeiro lançamento
   const meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
   const now = new Date();
-  sub.textContent = meses[now.getMonth()] + '/' + now.getFullYear() + ' â ' + LANCAMENTOS_MES.length + ' registro(s)';
+  sub.textContent = meses[now.getMonth()] + '/' + now.getFullYear() + ' — ' + LANCAMENTOS_MES.length + ' registro(s)';
 
   let totalVl = 0, totalQt = 0;
   tbody.innerHTML = LANCAMENTOS_MES.map(l => {
@@ -1315,7 +1316,7 @@ function drawLancamentos(){
   }).join('');
 
   tfoot.innerHTML = `<tr>
-    <td colspan="2" class="tf-label">TOTAL DO MÃS</td>
+    <td colspan="2" class="tf-label">TOTAL DO MÊS</td>
     <td class="qt" style="font-weight:700">${totalQt}</td>
     <td class="vl" style="font-weight:700;color:var(--cyan)">R$ ${totalVl.toFixed(2).replace('.',',')}</td>
   </tr>`;
