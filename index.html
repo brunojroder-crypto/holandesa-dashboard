@@ -503,7 +503,7 @@ function getFilterSlice(){
 
 function getTop10(){
   // Sem filtro de período: usa dados pré-calculados
-  if(!filtro) return activeCat ? TOP_CAT[activeCat] : TOP_GERAL;
+  if(!filtro && !filtroCustom) return activeCat ? TOP_CAT[activeCat] : TOP_GERAL;
   // Com filtro: calcula dinamicamente do PROD_DATA
   const {start, end} = getFilterSlice();
   const items = [];
@@ -520,8 +520,14 @@ function getTop10(){
 function getCmp(){ return activeCat ? CMP_CAT[activeCat] : CMP_GERAL; }
 
 function computeCmp(){
-  if(!filtro) return getCmp();
+  if(!filtro && !filtroCustom) return getCmp();
   const src = activeCat ? CAT_MENSAL[activeCat] : ALL;
+  if(filtroCustom){
+    // Range customizado: mostra valores do período selecionado como barras únicas
+    const {start, end} = getFilterSlice();
+    const lb = LABELS.slice(start, end+1);
+    return {lb, a25: Array(lb.length).fill(0), a26: src.vl.slice(start, end+1)};
+  }
   if(filtro === 1){
     // Jun/25 (índice 11) vs Jun/26* (índice 23)
     return {lb:['Jun*'], a25:[src.vl[11]], a26:[src.vl[23]]};
@@ -791,7 +797,7 @@ function drawDonut(){
   const cx=W/2, cy=100, R=82, r=50;
   // Totais filtrados pelo período
   const catTotals = CAT_INFO.map(c=>{
-    if(!filtro) return c.total;  // filtro=0: usa total hardcoded (inclui todos os produtos)
+    if(!filtro && !filtroCustom) return c.total;  // filtro=0 sem custom: usa total hardcoded
     const {start,end}=getFilterSlice();
     let sum=0;
     for(const [nome,d] of Object.entries(PROD_DATA)){
@@ -842,7 +848,7 @@ function drawDonut(){
   } else {
     ctx.fillStyle='rgba(255,255,255,0.45)'; ctx.font='10px system-ui';
     ctx.fillText('TOTAL', cx, cy-8);
-    const totalReal=filtro===0?TOTAL_GERAL:catTotals.reduce((a,b)=>a+b,0);
+    const totalReal=(filtro===0&&!filtroCustom)?TOTAL_GERAL:catTotals.reduce((a,b)=>a+b,0);
     const tStr=fmtBRL(totalReal);
     const fs=tStr.length>10?12:14;
     ctx.fillStyle='#fff'; ctx.font=`bold ${fs}px system-ui`;
@@ -1206,8 +1212,15 @@ function setRank(n){
 
 function drawRanking(){
   const n = rankMeses;
-  const end = 22; // Mai/26 index
-  const start = Math.max(0, end - n + 1);
+  let start, end;
+  if(filtroCustom){
+    // Respeita filtro customizado de data
+    start = filtroCustom.start;
+    end = filtroCustom.end;
+  } else {
+    end = 22; // Mai/26 index
+    start = Math.max(0, end - n + 1);
+  }
 
   const prods = Object.entries(PROD_DATA).map(([nome,d])=>{
     const v = d.vl.slice(start,end+1).reduce((a,b)=>a+b,0);
