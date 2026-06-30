@@ -277,6 +277,16 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
   </div>
 </div>
 
+<!-- GRÁFICO DIÁRIO (aparece somente com filtro de data ativo) -->
+<div class="cc" id="ccDiario" style="display:none;margin-bottom:14px;animation-delay:.35s">
+  <div class="cchdr">
+    <div><div class="cctitle" id="titleDiario">Desperdício Diário</div>
+    <div class="ccinsight" id="insDiario">Período selecionado</div></div>
+    <span class="cctag" id="tagDiario">Por Dia</span>
+  </div>
+  <canvas id="cDiario" height="200"></canvas>
+</div>
+
 <!-- TABELA -->
 <div class="slbl">Resumo Mensal Detalhado</div>
 <div class="tc" style="animation-delay:.36s">
@@ -1285,6 +1295,104 @@ function drawRanking(){
 // ═══════════════════════════════════════════
 // INICIALIZAÇÃO
 // ═══════════════════════════════════════════
+function drawDiario(){
+  const el = document.getElementById('ccDiario');
+  if(!filtroCustom || !window.LANCAMENTOS_MES || LANCAMENTOS_MES.length === 0){
+    el.style.display = 'none'; return;
+  }
+
+  // Agregar por dia
+  const dayMap = {};
+  LANCAMENTOS_MES.forEach(l=>{
+    const key = l.dt; // formato "DD/MM"
+    dayMap[key] = (dayMap[key]||0) + l.vl;
+  });
+
+  // Ordenar dias e filtrar pelo intervalo selecionado
+  const fromVal = document.getElementById('dateFrom').value; // YYYY-MM-DD
+  const toVal   = document.getElementById('dateTo').value;
+  if(!fromVal || !toVal){ el.style.display='none'; return; }
+
+  const [fy,fm,fd] = fromVal.split('-').map(Number);
+  const [ty,tm,td] = toVal.split('-').map(Number);
+  const fromTs = new Date(fy,fm-1,fd).getTime();
+  const toTs   = new Date(ty,tm-1,td).getTime();
+
+  // Ano dos lançamentos: assumir ano atual (dados do mês corrente)
+  const anoAtual = new Date().getFullYear();
+
+  const dias = Object.entries(dayMap)
+    .map(([dt,vl])=>{
+      const [dd,mm] = dt.split('/').map(Number);
+      const ts = new Date(anoAtual, mm-1, dd).getTime();
+      return {dt, dd, mm, vl, ts};
+    })
+    .filter(d => d.ts >= fromTs && d.ts <= toTs)
+    .sort((a,b)=> a.ts - b.ts);
+
+  if(dias.length === 0){ el.style.display='none'; return; }
+  el.style.display = 'block';
+
+  const canvas = document.getElementById('cDiario');
+  const W = canvas.parentElement.clientWidth - 44;
+  canvas.width = W; canvas.height = 220;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0,0,W,220);
+
+  const PAD = {l:10, r:10, t:30, b:36};
+  const chartW = W - PAD.l - PAD.r;
+  const chartH = 220 - PAD.t - PAD.b;
+  const n = dias.length;
+  const barW = Math.max(8, Math.min(48, chartW/n - 6));
+  const spacing = (chartW - barW*n) / (n+1);
+  const maxV = Math.max(...dias.map(d=>d.vl));
+
+  dias.forEach((d,i)=>{
+    const x = PAD.l + spacing*(i+1) + barW*i;
+    const bH = Math.max(3, (d.vl/maxV)*chartH);
+    const y  = PAD.t + chartH - bH;
+
+    const grad = ctx.createLinearGradient(x, y, x, y+bH);
+    grad.addColorStop(0,'rgba(0,207,255,0.95)');
+    grad.addColorStop(1,'rgba(0,100,200,0.35)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    if(ctx.roundRect) ctx.roundRect(x,y,barW,bH,4);
+    else { ctx.rect(x,y,barW,bH); }
+    ctx.fill();
+
+    // Rótulo do dia
+    ctx.fillStyle = 'rgba(255,255,255,0.55)';
+    ctx.font = '10px system-ui';
+    ctx.textAlign = 'center';
+    ctx.fillText(d.dt, x+barW/2, 220-PAD.b+14);
+
+    // Valor no topo (só se barras não muito juntas)
+    if(barW >= 18){
+      ctx.fillStyle = '#00cfff';
+      ctx.font = 'bold 9px system-ui';
+      const s = d.vl>=1000?'R$'+(d.vl/1000).toFixed(1)+'k':'R$'+Math.round(d.vl);
+      ctx.fillText(s, x+barW/2, y-5);
+    }
+  });
+
+  // Linha de média
+  const total = dias.reduce((a,b)=>a+b.vl,0);
+  const media = total/dias.length;
+  const mediaY = PAD.t + chartH - (media/maxV)*chartH;
+  ctx.setLineDash([4,4]);
+  ctx.strokeStyle = 'rgba(0,255,153,0.45)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(PAD.l, mediaY); ctx.lineTo(W-PAD.r, mediaY); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = 'rgba(0,255,153,0.7)'; ctx.font='9px system-ui'; ctx.textAlign='left';
+  ctx.fillText('média R$'+Math.round(media), PAD.l+4, mediaY-4);
+
+  document.getElementById('titleDiario').textContent = `Desperdício Diário — ${dias.length} dias`;
+  document.getElementById('insDiario').textContent   = `Total: R$ ${total.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
+  document.getElementById('tagDiario').textContent   = dias[0].dt+' a '+dias[dias.length-1].dt;
+}
+
 function updateAll(){
   drawEvolucao();
   drawDonut();
@@ -1294,6 +1402,7 @@ function updateAll(){
   drawTabela();
   drawRanking();
   drawLancamentos();
+  drawDiario();
 }
 
 setF(0);
