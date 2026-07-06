@@ -1107,10 +1107,10 @@ function openProdModal(name, color){
   const modal = document.getElementById('prodModal');
   modal.classList.add('open');
   document.body.style.overflow='hidden';
-  requestAnimationFrame(()=>{
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
     drawPmEv(d, color);
     drawPmAnual(d, color);
-  });
+  }));
 }
 
 function closeProdModal(){
