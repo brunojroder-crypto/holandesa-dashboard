@@ -1118,6 +1118,20 @@ function closeProdModal(){
   document.body.style.overflow='';
 }
 
+// Converte uma cor (hex "#rrggbb" ou "hsl(...)"/"hsla(...)") para uma versão
+// semitransparente sem quebrar o parser do canvas — addColorStop lança
+// SyntaxError com string de cor inválida (ex.: concatenar hex em cima de hsl()).
+function pmColorAlpha(c, alphaFloat){
+  if(typeof c!=='string') return 'rgba(0,180,255,'+alphaFloat+')';
+  if(c[0]==='#'){
+    const a = Math.round(alphaFloat*255).toString(16).padStart(2,'0');
+    return c+a;
+  }
+  if(c.indexOf('hsl(')===0) return 'hsla('+c.slice(4,-1)+','+alphaFloat+')';
+  if(c.indexOf('hsla(')===0) return c;
+  return c;
+}
+
 function drawPmEv(d, color){
   const canvas = document.getElementById('pmEv');
   const W = canvas.parentElement.clientWidth - 4;
@@ -1135,7 +1149,7 @@ function drawPmEv(d, color){
   for(let i=0;i<=4;i++){const y=PAD.t+cH*(1-i/4);ctx.beginPath();ctx.moveTo(PAD.l,y);ctx.lineTo(PAD.l+cW,y);ctx.stroke();}
 
   const grad = ctx.createLinearGradient(0,PAD.t,0,PAD.t+cH);
-  grad.addColorStop(0, clr+'33'); grad.addColorStop(1,'rgba(0,0,0,0)');
+  grad.addColorStop(0, pmColorAlpha(clr,0.2)); grad.addColorStop(1,'rgba(0,0,0,0)');
   ctx.beginPath();
   vl.forEach((v,i)=>{const x=PAD.l+i/(n-1)*cW,y=PAD.t+cH*(1-v/maxV);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
   ctx.lineTo(PAD.l+cW,PAD.t+cH); ctx.lineTo(PAD.l,PAD.t+cH); ctx.closePath();
@@ -1174,8 +1188,8 @@ function drawPmAnual(d, color){
     const x=startX+i*(barW+20);
     const bH=Math.max(2,(vals[i]/maxV)*54);
     const y=64-bH;
-    const alphas=['88','cc','ff'];
-    ctx.fillStyle=clr+alphas[i];
+    const alphas=[0.53,0.8,1.0];
+    ctx.fillStyle=pmColorAlpha(clr,alphas[i]);
     ctx.beginPath();
     const r=4;
     ctx.moveTo(x+r,y); ctx.lineTo(x+barW-r,y);
