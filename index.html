@@ -1423,7 +1423,16 @@ function drawLancamentos(){
   // Mês/ano do primeiro lançamento
   const meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
   const now = new Date();
-  sub.textContent = meses[now.getMonth()] + '/' + now.getFullYear() + ' — ' + LANCAMENTOS_MES.l
+  sub.textContent = meses[now.getMonth()] + '/' + now.getFullYear() + ' — ' + LANCAMENTOS_MES.length + ' registro(s)';
+
+  let totalQt = 0, totalVl = 0;
+  tbody.innerHTML = LANCAMENTOS_MES.map(l => {
+    totalQt += l.qt;
+    totalVl += l.vl;
+    return `<tr>
+      <td>${l.dt}</td>
+      <td>${l.pr}</td>
+      <td class="qt">${l.qt}</td>
       <td class="vl">R$ ${l.vl.toFixed(2).replace('.',',')}</td>
     </tr>`;
   }).join('');
