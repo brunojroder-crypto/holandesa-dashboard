@@ -380,10 +380,10 @@ const TOP_CAT = {
 };
 const CMP_GERAL = {lb:['Jan','Fev','Mar','Abr','Mai','Jun*'],a25:[6205.38,4773.78,9733.74,5329.03,4296.28,4702.34],a26:[5742.91,9561.40,5275.97,5916.57,3394.54,1027.40]};
 const CMP_CAT = {
-  'PADARIA / PÃES':      {a25:[1765.38,1653.68,1624.04,1984.13,1338.68,1620.14],a26:[1381.09,4462.12,2527.81,2733.27,1971.04,579.4]},
-  'CONFEITARIA / BOLOS': {a25:[2400,1540,2550.5,1674,1722,1343],a26:[2191.72,2212.78,977.06,1859.35,731.05,448]},
-  'SALGADOS':            {a25:[2040,1580.1,5553.6,1670.9,1235.6,1739.2],a26:[2170.1,2858.5,1720.7,1323.95,692.45,0]},
-  'FRIOS & EMBUTIDOS':   {a25:[0,0,5.6,0,0,0],a26:[0,28,50.4,0,0,0]}
+  'PADARIA / PÃES':      {lb:['Jan','Fev','Mar','Abr','Mai','Jun*'],a25:[1765.38,1653.68,1624.04,1984.13,1338.68,1620.14],a26:[1381.09,4462.12,2527.81,2733.27,1971.04,579.4]},
+  'CONFEITARIA / BOLOS': {lb:['Jan','Fev','Mar','Abr','Mai','Jun*'],a25:[2400,1540,2550.5,1674,1722,1343],a26:[2191.72,2212.78,977.06,1859.35,731.05,448]},
+  'SALGADOS':            {lb:['Jan','Fev','Mar','Abr','Mai','Jun*'],a25:[2040,1580.1,5553.6,1670.9,1235.6,1739.2],a26:[2170.1,2858.5,1720.7,1323.95,692.45,0]},
+  'FRIOS & EMBUTIDOS':   {lb:['Jan','Fev','Mar','Abr','Mai','Jun*'],a25:[0,0,5.6,0,0,0],a26:[0,28,50.4,0,0,0]}
 };
 
 const CAT_INFO = [
@@ -1127,8 +1127,12 @@ function closeProdModal(){
 function pmColorAlpha(c, alphaFloat){
   if(typeof c!=='string') return 'rgba(0,180,255,'+alphaFloat+')';
   if(c[0]==='#'){
+    // Normaliza para #rrggbb antes de acrescentar o alfa — a cor recebida pode
+    // já vir com um alfa embutido (ex.: Top 10 filtrado por categoria gera
+    // "#rrggbb"+2 dígitos extras), e concatenar em cima disso gera hex inválido.
+    const base = c.slice(0,7);
     const a = Math.round(alphaFloat*255).toString(16).padStart(2,'0');
-    return c+a;
+    return base+a;
   }
   if(c.indexOf('hsl(')===0) return 'hsla('+c.slice(4,-1)+','+alphaFloat+')';
   if(c.indexOf('hsla(')===0) return c;
