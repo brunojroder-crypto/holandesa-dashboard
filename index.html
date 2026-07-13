@@ -184,7 +184,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
   </div>
   <div style="display:flex;align-items:center;gap:12px">
   <div style="display:flex;align-items:center;gap:10px">
-    <div class="badge">📅 Atualizado em 07/07/2026</div>
+    <div class="badge">📅 Atualizado em 13/07/2026</div>
     <a href="lancamento_desperdicio.html" class="btn-lanc">✏️ Novo Lançamento</a>
   </div>
 </div>
@@ -341,11 +341,11 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
 // DADOS COMPLETOS
 // ═══════════════════════════════════════════
 const LABELS = ['Jun/24','Jul/24','Ago/24','Set/24','Out/24','Nov/24','Jan/25','Fev/25','Mar/25','Abr/25','Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26','Mai/26','Jun/26','Jul/26*'];
-const DIAS   = [24,24,25,26,30,30,28,22,31,27,30,26,31,29,23,30,27,30,29,28,26,26,20,14,4];
+const DIAS   = [24,24,25,26,30,30,28,22,31,27,30,26,31,29,23,30,27,30,29,28,26,26,20,14,5];
 
 const ALL = {
-  vl:[4404.55,4794.98,4036.47,6060.48,7066.15,5201.4,6205.38,4773.78,9733.74,5329.03,4296.28,4702.34,6599.74,4308.6,4782.76,6201.01,5517.93,13507.06,5742.91,9561.4,5275.97,5916.57,3394.54,10252.07,2646.07],
-  qt:[1868,1895,1494,1932,2230,1679,1630,1418,1700,1153,1037,1311,1912,1106,1168,1987,1457,3681,1123,1587,1417,1317,841,3414,320]
+  vl:[4404.55,4794.98,4036.47,6060.48,7066.15,5201.4,6205.38,4773.78,9733.74,5329.03,4296.28,4702.34,6599.74,4308.6,4782.76,6201.01,5517.93,13507.06,5742.91,9561.4,5275.97,5916.57,3394.54,10252.07,2686.57],
+  qt:[1868,1895,1494,1932,2230,1679,1630,1418,1700,1153,1037,1311,1912,1106,1168,1987,1457,3681,1123,1587,1417,1317,841,3414,323]
 };
 
 // Dados por categoria (mensais)
@@ -392,7 +392,7 @@ const CAT_INFO = [
   {name:'SALGADOS', color:'#00ff99', total:53514.0, icon:'🥐'},
   {name:'FRIOS & EMBUTIDOS', color:'#c800ff', total:262.8, icon:'🧀'}
 ];
-const TOTAL_GERAL = 150311.21;
+const TOTAL_GERAL = 150351.71;
 
 // Dados detalhados por produto (mensal + anual)
 const PROD_DATA = {
@@ -420,6 +420,7 @@ const PROD_DATA = {
   "Bolo de Fubá":{vl:[112.0,196.0,0.0,560.0,420.0,84.0,420.0,560.0,0.0,168.0,224.0,0.0,196.0,140.0,280.0,532.0,560.0,448.0,56.0,196.0,196.0,644.0,112.0,84.0,140.0],qt:[4,7,0,20,15,3,15,20,0,6,8,0,7,5,10,19,20,16,2,7,7,23,4,3,5],an:[1372.0,3528.0,1428.0],aqt:[49,126,51],tv:6328.0,tq:226,dias:103,md:61.44},
   "Bolo de Iogurte":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,56.0,420.0,0.0,280.0,420.0,84.0,56.0,0.0,28.0,56.0,0.0,280.0,140.0,28.0,0.0,112.0,0.0,0.0,0.0],qt:[0,0,0,0,0,0,2,15,0,10,15,3,2,0,1,2,0,10,5,1,0,4,0,0,0],an:[0.0,1680.0,280.0],aqt:[0,60,10],tv:1960.0,tq:70,dias:25,md:78.4},
   "Bolo de Laranja":{vl:[0.0,0.0,0.0,308.0,168.0,252.0,308.0,56.0,1764.0,448.0,224.0,168.0,112.0,224.0,56.0,112.0,140.0,784.0,112.0,420.0,56.0,168.0,112.0,28.0,56.0],qt:[0,0,0,11,6,9,11,2,63,16,8,6,4,8,2,4,5,28,4,15,2,6,4,1,2],an:[728.0,4396.0,952.0],aqt:[26,157,34],tv:6076.0,tq:217,dias:80,md:75.95},
+  "Bombom De Morango Belga":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,40.5],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],an:[0.0,0.0,40.5],aqt:[0,0,3],tv:40.5,tq:3,dias:1,md:40.5},
   "Brigadeiro Pistache":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,70.4],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13],an:[0.0,0.0,70.4],aqt:[0,0,13],tv:70.4,tq:13,dias:2,md:35.2},
   "Brioche Calabresa":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,139.0,639.4,111.2,500.4,111.2,528.2,139.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,23,4,18,4,19,5],an:[0.0,0.0,2168.4],aqt:[0,0,78],tv:2168.4,tq:78,dias:26,md:83.4},
   "Broa De Fuba":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.25,0.0,0.0,10.25,0.0,20.5,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,2,0],an:[0.0,0.0,41.0],aqt:[0,0,4],tv:41.0,tq:4,dias:3,md:13.67},
@@ -597,6 +598,7 @@ function setF(n){
   document.getElementById('bCust').classList.remove('on');
   document.getElementById(n===1?'bM':n===6?'b6':n===12?'b12':'bT').classList.add('on');
   const LANCAMENTOS_MES = [
+{dt:"13/07",pr:"Bombom De Morango Belga",qt:3,vl:40.5},
 {dt:"07/07",pr:"Brioche Calabresa",qt:2,vl:55.6},
 {dt:"06/07",pr:"Massa de Pizza",qt:13,vl:91.0},
 {dt:"06/07",pr:"Bolo de Fubá",qt:5,vl:140.0},
@@ -646,6 +648,13 @@ function setF(n){
 {dt:"01/07",pr:"Croissant",qt:4,vl:117.48},
 {dt:"01/07",pr:"Medialuna",qt:18,vl:135.0}
 ];
+window.LANCAMENTOS_MES = LANCAMENTOS_MES;
+window.LANCAMENTOS_MES = LANCAMENTOS_MES;
+window.LANCAMENTOS_MES = LANCAMENTOS_MES;
+window.LANCAMENTOS_MES = LANCAMENTOS_MES;
+window.LANCAMENTOS_MES = LANCAMENTOS_MES;
+window.LANCAMENTOS_MES = LANCAMENTOS_MES;
+window.LANCAMENTOS_MES = LANCAMENTOS_MES;
 window.LANCAMENTOS_MES = LANCAMENTOS_MES;
 window.LANCAMENTOS_MES = LANCAMENTOS_MES;
 window.LANCAMENTOS_MES = LANCAMENTOS_MES;
