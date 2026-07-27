@@ -1094,9 +1094,9 @@ function drawTop10(){
     else{ctx.textAlign='left';ctx.fillStyle='#c0c0d8';ctx.font='10px system-ui';ctx.fillText('R$'+(v/1000).toFixed(1)+'k',PAD.l+w+6,y+ph/2+4);}
   });
 
-  const totalRef = filtro ? top.vl.reduce((a,b)=>a+b,0)||1 :
+  const totalRef = (filtro||filtroCustom) ? top.vl.reduce((a,b)=>a+b,0)||1 :
                    activeCat ? CAT_INFO[CAT_INFO.findIndex(c=>c.name===activeCat)].total : TOTAL_GERAL;
-  const periodoLabel = filtro===1?'Mês Atual':filtro===6?'Últ. 6 Meses':filtro===12?'Últ. 12 Meses':'Todo período';
+  const periodoLabel = filtroCustom?`${LABELS[filtroCustom.start]} a ${LABELS[filtroCustom.end]}`:filtro===1?'Mês Atual':filtro===6?'Últ. 6 Meses':filtro===12?'Últ. 12 Meses':'Todo período';
   document.getElementById('titleT10').textContent=activeCat?`Top ${n} — ${activeCat}`:`Top 10 — Maior Desperdício`;
   document.getElementById('tagT10').textContent=activeCat?activeCat:periodoLabel;
 
