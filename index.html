@@ -180,7 +180,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
 <div class="hdr">
   <div>
     <h1>🥐 Panificadora Holandesa</h1>
-    <div class="sub">Controle de Desperdício · Jun/2024 — Jun/2026 · 77 produtos · 626 dias</div>
+    <div class="sub">Controle de Desperdício · Jun/2024 — Jul/2026 · 77 produtos · 626 dias</div>
   </div>
   <div style="display:flex;align-items:center;gap:12px">
   <div style="display:flex;align-items:center;gap:10px">
@@ -198,9 +198,9 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
   <button class="fbtn on" id="bT" onclick="setF(0)">Tudo</button>
   <span style="margin-left:8px;color:var(--border)">│</span>
   <span class="flbl" style="margin-left:8px">Intervalo</span>
-  <input type="date"  id="dateFrom" class="date-input" min="2024-06-01" max="2026-06-30" title="Data inicial">
+  <input type="date"  id="dateFrom" class="date-input" min="2024-06-01" max="2026-07-31" title="Data inicial">
   <span style="color:var(--muted);font-size:12px;padding:0 2px">→</span>
-  <input type="date"  id="dateTo"   class="date-input" min="2024-06-01" max="2026-06-30" title="Data final">
+  <input type="date"  id="dateTo"   class="date-input" min="2024-06-01" max="2026-07-31" title="Data final">
   <button class="btn-aplicar" id="bCust" onclick="applyCustomRange()">Aplicar</button>
 </div>
 
@@ -585,7 +585,7 @@ function applyCustomRange(){
   const to=document.getElementById('dateTo').value;
   if(!from||!to){return;}
   const s=monthToIdx(from), e=monthToIdx(to);
-  if(s<0||e<0){alert('Período fora do intervalo disponível (Jun/2024 – Jun/2026).');return;}
+  if(s<0||e<0){alert('Período fora do intervalo disponível (Jun/2024 – Jul/2026).');return;}
   if(s>e){alert('A data inicial deve ser anterior à data final.');return;}
   filtroCustom={start:s,end:e};
   document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));
@@ -766,6 +766,7 @@ function setF(n){
 {dt:"01/07",pr:"Croissant",qt:4,vl:117.48},
 {dt:"01/07",pr:"Medialuna",qt:18,vl:135.0}
 ];
+window.LANCAMENTOS_MES = LANCAMENTOS_MES;
 window.LANCAMENTOS_MES = LANCAMENTOS_MES;
 window.LANCAMENTOS_MES = LANCAMENTOS_MES;
 window.LANCAMENTOS_MES = LANCAMENTOS_MES;
@@ -1207,7 +1208,7 @@ function updateKPIs(){
   document.getElementById('kv3').textContent=R$(tv/td);
   document.getElementById('kv4').textContent=R$(maxV);
   document.getElementById('kd4').textContent=d.lb[maxIdx]||'—';
-  document.getElementById('ks1').textContent=filtroCustom?`${LABELS[filtroCustom.start]} a ${LABELS[filtroCustom.end]}`:filtro===0?'Jun/2024 a Jun/2026':filtro===1?'Jun/2026 (mês atual)':filtro===6?'Últimos 6 meses':'Últimos 12 meses';
+  document.getElementById('ks1').textContent=filtroCustom?`${LABELS[filtroCustom.start]} a ${LABELS[filtroCustom.end]}`:filtro===0?'Jun/2024 a Jul/2026':filtro===1?'Jul/2026 (mês atual)':filtro===6?'Últimos 6 meses':'Últimos 12 meses';
   document.getElementById('ks2').textContent=d.lb.length+' meses';
   document.getElementById('ks3').textContent='por dia útil registrado';
 
@@ -1246,7 +1247,7 @@ function openProdModal(name, color){
   const d = PROD_DATA[name];
   if(!d) return;
   document.getElementById('pmTitle').textContent = name;
-  document.getElementById('pmSub').textContent = `${d.dias} dias com registro · dados Jun/2024 – Jun/2026`;
+  document.getElementById('pmSub').textContent = `${d.dias} dias com registro · dados Jun/2024 – Jul/2026`;
   document.getElementById('pmTotal').textContent = R$(d.tv);
   document.getElementById('pmMedia').textContent = R$(d.md)+'/dia';
   document.getElementById('pmQtd').textContent = N(d.tq)+' un';
