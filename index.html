@@ -4363,9 +4363,14 @@ function drawDonut(){
     ctx.fillText(tStr, cx, cy+10);
   }
 
+  const visIdx=CAT_INFO.map((c,i)=>i).filter(i=>c_total_gt0(CAT_INFO[i]));
+  function c_total_gt0(c){ return c.total>0; }
+  const nRows=Math.ceil(visIdx.length/2);
   const lh=26, lstart=cy+R+18;
-  CAT_INFO.forEach((c,i)=>{
-    const col=i<2?0:1, row=i%2;
+  const legendRects=[];
+  visIdx.forEach((i,j)=>{
+    const c=CAT_INFO[i];
+    const col=j<nRows?0:1, row=j%nRows;
     const lx=col===0?10:W/2+4, ly=lstart+row*lh;
     const isA=activIdx===-1||activIdx===i;
     ctx.globalAlpha=isA?1:0.35;
@@ -4381,10 +4386,19 @@ function drawDonut(){
     ctx.fillStyle=isA?c.color:'#7070a0'; ctx.font='bold 11px system-ui';
     ctx.fillText(`${vStr}  ${pStr}`,lx+14,ly+12);
     ctx.globalAlpha=1;
+    legendRects.push({x:lx, y:ly-14, w:(W/2)-14, h:lh, idx:i});
   });
 
   let hoverIdx=-1;
+  function legendHit(mx,my){
+    for(const rc of legendRects){
+      if(mx>=rc.x&&mx<=rc.x+rc.w&&my>=rc.y&&my<=rc.y+rc.h) return rc.idx;
+    }
+    return -1;
+  }
   function getSegIdx(mx,my){
+    const li=legendHit(mx,my);
+    if(li>=0) return li;
     const dx=mx-cx, dy=my-cy, dist=Math.sqrt(dx*dx+dy*dy);
     if(dist<r||dist>R+12) return -1;
     let a=Math.atan2(dy,dx)+Math.PI/2; if(a<0)a+=Math.PI*2;
@@ -4401,6 +4415,7 @@ function drawDonut(){
     const mx=e.clientX-rect.left, my=e.clientY-rect.top;
     const idx=getSegIdx(mx,my);
     if(idx!==hoverIdx){hoverIdx=idx;}
+    canvas.style.cursor=idx>=0?'pointer':'default';
     if(idx>=0){
       const c=CAT_INFO[idx];
       showTT(e,c.name,[
@@ -4409,7 +4424,7 @@ function drawDonut(){
       ],activIdx===idx?'Clique para remover filtro':'👆 Clique para filtrar todos os gráficos');
     } else hideTT();
   };
-  canvas.onmouseleave=function(){hoverIdx=-1;hideTT();};
+  canvas.onmouseleave=function(){hoverIdx=-1;canvas.style.cursor='default';hideTT();};
 
   canvas.onclick=function(e){
     const rect=canvas.getBoundingClientRect();
