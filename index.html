@@ -342,6 +342,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
 // ═══════════════════════════════════════════
 const LABELS = ['Jun/24','Jul/24','Ago/24','Set/24','Out/24','Nov/24','Jan/25','Fev/25','Mar/25','Abr/25','Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26','Mai/26','Jun/26','Jul/26','Ago/26*'];
 const DIAS   = [24,24,25,26,30,30,28,22,31,27,30,26,31,29,23,30,27,30,29,28,26,26,20,14,11,3];
+const CAL_DIAS = [30,31,31,30,31,30,31,28,31,30,31,30,31,31,30,31,30,31,31,28,31,30,31,30,31,31];
 
 const ALL = {
   vl:[4404.55,4794.98,4036.47,6060.48,7066.15,5201.4,6205.38,4773.78,9733.74,5329.03,4296.28,4702.34,6599.74,4308.6,4782.76,6201.01,5517.93,13507.06,5742.91,9561.4,5275.97,5916.57,3394.54,10252.07,8790.52,3322.38],
@@ -4592,7 +4593,17 @@ function updateKPIs(){
   const d=getEvData();
   const tv=d.vl.reduce((a,b)=>a+b,0);
   const tq=d.qt.reduce((a,b)=>a+b,0);
-  const td=d.di.reduce((a,b)=>a+b,0);
+  // Média por Dia = total ÷ dias CORRIDOS do período (ex.: mês de 31 dias
+  // divide por 31, não importa em quantos dias houve lançamento).
+  let td;
+  if(filtroCustom){
+    td = Math.round((new Date(filtroCustom.to)-new Date(filtroCustom.from))/86400000) + 1;
+  } else if(!filtro){
+    td = CAL_DIAS.reduce((a,b)=>a+b,0);
+  } else {
+    const s = Math.max(0,LABELS.length-filtro);
+    td = CAL_DIAS.slice(s).reduce((a,b)=>a+b,0);
+  }
   const maxV=Math.max(...d.vl);
   const maxIdx=d.vl.indexOf(maxV);
   document.getElementById('kv1').textContent=R$(tv);
@@ -4602,9 +4613,9 @@ function updateKPIs(){
   document.getElementById('kd4').textContent=d.lb[maxIdx]||'—';
   document.getElementById('ks1').textContent=filtroCustom?`${fmtBR(filtroCustom.from)} a ${fmtBR(filtroCustom.to)}`:filtro===0?'Jun/2024 a Ago/2026':filtro===1?'Ago/2026 (mês atual)':filtro===6?'Últimos 6 meses':'Últimos 12 meses';
   document.getElementById('ks2').textContent=d.lb.length+' meses';
-  document.getElementById('ks3').textContent='por dia útil registrado';
+  document.getElementById('ks3').textContent='por dia corrido do período';
 
-  const avgTotal=TOTAL_GERAL/626;
+  const avgTotal=TOTAL_GERAL/CAL_DIAS.reduce((a,b)=>a+b,0);
   const avgPer=tv/td;
   const dl=(avgPer-avgTotal)/avgTotal;
   const kd3=document.getElementById('kd3');
@@ -4622,7 +4633,7 @@ function drawTabela(){
   const maxV=Math.max(...src.vl);
   let html='';
   LABELS.forEach((lb,i)=>{
-    const v=src.vl[i],q=src.qt[i],d=DIAS[i],md=v/d;
+    const v=src.vl[i],q=src.qt[i],d=DIAS[i],cd=CAL_DIAS[i],md=v/cd;
     const bw=Math.round(v/maxV*100);
     const bc=v===maxV?'#ff2d6b':v>7000?'#ff7a00':'#00b4ff';
     let varH='<span class="vna">—</span>';
