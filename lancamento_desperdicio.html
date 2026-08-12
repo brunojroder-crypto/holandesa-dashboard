@@ -953,16 +953,19 @@ async function salvarNoProjeto() {
       }
     }
     if (!dirHandle) {
-      mostrarStatus('ok', 'Selecione a pasta PANIFICADORA HOLANDESA COMPRAS...');
+      mostrarStatus('ok', 'Selecione a pasta DESPERDICIO...');
       dirHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
       await salvarDirHandle(dirHandle);
     }
+    // Pasta única PENDENTES/ dentro da pasta selecionada — é o único lugar
+    // que atualizar_dashboard.py verifica para importar lançamentos novos.
+    const pendentesHandle = await dirHandle.getDirectoryHandle('PENDENTES', { create: true });
     const { conteudo, nome } = await csvConteudo();
-    const fileHandle = await dirHandle.getFileHandle(nome, { create: true });
+    const fileHandle = await pendentesHandle.getFileHandle(nome, { create: true });
     const writable   = await fileHandle.createWritable();
     await writable.write(conteudo);
     await writable.close();
-    mostrarStatus('ok', `Salvo em "${dirHandle.name}/${nome}"`);
+    mostrarStatus('ok', `Salvo em "${dirHandle.name}/PENDENTES/${nome}"`);
   } catch (e) {
     if (e.name === 'AbortError') return;
     mostrarStatus('err', `Erro ao salvar: ${e.message}`);
