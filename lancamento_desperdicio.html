@@ -172,7 +172,8 @@
       transition:all 0.2s; flex-shrink:0;
     }
     .btn-salvar-preco:hover { background:rgba(255,136,0,0.28); }
-    .form-grid { grid-template-columns: 2fr 0.7fr 0.9fr 0.9fr auto !important; }
+    .form-grid { grid-template-columns: 1.8fr 1.2fr 0.7fr 0.9fr 0.9fr auto !important; }
+    @media (max-width:900px) { .form-grid { grid-template-columns: 1fr 1fr !important; } }
 
     /* CADASTRO DE PRODUTOS */
     .produtos-toggle {
@@ -349,95 +350,140 @@
       <label>Produto</label>
       <input type="text" id="inp-produto" placeholder="Ex: Pão de Queijo Grande" list="prod-list" autocomplete="off"/>
       <datalist id="prod-list">
-        <option value="PÃO DE QUEIJO GRANDE"/>
-        <option value="MINI RISOLIS"/>
-        <option value="MINI PÃO DE QUEIJO"/>
-        <option value="MINI KIBE"/>
-        <option value="SALGADO GRANDE FRITO"/>
-        <option value="SALGADO GRANDE ASSADO"/>
-        <option value="BOLO DE FUBA"/>
-        <option value="BOLO DE LARANJA"/>
-        <option value="MINI BOLINHA DE QUEIJO"/>
-        <option value="MINI COXINHA"/>
-        <option value="BOLO DE CENOURA"/>
-        <option value="BOLO DE CHOCOLATE"/>
-        <option value="PÃO FAZENDA"/>
-        <option value="CUECA VIRADA"/>
-        <option value="MINI PASTEL"/>
-        <option value="PÃO CUCA"/>
-        <option value="BOLO GLUTEM LESS"/>
-        <option value="BOLO DE AIPIM"/>
-        <option value="BRIOCHE DE CALABRESA"/>
-        <option value="PAO CASEIRO"/>
-        <option value="PAO DE MILHO"/>
-        <option value="MASSA DE PIZZA"/>
-        <option value="MEDIALUNA"/>
-        <option value="BISNAGUINHA"/>
-        <option value="BROA DE FUBA"/>
-        <option value="TORTA INTEIRA"/>
-        <option value="CAROLINA AÇUCARADA"/>
-        <option value="CROISSANT"/>
-        <option value="FATIA HUNGARA"/>
-        <option value="GRAVATINHA"/>
-        <option value="LUA DE MEL"/>
-        <option value="MINI ROSCA DE CREME"/>
-        <option value="PAO DE LEITE NINHO"/>
-        <option value="PIROGUE"/>
-        <option value="ROCAMBOLE"/>
-        <option value="TRANÇA DE CREME"/>
-        <option value="CUCA"/>
-        <option value="BOLO TIRA MISTO"/>
-        <option value="BOLO REDONDO MISTO"/>
-        <option value="BOLO NEGA MALUCA"/>
-        <option value="BOLO DE IOGURTE"/>
-        <option value="LANCHE NATURAL"/>
-        <option value="SALADA DE FRUTAS"/>
-        <option value="FATIA HUNGARA"/>
         <option value="BAGUETE LANCHE"/>
         <option value="BALA DE BRIGADEIRO 100G"/>
+        <option value="BALA DE BRIGADEIRO KG"/>
+        <option value="BARRA DE CHOCOLATE COM PIPOCA"/>
+        <option value="BEIJINHO"/>
         <option value="BELISCÃO"/>
         <option value="BICHO DE PÉ"/>
+        <option value="BISNAGUINHA"/>
+        <option value="BOLO DE AIPIM"/>
+        <option value="BOLO DE CENOURA"/>
+        <option value="BOLO DE CHOCOLATE"/>
+        <option value="BOLO DE FUBA"/>
         <option value="BOLO DE IOGURT"/>
+        <option value="BOLO DE IOGURTE"/>
+        <option value="BOLO DE LARANJA"/>
         <option value="BOLO DE LARANJA2"/>
         <option value="BOLO DE LIMÃO TIRA"/>
         <option value="BOLO DE MAÇÃ"/>
         <option value="BOLO DE MILHO"/>
         <option value="BOLO DE TANGERINA"/>
         <option value="BOLO FORMIGUEIRO"/>
+        <option value="BOLO GLUTEM LESS"/>
+        <option value="BOLO MULTIGRÃOS"/>
+        <option value="BOLO NEGA MALUCA"/>
+        <option value="BOLO REDONDO MISTO"/>
+        <option value="BOLO TIRA MISTO"/>
         <option value="BOLO TOALHA FELPUDA"/>
+        <option value="BOMBOM DE MORANGO BELGA"/>
+        <option value="BOMBOM MORANGO C/ PISTACHE"/>
+        <option value="BRIGADEIRO CARAMELO SALGADO"/>
+        <option value="BRIGADEIRO DE MILHO"/>
         <option value="BRIGADEIRO DE PISTACHE"/>
+        <option value="BRIOCHE CALABRESA C/ PESTO (KG)"/>
+        <option value="BRIOCHE DE CALABRESA"/>
+        <option value="BROA DE FUBA"/>
+        <option value="CAJUZINHO"/>
+        <option value="CAROLINA AÇUCARADA"/>
         <option value="CASADINHO"/>
+        <option value="CHARUTO DE MORTADELA"/>
+        <option value="COOKIES CACAU"/>
+        <option value="CROISSANT"/>
         <option value="CRUNCH CAKE"/>
         <option value="CRUNCH CAKE POTINHO"/>
+        <option value="CUCA"/>
+        <option value="CUECA VIRADA"/>
+        <option value="ESFIRRA LIBANESA"/>
+        <option value="FATIA HUNGARA"/>
+        <option value="GRAVATINHA"/>
+        <option value="LANCHE NATURAL"/>
+        <option value="LUA DE MEL"/>
+        <option value="MARIA MOLE CASEIRA"/>
+        <option value="MASSA DE PIZZA"/>
+        <option value="MAÇÃ DO AMOR"/>
+        <option value="MEDIALUNA"/>
+        <option value="MINI BOLINHA DE QUEIJO"/>
+        <option value="MINI COXINHA"/>
+        <option value="MINI CROISSANT DE FRANGO"/>
+        <option value="MINI CROISSANT PRESUNTO/QUEIJO"/>
         <option value="MINI EMPADA DE FRANGO"/>
+        <option value="MINI EMPADA DE PALMITO"/>
+        <option value="MINI ESFIRRA"/>
+        <option value="MINI KIBE"/>
+        <option value="MINI MANGULÃO DE FRANGO COM CATUPIRY"/>
+        <option value="MINI MANGULÃO DE PRES/QUEIJO"/>
+        <option value="MINI PASTEL"/>
+        <option value="MINI PASTEL DE CARNE"/>
+        <option value="MINI PASTEL DE QUEIJO"/>
+        <option value="MINI PIZZA"/>
+        <option value="MINI PÃO DE QUEIJO"/>
         <option value="MINI PÃO DE QUEIJO C/ GOIB"/>
+        <option value="MINI QUICHE DE ALHO PORÓ"/>
         <option value="MINI QUICHE LEGUMES"/>
+        <option value="MINI RISOLES DE CARNE"/>
+        <option value="MINI ROSCA DE CREME"/>
+        <option value="MINI SALSICHA ASSADA"/>
+        <option value="MINI SEMI FOLHADO DE PALMITO"/>
+        <option value="MINI SEMI FOLHADO DE PRESUNTO E QUEIJO"/>
         <option value="MINI TROUXINHA FRANGO COM PALMITO"/>
+        <option value="MORANGO DO AMOR"/>
+        <option value="NUTS AO LEITE"/>
         <option value="PALHA ITALIANA DE PISTACHE"/>
         <option value="PANQUECA"/>
+        <option value="PAO ALEMAO"/>
+        <option value="PAO CASEIRO"/>
         <option value="PAO CUCA/ CENOURA"/>
-        <option value="PÃO DE FORMA"/>
         <option value="PAO DE FORMA INTEGRAL"/>
-        <option value="PÃO DE NATA"/>
-        <option value="PÃO DE QUEIJO PALITO"/>
+        <option value="PAO DE LEITE NINHO"/>
+        <option value="PAO DE NATA"/>
         <option value="PAO DOCE"/>
+        <option value="PASTEL ASSADO DE PALMITO"/>
+        <option value="PAVÊ RUSSO"/>
+        <option value="PIROGUE"/>
+        <option value="PÃO CAPA DE QUEIJO (KG)"/>
+        <option value="PÃO CUCA"/>
+        <option value="PÃO CURITIBANO (KG)"/>
+        <option value="PÃO DE CENOURA (KG)"/>
+        <option value="PÃO DE FORMA"/>
+        <option value="PÃO DE FORMA INTEGRAL"/>
+        <option value="PÃO DE LEVAIN (KG)"/>
+        <option value="PÃO DE MILHO (KG)"/>
+        <option value="PÃO DE NATA"/>
+        <option value="PÃO DE QUEIJO GRANDE"/>
+        <option value="PÃO DE QUEIJO PALITO"/>
+        <option value="PÃO FAZENDA"/>
         <option value="PÃO FIESTA"/>
+        <option value="PÃO FRANCÊS (KG)"/>
         <option value="PÃO INTEGRAL"/>
         <option value="PÃO INTEGRAL DE FORMA"/>
-        <option value="PAVÊ RUSSO"/>
+        <option value="PÃO PORTUGUÊS (KG)"/>
         <option value="QUEIJADINHA"/>
+        <option value="ROCAMBOLE"/>
         <option value="ROSQUINHA DE PINGA"/>
+        <option value="SALADA DE FRUTAS"/>
         <option value="SALGADO ASSADO"/>
         <option value="SALGADO ASSADO GRANDE"/>
         <option value="SALGADO FRITO"/>
         <option value="SALGADO FRITO GRANDE"/>
-        <option value="UVA C/ SUCRILHOS"/>
-        <option value="MORANGO DO AMOR"/>
-        <option value="BALA DE BRIGADEIRO KG"/>
+        <option value="SALGADO GRANDE FRITO"/>
         <option value="SONHO"/>
-        <option value="CAJUZINHO"/>
-        <option value="BEIJINHO"/>
+        <option value="TORTA INTEIRA"/>
+        <option value="TRANÇA DE CREME"/>
+        <option value="TRIO WAFER SORTIDO 80G"/>
+        <option value="UVA C/ SUCRILHOS"/>
       </datalist>
+    </div>
+    <div class="field">
+      <label>Setor <span id="setor-tag" style="font-size:10px;font-weight:600;color:var(--muted);"></span></label>
+      <select id="inp-setor" onchange="marcarSetorManual()" style="width:100%;padding:11px 12px;background:var(--card);border:1px solid var(--border);border-radius:9px;color:#fff;font-size:13px;font-family:inherit;">
+        <option value="PADARIA / PÃES">🥖 Padaria / Pães</option>
+        <option value="CONFEITARIA / BOLOS">🍰 Confeitaria / Bolos</option>
+        <option value="SALGADOS">🥟 Salgados</option>
+        <option value="FRIOS &amp; EMBUTIDOS">🧀 Frios &amp; Embutidos</option>
+        <option value="OUTROS">📦 Outros</option>
+      </select>
     </div>
     <div class="field">
       <label>Quantidade (un)</label>
@@ -485,6 +531,7 @@
       <tr>
         <th>#</th>
         <th>Produto</th>
+        <th>Setor</th>
         <th class="td-right">Qtd (un)</th>
         <th class="td-right">Valor (R$)</th>
         <th class="td-right">R$/un</th>
@@ -576,117 +623,165 @@
 // TABELA DE PREÇOS (R$/unidade)
 // ══════════════════════════════
 const PRECOS = {
-  'MINI COXINHA':              1.30,
-  'MINI RISOLIS':              1.30,
-  'MINI PASTEL':               1.80,
-  'MINI KIBE':                 1.30,
-  'MINI BOLINHA DE QUEIJO':    1.30,
-  'SALGADO GRANDE FRITO':     12.80,
-  'SALGADO GRANDE ASSADO':    16.10,
-  'SALGADO ASSADO GRANDE':    16.10,
-  'MINI PÃO DE QUEIJO':        2.50,
-  'PÃO DE QUEIJO GRANDE':      9.21,
-  'BOLO DE LARANJA':          28.00,
-  'CUECA VIRADA':              4.03,
-  'BOLO DE CHOCOLATE':        25.00,
-  'BOLO DE IOGURTE':          28.00,
-  'BOLO DE CENOURA':          28.00,
-  'BOLO REDONDO MISTO':       28.00,
-  'BOLO TIRA MISTO':          25.00,
-  'MEDIALUNA':                 7.50,
-  'BOLO DE FUBA':             28.00,
-  'BOLO DE AIPIM':            28.00,
-  'BOLO GLUTEM LESS':         28.00,
-  'PAO CASEIRO':              18.25,
-  'PAO DE NATA':              18.90,
-  'PÃO FAZENDA':              18.90,
-  'PAO CUCA':                 19.75,
-  'PÃO CUCA':                 19.75,
-  'BRIOCHE DE CALABRESA':     27.80,
-  'MASSA DE PIZZA':            7.00,
-  'PAO DE MILHO':             19.75,
-  'BISNAGUINHA':              14.36,
-  'BROA DE FUBA':             10.25,
-  'CAROLINA AÇUCARADA':       12.00,
-  'CROISSANT':                29.37,
-  'FATIA HUNGARA':             5.60,
-  'GRAVATINHA':                1.17,
-  'LUA DE MEL':                6.42,
-  'MINI ROSCA DE CREME':       3.50,
-  'PAO DE LEITE NINHO':        6.50,
-  'PAO DOCE':                 10.72,
-  'PIROGUE':                   2.46,
-  'ROCAMBOLE':                14.00,
-  'ROSQUINHA DE PINGA':       10.00,
-  'TRANÇA DE CREME':           3.50,
-  'CUCA':                     28.50,
-  'BOLO NEGA MALUCA':         28.00,
-  'BOLO DE IOGURT':           28.00,
-  'TORTA INTEIRA':           114.48,
-  'LANCHE NATURAL':           12.00,
-  'SALADA DE FRUTAS':         12.00,
-  'BAGUETE LANCHE':           12.00,
-  'BALA DE BRIGADEIRO 100G':  14.90,
-  'BELISCÃO':                 16.85,
-  'BICHO DE PÉ':               3.00,
-  'BOLO DE LARANJA2':         28.00,
-  'BOLO DE LIMÃO TIRA':       25.00,
-  'BOLO DE MAÇÃ':             28.00,
-  'BOLO DE MILHO':            28.00,
-  'BOLO DE TANGERINA':        28.00,
-  'BOLO FORMIGUEIRO':         28.00,
-  'BOLO TOALHA FELPUDA':      28.00,
-  'BRIGADEIRO DE PISTACHE':    5.90,
-  'CASADINHO':                 2.62,
-  'CRUNCH CAKE':              19.90,
-  'CRUNCH CAKE POTINHO':      25.30,
-  'MINI EMPADA DE FRANGO':     2.45,
-  'MINI PÃO DE QUEIJO C/ GOIB': 2.30,
-  'MINI QUICHE LEGUMES':       2.45,
-  'MINI TROUXINHA FRANGO COM PALMITO': 2.45,
-  'PALHA ITALIANA DE PISTACHE': 12.93,
-  'PANQUECA':                 15.00,
-  'PAO CUCA/ CENOURA':        19.75,
-  'PÃO DE FORMA':             12.00,
-  'PAO DE FORMA INTEGRAL':    14.00,
-  'PÃO DE NATA':              18.90,
-  'PÃO DE QUEIJO PALITO':      2.30,
-  'PÃO FIESTA':               17.00,
-  'PÃO INTEGRAL':             14.00,
-  'PÃO INTEGRAL DE FORMA':    14.00,
-  'PAVÊ RUSSO':               18.55,
-  'QUEIJADINHA':              15.50,
-  'SALGADO ASSADO':           16.10,
-  'SALGADO FRITO':            12.80,
-  'SALGADO FRITO GRANDE':     12.80,
-  'UVA C/ SUCRILHOS':          4.39,
-  'MORANGO DO AMOR':          16.85,
-  'BALA DE BRIGADEIRO KG':   124.69,
-  'BARRA CHOCLOLATE COM PIPOCA':    34.90,
-  'BARRA DE CHOCOLATE COM PIPICA':  34.90,
-  'BARRA DE CHOCOLATE COM PIPOCA':  34.90,
-  'BARRINHA GOLD COM PIPOCA':       34.90,
-  'BOLO MULTIGRAES':                42.69,
-  'BOLO MULTIGRAOS':                42.69,
-  'BOMBOM DE MORANGO BELGA':        13.50,
-  'BOMBOM MORANGO C/ PISTACHE':     13.50,
-  'BRIGADEIRO CARAMELO FLOR DE SAL': 3.70,
-  'BRIGADEIRO DE CARAMELO SALGADO':  3.70,
-  'BRIGADEIRO DE MILHO':             3.00,
-  'COOKIES CACAU':                  19.90,
-  'MACA DO AMOR':                   12.50,
-  'MAÇA DO AMOR':                   12.50,
-  'MAÇÃ DO AMOR':                   12.50,
-  'MARIA MOLE CASEIRA':             13.90,
-  'MINI ESFIRRA':                    2.60,
-  'NUTS AO LEITE':                   4.80,
-  'PAO ALEMAO':                     19.82,
-  'TRIO WAFER SORTIDO 80G':         21.20,
-  'UVA COM SUCRILHOS':               4.36,
-  'SONHO':                          14.90,
-  'CAJUZINHO':                       6.00,
-  'BEIJINHO':                        3.00,
+  'BAGUETE LANCHE':                          12.00,
+  'BALA DE BRIGADEIRO 100G':                 14.90,
+  'BALA DE BRIGADEIRO KG':                   124.69,
+  'BARRA DE CHOCOLATE COM PIPOCA':           34.90,
+  'BELISCÃO':                                16.85,
+  'BICHO DE PÉ':                             3.00,
+  'BISNAGUINHA':                             14.36,
+  'BOLO DE AIPIM':                           28.00,
+  'BOLO DE CENOURA':                         28.00,
+  'BOLO DE CHOCOLATE':                       25.00,
+  'BOLO DE FUBA':                            28.00,
+  'BOLO DE IOGURT':                          28.00,
+  'BOLO DE IOGURTE':                         28.00,
+  'BOLO DE LARANJA':                         28.00,
+  'BOLO DE LARANJA2':                        28.00,
+  'BOLO DE LIMÃO TIRA':                      25.00,
+  'BOLO DE MAÇÃ':                            28.00,
+  'BOLO DE MILHO':                           28.00,
+  'BOLO DE TANGERINA':                       28.00,
+  'BOLO FORMIGUEIRO':                        28.00,
+  'BOLO GLUTEM LESS':                        28.00,
+  'BOLO MULTIGRÃOS':                         42.69,
+  'BOLO NEGA MALUCA':                        28.00,
+  'BOLO REDONDO MISTO':                      28.00,
+  'BOLO TIRA MISTO':                         25.00,
+  'BOLO TOALHA FELPUDA':                     28.00,
+  'BOMBOM DE MORANGO BELGA':                 13.50,
+  'BOMBOM MORANGO C/ PISTACHE':              13.50,
+  'BRIGADEIRO CARAMELO SALGADO':             3.70,
+  'BRIGADEIRO DE MILHO':                     3.00,
+  'BRIGADEIRO DE PISTACHE':                  5.90,
+  'BRIOCHE CALABRESA C/ PESTO (KG)':         83.48,
+  'BRIOCHE DE CALABRESA':                    27.80,
+  'BROA DE FUBA':                            10.25,
+  'CAROLINA AÇUCARADA':                      12.00,
+  'CASADINHO':                               2.62,
+  'CHARUTO DE MORTADELA':                    2.15,
+  'COOKIES CACAU':                           19.90,
+  'CROISSANT':                               29.37,
+  'CRUNCH CAKE':                             19.90,
+  'CRUNCH CAKE POTINHO':                     25.30,
+  'CUCA':                                    28.50,
+  'CUECA VIRADA':                            4.03,
+  'ESFIRRA LIBANESA':                        5.55,
+  'FATIA HUNGARA':                           5.60,
+  'GRAVATINHA':                              1.17,
+  'LANCHE NATURAL':                          12.00,
+  'LUA DE MEL':                              6.42,
+  'MARIA MOLE CASEIRA':                      13.90,
+  'MASSA DE PIZZA':                          7.00,
+  'MAÇÃ DO AMOR':                            12.50,
+  'MEDIALUNA':                               7.50,
+  'MINI BOLINHA DE QUEIJO':                  1.30,
+  'MINI COXINHA':                            1.30,
+  'MINI COXINHA DE FRANGO':                  1.30,
+  'MINI CROISSANT DE FRANGO':                2.05,
+  'MINI CROISSANT PRESUNTO/QUEIJO':          1.90,
+  'MINI EMPADA DE FRANGO':                   2.45,
+  'MINI EMPADA DE PALMITO':                  2.45,
+  'MINI ESFIRRA':                            2.60,
+  'MINI ESFIRRA DE CARNE':                   2.45,
+  'MINI KIBE':                               1.30,
+  'MINI MANGULÃO DE FRANGO COM CATUPIRY':    2.05,
+  'MINI MANGULÃO DE PRES/QUEIJO':            2.05,
+  'MINI PASTEL':                             1.80,
+  'MINI PASTEL DE CARNE':                    1.80,
+  'MINI PASTEL DE QUEIJO':                   1.80,
+  'MINI PIZZA':                              2.05,
+  'MINI PÃO DE QUEIJO':                      2.50,
+  'MINI PÃO DE QUEIJO C/ GOIB':              2.30,
+  'MINI QUIBE':                              1.30,
+  'MINI QUICHE DE ALHO PORÓ':                2.45,
+  'MINI QUICHE LEGUMES':                     2.45,
+  'MINI RISOLES DE CARNE':                   1.30,
+  'MINI RISOLIS':                            1.30,
+  'MINI ROSCA DE CREME':                     3.50,
+  'MINI SALSICHA ASSADA':                    1.80,
+  'MINI SEMI FOLHADO DE PALMITO':            2.05,
+  'MINI SEMI FOLHADO DE PRESUNTO E QUEIJO':  2.05,
+  'MINI TROUXINHA FRANGO COM PALMITO':       2.45,
+  'MORANGO DO AMOR':                         16.85,
+  'NUTS AO LEITE':                           4.80,
+  'PALHA ITALIANA DE PISTACHE':              12.93,
+  'PANQUECA':                                15.00,
+  'PAO ALEMAO':                              19.75,
+  'PAO CASEIRO':                             18.25,
+  'PAO CUCA/ CENOURA':                       19.75,
+  'PAO DE FORMA INTEGRAL':                   14.00,
+  'PAO DE LEITE NINHO':                      6.50,
+  'PAO DE NATA':                             18.90,
+  'PAO DOCE':                                10.72,
+  'PASTEL ASSADO DE PALMITO':                1.85,
+  'PAVÊ RUSSO':                              18.55,
+  'PIROGUE':                                 2.46,
+  'PÃO CAPA DE QUEIJO (KG)':                 50.43,
+  'PÃO CUCA':                                19.75,
+  'PÃO CURITIBANO (KG)':                     33.26,
+  'PÃO DE CENOURA (KG)':                     58.30,
+  'PÃO DE FORMA':                            12.00,
+  'PÃO DE FORMA INTEGRAL':                   14.00,
+  'PÃO DE LEVAIN (KG)':                      74.31,
+  'PÃO DE MILHO (KG)':                       58.30,
+  'PÃO DE NATA':                             18.90,
+  'PÃO DE QUEIJO GRANDE':                    9.21,
+  'PÃO DE QUEIJO PALITO':                    2.30,
+  'PÃO FAZENDA':                             18.90,
+  'PÃO FIESTA':                              17.00,
+  'PÃO FRANCÊS (KG)':                        28.51,
+  'PÃO INTEGRAL':                            14.00,
+  'PÃO INTEGRAL DE FORMA':                   14.00,
+  'PÃO PORTUGUÊS (KG)':                      33.27,
+  'QUEIJADINHA':                             15.50,
+  'ROCAMBOLE':                               14.00,
+  'ROSQUINHA DE PINGA':                      10.00,
+  'SALADA DE FRUTAS':                        15.80,
+  'SALGADO ASSADO':                          16.10,
+  'SALGADO ASSADO GRANDE':                   16.10,
+  'SALGADO FRITO':                           12.80,
+  'SALGADO FRITO GRANDE':                    12.80,
+  'SALGADO GRANDE ASSADO':                   16.10,
+  'SALGADO GRANDE FRITO':                    12.80,
+  'TRANÇA DE CREME':                         3.50,
+  'TRIO WAFER SORTIDO 80G':                  21.20,
+  'UVA C/ SUCRILHOS':                        4.39,
+  'UVA COM SUCRILHOS':                       3.95,
 };
+
+// ═══════════════════
+// SETORES (categorias do dashboard)
+// ═══════════════════
+const CATS = ['PADARIA / PÃES','CONFEITARIA / BOLOS','SALGADOS','FRIOS & EMBUTIDOS','OUTROS'];
+
+const SETOR_LISTA = {
+  "PADARIA / PÃES": ["BAGUETE LANCHE", "BELISCÃO", "BISNAGUINHA", "BRIOCHE CALABRESA C/ PESTO (KG)", "BRIOCHE DE CALABRESA", "BROA DE FUBA", "CROISSANT", "CUCA", "CUECA VIRADA", "FATIA HUNGARA", "GRAVATINHA", "LUA DE MEL", "MASSA DE PIZZA", "MEDIALUNA", "MINI PÃO DE QUEIJO", "MINI PÃO DE QUEIJO C/ GOIB", "MINI ROSCA DE CREME", "PANQUECA", "PAO ALEMAO", "PAO CASEIRO", "PAO CUCA/ CENOURA", "PAO DE FORMA INTEGRAL", "PAO DE LEITE NINHO", "PAO DE NATA", "PAO DOCE", "PIROGUE", "PÃO CAPA DE QUEIJO (KG)", "PÃO CUCA", "PÃO CURITIBANO (KG)", "PÃO DE CENOURA (KG)", "PÃO DE FORMA", "PÃO DE FORMA INTEGRAL", "PÃO DE LEVAIN (KG)", "PÃO DE MILHO (KG)", "PÃO DE NATA", "PÃO DE QUEIJO GRANDE", "PÃO DE QUEIJO PALITO", "PÃO FAZENDA", "PÃO FIESTA", "PÃO FRANCÊS (KG)", "PÃO INTEGRAL", "PÃO INTEGRAL DE FORMA", "PÃO PORTUGUÊS (KG)", "ROCAMBOLE", "SONHO", "TRANÇA DE CREME"],
+  "CONFEITARIA / BOLOS": ["BALA DE BRIGADEIRO 100G", "BALA DE BRIGADEIRO KG", "BARRA DE CHOCOLATE COM PIPOCA", "BEIJINHO", "BICHO DE PÉ", "BOLO DE AIPIM", "BOLO DE CENOURA", "BOLO DE CHOCOLATE", "BOLO DE FUBA", "BOLO DE IOGURT", "BOLO DE IOGURTE", "BOLO DE LARANJA", "BOLO DE LARANJA2", "BOLO DE LIMÃO TIRA", "BOLO DE MAÇÃ", "BOLO DE MILHO", "BOLO DE TANGERINA", "BOLO FORMIGUEIRO", "BOLO GLUTEM LESS", "BOLO MULTIGRÃOS", "BOLO NEGA MALUCA", "BOLO REDONDO MISTO", "BOLO TIRA MISTO", "BOLO TOALHA FELPUDA", "BOMBOM DE MORANGO BELGA", "BOMBOM MORANGO C/ PISTACHE", "BRIGADEIRO CARAMELO SALGADO", "BRIGADEIRO DE MILHO", "BRIGADEIRO DE PISTACHE", "CAJUZINHO", "CAROLINA AÇUCARADA", "CASADINHO", "COOKIES CACAU", "CRUNCH CAKE", "CRUNCH CAKE POTINHO", "MARIA MOLE CASEIRA", "MAÇÃ DO AMOR", "MORANGO DO AMOR", "NUTS AO LEITE", "PALHA ITALIANA DE PISTACHE", "PAVÊ RUSSO", "QUEIJADINHA", "ROSQUINHA DE PINGA", "TRIO WAFER SORTIDO 80G", "UVA C/ SUCRILHOS"],
+  "SALGADOS": ["CHARUTO DE MORTADELA", "ESFIRRA LIBANESA", "MINI BOLINHA DE QUEIJO", "MINI COXINHA", "MINI CROISSANT DE FRANGO", "MINI CROISSANT PRESUNTO/QUEIJO", "MINI EMPADA DE FRANGO", "MINI EMPADA DE PALMITO", "MINI ESFIRRA", "MINI KIBE", "MINI MANGULÃO DE FRANGO COM CATUPIRY", "MINI MANGULÃO DE PRES/QUEIJO", "MINI PASTEL", "MINI PASTEL DE CARNE", "MINI PASTEL DE QUEIJO", "MINI PIZZA", "MINI QUICHE DE ALHO PORÓ", "MINI QUICHE LEGUMES", "MINI RISOLES DE CARNE", "MINI SALSICHA ASSADA", "MINI SEMI FOLHADO DE PALMITO", "MINI SEMI FOLHADO DE PRESUNTO E QUEIJO", "MINI TROUXINHA FRANGO COM PALMITO", "PASTEL ASSADO DE PALMITO", "SALGADO ASSADO", "SALGADO ASSADO GRANDE", "SALGADO FRITO", "SALGADO FRITO GRANDE", "SALGADO GRANDE FRITO", "TORTA INTEIRA"],
+  "FRIOS & EMBUTIDOS": [],
+  "OUTROS": ["LANCHE NATURAL", "SALADA DE FRUTAS"],
+};
+
+// Monta o índice produto → setor
+const SETORES = {};
+for (const cat of CATS) (SETOR_LISTA[cat] || []).forEach(p => SETORES[p.toUpperCase().trim()] = cat);
+
+// Setores definidos pelo usuário (produtos novos) — ficam salvos no navegador
+const SETORES_CUSTOM = JSON.parse(localStorage.getItem('setores_custom') || '{}');
+
+// Descobre o setor: custom → tabela → palavras-chave → OUTROS
+function getSetor(nomeProduto) {
+  const n = (nomeProduto || '').toUpperCase().trim();
+  if (!n) return '';
+  if (SETORES_CUSTOM[n]) return SETORES_CUSTOM[n];
+  if (SETORES[n]) return SETORES[n];
+  if (/BOLO|BRIGADEIRO|TORTA DE |DOCE|BOMBOM|CHOCOLATE|BALA |PALHA ITALIANA|MORANGO DO AMOR|MAÇ. DO AMOR|COOKIE|PAVÊ|PAVE|BEIJINHO|CAJUZINHO|QUEIJADINHA|CROCANTE|MOUSSE|PUDIM|SOBREMESA/.test(n)) return 'CONFEITARIA / BOLOS';
+  if (/^MINI |SALGADO|COXINHA|ESFIRRA|KIBE|RISOLI|PASTEL|EMPADA|QUICHE|ENROLADINHO|TROUXINHA/.test(n)) return 'SALGADOS';
+  if (/P(Ã|A)O|BAGUETE|CUCA|CROISSANT|BISNAG|ROSCA|BRIOCHE|SONHO|FATIA|TRAN(Ç|C)A|MASSA DE PIZZA|MEDIALUNA/.test(n)) return 'PADARIA / PÃES';
+  if (/PRESUNTO|QUEIJO FATIADO|MORTADELA|SALAME|LINGUI(Ç|C)A|BACON|SALSICHA|EMBUTIDO|IOGURTE|LEITE|MANTEIGA|REQUEIJ/.test(n)) return 'FRIOS & EMBUTIDOS';
+  return 'OUTROS';
+}
 
 // Preços customizados salvos pelo usuário sobrepõem a tabela padrão
 const PRECOS_CUSTOM = JSON.parse(localStorage.getItem('precos_custom') || '{}');
@@ -712,11 +807,48 @@ function atualizarPreco() {
   // Mostra botão de salvar preço ao editar manualmente
   btnSP.style.display = prod.trim() ? 'inline-flex' : 'none';
 
+  // Preenche o setor automaticamente (só se o usuário não escolheu à mão)
+  atualizarSetor(prod);
+
   // Recalcula total
   const pu = parseFloat(inpPU.value) || 0;
   if (pu > 0 && qtd > 0) {
     inpTot.value = (pu * qtd).toFixed(2);
   }
+}
+
+// Preenche o select de setor conforme o produto digitado
+function atualizarSetor(prod) {
+  const sel = document.getElementById('inp-setor');
+  const tag = document.getElementById('setor-tag');
+  if (!sel) return;
+  const n = (prod || '').toUpperCase().trim();
+
+  if (sel.dataset.manual === 'true') {
+    tag.textContent = '• definido por você';
+    tag.style.color = 'var(--orange)';
+    return;
+  }
+  if (!n) { tag.textContent = ''; sel.value = 'PADARIA / PÃES'; return; }
+
+  sel.value = getSetor(n);
+  const conhecido = SETORES_CUSTOM[n] || SETORES[n];
+  tag.textContent   = conhecido ? '• automático' : '• sugerido — confira';
+  tag.style.color   = conhecido ? 'var(--muted)' : 'var(--orange)';
+}
+
+// Usuário mexeu no select: respeita a escolha dele e memoriza o produto
+function marcarSetorManual() {
+  const sel  = document.getElementById('inp-setor');
+  const prod = document.getElementById('inp-produto').value.toUpperCase().trim();
+  sel.dataset.manual = 'true';
+  if (prod) {
+    SETORES_CUSTOM[prod] = sel.value;
+    localStorage.setItem('setores_custom', JSON.stringify(SETORES_CUSTOM));
+  }
+  const tag = document.getElementById('setor-tag');
+  tag.textContent = '• definido por você';
+  tag.style.color = 'var(--orange)';
 }
 
 function salvarPrecoUn() {
@@ -767,18 +899,24 @@ function mostrarErro(msg) {
 // ═══════════════════
 // ADD ITEM
 // ═══════════════════
-function addItem(produto, qtd, valor, origem) {
+function addItem(produto, qtd, valor, origem, setor) {
   if (!produto) {
     produto = document.getElementById('inp-produto').value.trim().toUpperCase();
     qtd     = parseFloat(document.getElementById('inp-qtd').value);
     valor   = parseFloat(document.getElementById('inp-valor').value);
+    setor   = document.getElementById('inp-setor').value;
     origem  = 'manual';
   }
   if (!produto) return mostrarErro('Informe o nome do produto.');
   if (!qtd || qtd <= 0) return mostrarErro('Informe a quantidade.');
   if (!valor || valor <= 0) return mostrarErro('Informe o valor total.');
 
-  itens.push({ produto, qtd, valor, origem: origem || 'manual', id: Date.now() });
+  setor = setor || getSetor(produto);
+  // Memoriza o setor deste produto para os próximos lançamentos
+  SETORES_CUSTOM[produto.toUpperCase().trim()] = setor;
+  localStorage.setItem('setores_custom', JSON.stringify(SETORES_CUSTOM));
+
+  itens.push({ produto, qtd, valor, setor, origem: origem || 'manual', id: Date.now() });
   salvar();
   renderTabela();
   // Limpa form
@@ -788,6 +926,10 @@ function addItem(produto, qtd, valor, origem) {
   document.getElementById('inp-preco-un').dataset.edited = '';
   document.getElementById('inp-valor').value = '';
   document.getElementById('btn-salvar-preco').style.display = 'none';
+  const selSetor = document.getElementById('inp-setor');
+  selSetor.dataset.manual = '';
+  document.getElementById('setor-tag').textContent = '';
+  selSetor.value = 'PADARIA / PÃES';
 }
 
 // ═══════════════════
@@ -807,7 +949,7 @@ function renderTabela() {
   const totRow = document.getElementById('totaisRow');
 
   if (itens.length === 0) {
-    tbody.innerHTML = `<tr id="tr-vazio"><td colspan="7" style="text-align:center;padding:28px;color:var(--muted);font-size:13px;">Nenhum lançamento ainda. Use o formulário acima ou envie uma foto no chat.</td></tr>`;
+    tbody.innerHTML = `<tr id="tr-vazio"><td colspan="8" style="text-align:center;padding:28px;color:var(--muted);font-size:13px;">Nenhum lançamento ainda. Use o formulário acima ou envie uma foto no chat.</td></tr>`;
     totRow.style.cssText = 'display:none!important';
     return;
   }
@@ -822,9 +964,12 @@ function renderTabela() {
     const origemBadge = it.origem === 'foto'
       ? '<span class="status-foto">📸 Foto</span>'
       : '<span class="status-manual">⌨ Manual</span>';
+    const st = it.setor || getSetor(it.produto);
+    const stCor = { 'PADARIA / PÃES':'#ffb26b', 'CONFEITARIA / BOLOS':'#ff7bd5', 'SALGADOS':'#6be3ff', 'FRIOS & EMBUTIDOS':'#9dff6b', 'OUTROS':'#9aa4b2' }[st] || '#9aa4b2';
     html += `<tr class="fade-in">
       <td style="color:var(--muted)">${i+1}</td>
       <td style="font-weight:600">${it.produto}</td>
+      <td><span style="font-size:11px;font-weight:600;color:${stCor};border:1px solid ${stCor}44;background:${stCor}18;border-radius:6px;padding:3px 8px;white-space:nowrap;">${st}</span></td>
       <td class="td-right">${it.qtd}</td>
       <td class="td-right" style="color:#fff;font-weight:600">${fmtBRL(it.valor)}</td>
       <td class="td-right" style="color:var(--muted)">${fmtBRL(parseFloat(uv))}</td>
@@ -835,7 +980,7 @@ function renderTabela() {
 
   // Linha de total
   html += `<tr style="border-top:2px solid var(--border)">
-    <td colspan="2" style="padding:12px;font-weight:700;color:var(--muted)">TOTAL DO DIA</td>
+    <td colspan="3" style="padding:12px;font-weight:700;color:var(--muted)">TOTAL DO DIA</td>
     <td class="td-right" style="font-weight:700">${totQ}</td>
     <td class="td-right" style="font-weight:800;color:var(--orange)">${fmtBRL(totV)}</td>
     <td colspan="3"></td>
@@ -856,9 +1001,9 @@ function renderTabela() {
 function exportCSV() {
   if (itens.length === 0) return alert('Nenhum item para exportar.');
   const dataISO = new Date().toISOString().split('T')[0];
-  let csv = 'DATA,PRODUTO,QUANTIDADE,VALOR (R$)\n';
+  let csv = 'DATA,PRODUTO,QUANTIDADE,VALOR (R$),SETOR\n';
   itens.forEach(it => {
-    csv += `${dataISO},${it.produto},${it.qtd},${it.valor.toFixed(2)}\n`;
+    csv += `${dataISO},${it.produto},${it.qtd},${it.valor.toFixed(2)},${it.setor || getSetor(it.produto)}\n`;
   });
   const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
   const a = document.createElement('a');
@@ -927,9 +1072,9 @@ async function salvarDirHandle(handle) {
 
 async function csvConteudo() {
   const dataISO = new Date().toISOString().split('T')[0];
-  let csv = 'DATA,PRODUTO,QUANTIDADE,VALOR (R$)\n';
+  let csv = 'DATA,PRODUTO,QUANTIDADE,VALOR (R$),SETOR\n';
   itens.forEach(it => {
-    csv += `${dataISO},${it.produto},${it.qtd},${it.valor.toFixed(2)}\n`;
+    csv += `${dataISO},${it.produto},${it.qtd},${it.valor.toFixed(2)},${it.setor || getSetor(it.produto)}\n`;
   });
   return { conteudo: '﻿' + csv, nome: `lancamentos_pendentes_${dataISO}.csv` };
 }
