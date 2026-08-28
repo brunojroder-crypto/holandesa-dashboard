@@ -4937,7 +4937,7 @@ function drawRanking(){
     start = filtroCustom.start;
     end = filtroCustom.end;
   } else {
-    end = 22; // Mai/26 index
+    end = 24; // Jul/26 index
     start = Math.max(0, end - n + 1);
   }
 
@@ -4976,7 +4976,7 @@ function drawRanking(){
     else{ctx.textAlign='left';ctx.fillStyle='#c0c0d8';ctx.font='10px system-ui';ctx.fillText('R$'+(p.v/1000).toFixed(1)+'k',PAD.l+w+6,y+ph/2+4);}
   });
 
-  const mLabel = n===1?'Mês Anterior (Mai/26)':n===3?'Últimos 3 Meses':'Últimos 6 Meses';
+  const mLabel = n===1?'Mês Anterior (Jul/26)':n===3?'Últimos 3 Meses':'Últimos 6 Meses';
   document.getElementById('titleRank').textContent=`Top Desperdício — ${mLabel}`;
   document.getElementById('insRank').textContent=`${prods.length} produtos com desperdício · Total: R$${(totalPer/1000).toFixed(1)}k`;
 
