@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f1720">
+<title>Checklist de Pedidos — Panificadora Holandesa</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥖</text></svg>">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0f1720; --card:#18222e; --card2:#1e2a38; --line:#2a3847;
+  --txt:#e8eef5; --dim:#8da2b8;
+  --pend:#ef4444; --ped:#f59e0b; --rec:#22c55e;
+  --accent:#38bdf8;
+}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding-bottom:40px}
+a{color:inherit;text-decoration:none}
+
+/* ---------- topo ---------- */
+header{position:sticky;top:0;z-index:40;background:rgba(15,23,32,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;gap:10px;padding:10px 14px 8px;max-width:1200px;margin:0 auto}
+.logo{font-size:20px}
+h1{font-size:15px;font-weight:700;margin:0;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hoje{font-size:11px;color:var(--dim);font-weight:500}
+.spacer{flex:1}
+.btn{background:var(--card2);border:1px solid var(--line);color:var(--txt);border-radius:9px;padding:7px 11px;font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--accent)}
+.btn.ghost{background:transparent}
+
+/* ---------- abas ---------- */
+nav{display:flex;gap:5px;padding:0 14px 9px;max-width:1200px;margin:0 auto;overflow-x:auto;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:7px 13px;font-size:13px;font-weight:600;color:var(--dim);cursor:pointer;position:relative}
+.tab.on{background:var(--accent);border-color:var(--accent);color:#06283d}
+.tab.today::after{content:'';position:absolute;top:4px;right:5px;width:5px;height:5px;border-radius:50%;background:var(--rec)}
+.tab.on.today::after{background:#06283d}
+
+/* ---------- barra de progresso ---------- */
+.prog{max-width:1200px;margin:0 auto;padding:0 14px 10px}
+.bar{height:7px;background:var(--card);border-radius:99px;overflow:hidden;display:flex}
+.bar i{display:block;height:100%;transition:width .35s}
+.bar .f-ped{background:var(--ped)} .bar .f-rec{background:var(--rec)}
+.legend{display:flex;gap:13px;flex-wrap:wrap;font-size:11.5px;color:var(--dim);margin-top:6px;align-items:center}
+.legend b{color:var(--txt)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:-1px}
+
+/* ---------- busca ---------- */
+.searchwrap{max-width:1200px;margin:0 auto;padding:0 14px 12px}
+.search{width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--txt);font-size:14px}
+.search::placeholder{color:#64788d}
+.search:focus{outline:none;border-color:var(--accent)}
+
+/* ---------- lista ---------- */
+main{max-width:1200px;margin:0 auto;padding:0 14px}
+.row{display:flex;align-items:center;gap:11px;background:var(--card);border:1px solid var(--line);border-left-width:4px;border-radius:11px;padding:11px 12px;margin-bottom:8px}
+.row[data-s="PENDENTE"]{border-left-color:var(--pend)}
+.row[data-s="PEDIDO"]{border-left-color:var(--ped)}
+.row[data-s="RECEBIDO"]{border-left-color:var(--rec);opacity:.62}
+.num{font-size:11px;color:var(--dim);min-width:20px;text-align:right;font-variant-numeric:tabular-nums}
+.info{flex:1;min-width:0}
+.nome{font-weight:650;font-size:14.5px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row[data-s="RECEBIDO"] .nome{text-decoration:line-through;text-decoration-color:var(--dim)}
+.meta{font-size:11.5px;color:var(--dim);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acts{display:flex;gap:7px;align-items:center;flex:0 0 auto}
+.wa{width:36px;height:36px;border-radius:9px;background:#1b3a2a;border:1px solid #255c3c;display:grid;place-items:center;font-size:16px}
+.wa:hover{background:#235039}
+.wa.off{opacity:.25;pointer-events:none}
+.st{border:none;border-radius:9px;padding:9px 13px;font-size:12px;font-weight:800;letter-spacing:.3px;cursor:pointer;min-width:104px;color:#0b1016}
+.st[data-s="PENDENTE"]{background:var(--pend);color:#fff}
+.st[data-s="PEDIDO"]{background:var(--ped)}
+.st[data-s="RECEBIDO"]{background:var(--rec)}
+.st:active{transform:scale(.96)}
+
+/* lista de contatos */
+.grid{display:grid;gap:8px;grid-template-columns:1fr}
+@media(min-width:760px){.grid{grid-template-columns:1fr 1fr}}
+.cc{display:flex;align-items:center;gap:11px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:10px 12px}
+.cc .tel{font-size:12px;color:var(--accent);font-variant-numeric:tabular-nums}
+.sec{font-size:11.5px;font-weight:800;letter-spacing:1.2px;color:var(--dim);text-transform:uppercase;margin:18px 0 9px}
+.empty{text-align:center;color:var(--dim);padding:40px 0;font-size:14px}
+.foot{text-align:center;color:#5a6e84;font-size:11px;padding:24px 14px 10px}
+@media(min-width:760px){
+  h1{font-size:16px}
+  .nome{font-size:15px}
+  .row{padding:12px 14px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="top">
+    <span class="logo">🥖</span>
+    <div style="min-width:0">
+      <h1>Checklist de Pedidos</h1>
+      <div class="hoje" id="hoje"></div>
+    </div>
+    <span class="spacer"></span>
+    <button class="btn ghost" id="btnLimpar">Limpar dia</button>
+  </div>
+  <nav id="nav"></nav>
+  <div class="prog">
+    <div class="bar"><i class="f-rec" id="fRec" style="width:0"></i><i class="f-ped" id="fPed" style="width:0"></i></div>
+    <div class="legend" id="legend"></div>
+  </div>
+  <div class="searchwrap"><input class="search" id="busca" placeholder="Buscar fornecedor…" autocomplete="off"></div>
+</header>
+
+<main id="app"></main>
+<div class="foot">Status salvo neste aparelho · zera automaticamente toda segunda-feira</div>
+
+<script>
+const D = {"dias":{"seg":[{"n":"SENDESKY","c":"Produtos gerais","t":"(44)999450851","w":"44999450851"},{"n":"LAC FOODS","c":"Laticínios","t":"(44)998352794","w":"44998352794"},{"n":"CASSIO","c":"laticinio","t":"(44)988362357","w":"44988362357"},{"n":"DIFAL","c":"Distribuidor alimentos","t":"wthas busines","w":""},{"n":"DUSNEY","c":"Distribuidor geral","t":"(44)999917763","w":"44999917763"},{"n":"DIFRIPAR","c":"Frios / refrigerados","t":"(44)998449594","w":"44998449594"},{"n":"SANTA MARIA","c":"Distribuidor geral","t":"(44)991373372","w":"44991373372"},{"n":"MARIMEL","c":"Distribuidor geral","t":"(44)991856991","w":"44991856991"},{"n":"ARILU","c":"Distribuidor alimentos","t":"whtas busines","w":""},{"n":"FRANGO PARANA","c":"Proteínas / carnes","t":"(44)999575929","w":"44999575929"},{"n":"MORANGO","c":"Hortifruti/ fernando","t":"(43)998481773","w":"43998481773"},{"n":"PENACCI","c":"Distribuidor","t":"(44)999777079","w":"44999777079"},{"n":"CENTRAL CARNES","c":"Proteínas","t":"(44)998967634","w":"44998967634"},{"n":"HAMBÚRGUER Draus","c":"Proteínas","t":"(44)998008757","w":"44998008757"},{"n":"ARCO IRIS","c":"embalagens e cholates","t":"(44)999467602","w":"44999467602"},{"n":"IMUZINT","c":"Bebidas / outros","t":"wthats web","w":""},{"n":"GUARANÁ / G.ANTARCTICA","c":"Bebidas","t":"(44)991197400","w":"44991197400"},{"n":"AMISTE","c":"Distribuidor limpeza","t":"whats web","w":""},{"n":"BRUNA/ RM","c":"Fornecedor","t":"(44)999901360","w":"44999901360"},{"n":"CHAPELIMP","c":"limpeza","t":"(44)997320039","w":"44997320039"},{"n":"AGUA SAFIRA","c":"bebidas","t":"(44)997670069","w":"44997670069"},{"n":"NESTLE","c":"producao","t":"(44)998550466","w":"44998550466"},{"n":"EMBALAGENS CANÇÃO","c":"sacolas","t":"(44)998686624","w":"44998686624"},{"n":"LCA","c":"farinha","t":"(44)991472530","w":"44991472530"},{"n":"ZAPPA","c":"acucar e oleo","t":"(44)991681802","w":"44991681802"},{"n":"LACTALIS","c":"confeitaria","t":"(44)998756203","w":"44998756203"},{"n":"LONDRIFOODS","c":"Frios / refrigerados","t":"(43)999918606","w":"43999918606"},{"n":"VALDIR","c":"Frios/ geral","t":"(44)999613060","w":"44999613060"},{"n":"ROTTA","c":"confeitaria","t":"(44)997715832","w":"44997715832"},{"n":"RABELE","c":"confeitaria","t":"(44)991140559","w":"44991140559"},{"n":"ANACONDA","c":"farinha","t":"(42)999688790","w":"42999688790"},{"n":"RICARNES","c":"frango/ fatiado","t":"(44)984297913","w":"44984297913"},{"n":"FRANGO LEVO","c":"frango","t":"(44)991533703","w":"44991533703"},{"n":"MORANGOLANDIA","c":"morango","t":"(44)997536960","w":"44997536960"},{"n":"ACOUGUE MELO","c":"carne moida","t":"(44)991211047","w":"44991211047"},{"n":"MASSA DE PASTEL (JUNIOR)","c":"massa de pastel e lasanha","t":"(44)991367644","w":"44991367644"},{"n":"NUTRIBOM","c":"produtos natural","t":"(44)999184941","w":"44999184941"}],"ter":[{"n":"DUSNEY","c":"Distribuidor geral","t":"(44)999917763","w":"44999917763"},{"n":"PENACCI","c":"Distribuidor","t":"(44)999777079","w":"44999777079"},{"n":"HAMBÚRGUER MR GRILL","c":"Proteínas","t":"(44)998008757","w":"44998008757"},{"n":"SHINAY","c":"Distribuidor geral","t":"","w":""},{"n":"ATACADÃO","c":"Compras atacado","t":"","w":""},{"n":"CÉSAR EMBALAGEM","c":"Embalagens","t":"(43)999953639","w":"43999953639"},{"n":"CENTRAL","c":"Central de abastecimento","t":"","w":""},{"n":"CHAPELIMP","c":"Limpeza / higiene","t":"(44)997320039","w":"44997320039"}],"qua":[{"n":"VIDA LACTE","c":"Laticínios","t":"(44)998352794","w":"44998352794"},{"n":"CASSIO","c":"Distribuidor geral","t":"(44)988362357","w":"44988362357"},{"n":"FRANGO PARANA","c":"Proteínas / carnes","t":"(44)999575929","w":"44999575929"},{"n":"FRANGO LEVO","c":"Proteínas / carnes","t":"(44)991533703","w":"44991533703"},{"n":"MORANGO","c":"Hortifruti","t":"(43)998481773","w":"43998481773"},{"n":"CARNES","c":"Proteínas","t":"","w":""},{"n":"HAMBÚRGUER MR GRILL","c":"Proteínas","t":"(44)998008757","w":"44998008757"},{"n":"PEQUENAS FORMINHAS","c":"Embalagens / formas","t":"","w":""},{"n":"ÁGUA SAFIRA","c":"Bebidas / água","t":"(44)997670069","w":"44997670069"}],"qui":[{"n":"DIFAL","c":"Distribuidor alimentos","t":"wthas busines","w":""},{"n":"DUSNEY","c":"Distribuidor geral","t":"(44)999917763","w":"44999917763"},{"n":"DIFRIPAR","c":"Frios / refrigerados","t":"(44)998449594","w":"44998449594"},{"n":"CARNES","c":"Proteínas","t":"","w":""},{"n":"HAMBÚRGUER MR GRILL","c":"Proteínas","t":"(44)998008757","w":"44998008757"},{"n":"GUARANÁ / G.ANTARCTICA","c":"Bebidas","t":"(44)991197400","w":"44991197400"},{"n":"AMISTE","c":"Distribuidor limpeza","t":"whats web","w":""},{"n":"SHINAY","c":"Distribuidor geral","t":"","w":""},{"n":"CÉSAR EMBALAGEM","c":"Embalagens","t":"(43)999953639","w":"43999953639"},{"n":"CEASA","c":"Hortifruti","t":"(44)999481476","w":"44999481476"},{"n":"LACFOODS","c":"Frios / refrigerados","t":"(44)998352794","w":"44998352794"},{"n":"COCA-COLA","c":"Bebidas","t":"(44)988164998","w":"44988164998"},{"n":"ROTTA","c":"Distribuidor rota","t":"(44)997715832","w":"44997715832"},{"n":"LONDRI FOODS","c":"Alimentos gerais","t":"(43)999918606","w":"43999918606"},{"n":"LEÃO","c":"Chás / bebidas","t":"(44)991191713","w":"44991191713"},{"n":"COFERPAN","c":"confeitaria","t":"(44)997311999","w":"44997311999"},{"n":"ROTTA","c":"confeitaria","t":"(44)997715832","w":"44997715832"}],"sex":[{"n":"VIDA LACTE","c":"Laticínios","t":"(44)998352794","w":"44998352794"},{"n":"CASSIO","c":"Distribuidor geral","t":"(44)988362357","w":"44988362357"},{"n":"FRANGO PARANA","c":"Proteínas / carnes","t":"(44)999575929","w":"44999575929"},{"n":"FRANGO LEVO","c":"Proteínas / carnes","t":"(44)991533703","w":"44991533703"},{"n":"MORANGO","c":"Hortifruti","t":"(43)998481773","w":"43998481773"},{"n":"CENTRAL CARNES","c":"Proteínas","t":"(44)998967634","w":"44998967634"},{"n":"HAMBÚRGUER MR GRILL","c":"Proteínas","t":"(44)998008757","w":"44998008757"},{"n":"BOMBONIERE","c":"Doces / confeitaria","t":"","w":""},{"n":"IMUZINT","c":"Bebidas / outros","t":"wthats web","w":""},{"n":"ATACADÃO","c":"Compras atacado","t":"","w":""},{"n":"FEITO CHOCOLATE","c":"chocolate","t":"(41)996956072","w":"41996956072"}],"sab":[{"n":"MORANGO","c":"Hortifruti","t":"(43)998481773","w":"43998481773"},{"n":"BOMBONIERE","c":"Doces / confeitaria","t":"","w":""},{"n":"GUARANÁ / G.ANTARCTICA","c":"Bebidas","t":"(44)991197400","w":"44991197400"},{"n":"SHINAY","c":"Distribuidor geral","t":"","w":""},{"n":"CEASA","c":"Hortifruti","t":"(44)999481476","w":"44999481476"},{"n":"COCA-COLA","c":"Bebidas","t":"(44)988164998","w":"44988164998"},{"n":"LAC FOODS","c":"Frios / refrigerados","t":"(44)998352794","w":"44998352794"},{"n":"ACOUGUE MELO","c":"","t":"(44)991211047","w":"44991211047"}],"dom":[{"n":"Levar frios para a frente","c":"Operações","t":"","w":""},{"n":"Organizar câmara de congelados","c":"Estoque","t":"","w":""},{"n":"Organizar estoque da produção","c":"Estoque","t":"","w":""},{"n":"Organizar estoque de embalagens","c":"Estoque","t":"","w":""},{"n":"Organizar câmara fria","c":"Estoque","t":"","w":""},{"n":"Fazer pedido dos refrigerantes","c":"Pedidos","t":"","w":""},{"n":"Organizar caixas na área de recebimento","c":"Operações","t":"","w":""},{"n":"Repor geladeira de frios","c":"Operações","t":"","w":""},{"n":"Fazer pedido do Ceasa","c":"Pedidos","t":"","w":""},{"n":"Pedido Coca-Cola","c":"Pedidos","t":"","w":""},{"n":"Pedido Guaraná Antarctica","c":"Pedidos","t":"","w":""},{"n":"Ajudar iFood / estacionamento (se houver tempo)","c":"Apoio","t":"","w":""}]},"forn":[{"n":"Sendesky","c":"Produtos gerais","t":"(44)999450851","w":"44999450851","d":"Segunda"},{"n":"Vida Lacte","c":"Laticínios","t":"(44)998352794","w":"44998352794","d":"Seg / Qua / Sex"},{"n":"Cassio","c":"Distribuidor geral","t":"(44)988362357","w":"44988362357","d":"Seg / Qua / Sex"},{"n":"Difal","c":"Distribuidor alimentos","t":"wthas busines","w":"","d":"Seg / Qui"},{"n":"Dusney","c":"Distribuidor geral","t":"(44)999917763","w":"44999917763","d":"Seg / Ter / Qui"},{"n":"Difripar","c":"Frios / refrigerados","t":"(44)998449594","w":"44998449594","d":"Seg / Qui"},{"n":"Santa Maria","c":"Distribuidor geral","t":"(44)991373372","w":"44991373372","d":"Segunda"},{"n":"Marimel","c":"Distribuidor geral","t":"(44)991856991","w":"44991856991","d":"Segunda"},{"n":"Arilu","c":"Distribuidor alimentos","t":"whtas busines","w":"","d":"Segunda"},{"n":"Frango","c":"Proteínas / carnes","t":"","w":"","d":"Seg / Qua / Sex"},{"n":"Morango","c":"Hortifruti","t":"(43)998481773","w":"43998481773","d":"Seg / Qua / Sex / Sáb"},{"n":"Penacci","c":"Distribuidor","t":"(44)999777079","w":"44999777079","d":"Seg / Ter"},{"n":"Carnes","c":"Proteínas","t":"","w":"","d":"Seg / Qua / Qui / Sex"},{"n":"Hambúrguer","c":"Proteínas","t":"","w":"","d":"Seg / Ter / Qua / Qui / Sex"},{"n":"Bomboniere","c":"Doces / confeitaria","t":"","w":"","d":"Seg / Sex / Sáb"},{"n":"Imuzint","c":"Bebidas / outros","t":"wthats web","w":"","d":"Seg / Sex"},{"n":"Guaraná / G.Antarctica","c":"Bebidas","t":"(44)991197400","w":"44991197400","d":"Seg / Qui / Sáb"},{"n":"Amiste","c":"Distribuidor limpeza","t":"whats web","w":"","d":"Seg / Qui"},{"n":"Bruna","c":"Fornecedor","t":"","w":"","d":"Segunda"},{"n":"Shinay","c":"Distribuidor geral","t":"","w":"","d":"Ter / Qui / Sáb"},{"n":"Atacadão","c":"Compras atacado","t":"","w":"","d":"Ter / Sex"},{"n":"César Embalagem","c":"Embalagens","t":"(43)999953639","w":"43999953639","d":"Ter / Qui"},{"n":"Central","c":"Central de abastecimento","t":"","w":"","d":"Terça"},{"n":"Chapelimp","c":"Limpeza / higiene","t":"(44)997320039","w":"44997320039","d":"Terça"},{"n":"Pequenas Forminhas","c":"Embalagens / formas","t":"","w":"","d":"Quarta"},{"n":"Água Safira","c":"Bebidas / água","t":"(44)997670069","w":"44997670069","d":"Quarta"},{"n":"Ceasa","c":"Hortifruti","t":"(44)999481476","w":"44999481476","d":"Qui / Sáb"},{"n":"Tiago","c":"Fornecedor","t":"","w":"","d":"Quinta"},{"n":"Coca-Cola","c":"Bebidas","t":"(44)988164998","w":"44988164998","d":"Qui / Sáb"},{"n":"Carol Rota","c":"Distribuidor rota","t":"","w":"","d":"Quinta"},{"n":"Londri Foods","c":"Alimentos gerais","t":"(43)999918606","w":"43999918606","d":"Quinta"},{"n":"Leão","c":"Chás / bebidas","t":"(44)991191713","w":"44991191713","d":"Quinta"},{"n":"Rotta","c":"Distribuidor rota","t":"(44)997715832","w":"44997715832","d":"Quinta"},{"n":"Frios","c":"Frios / refrigerados","t":"","w":"","d":"Sábado"},{"n":"Marcos TI Suporte","c":"Sistema e TI","t":"44-984513795","w":"44984513795","d":"Sob demanda"},{"n":"Vagner TI","c":"Sistema e TI","t":"44-984293903","w":"44984293903","d":"Sob demanda"},{"n":"Rafael Sagres Sistema","c":"Sistema","t":"43-988173683","w":"43988173683","d":"Sob demanda"},{"n":"Ademir Refrigeração","c":"Máquinas e equip.","t":"44-999636368","w":"44999636368","d":"Sob demanda"},{"n":"Thiago Refrigeração","c":"Máquinas e equip.","t":"44-988328245","w":"44988328245","d":"Sob demanda"},{"n":"Neno Forno","c":"Máquinas e equip.","t":"44-999525516","w":"44999525516","d":"Sob demanda"},{"n":"João Vidraceiro","c":"Máquinas e equip.","t":"44-999983330","w":"44999983330","d":"Sob demanda"},{"n":"Fabrício Eletrecista","c":"Manutenção predial","t":"44-984181145","w":"44984181145","d":"Sob demanda"},{"n":"Nivaldo Pedreiro","c":"Manutenção predial","t":"44-999701090","w":"44999701090","d":"Sob demanda"},{"n":"Metalúrgica Zé Carlos","c":"Manutenção predial","t":"44-999693546","w":"44999693546","d":"Sob demanda"},{"n":"Ronaldinho Ar Cond.","c":"Manutenção predial","t":"44-999464283","w":"44999464283","d":"Sob demanda"}]};
+const DIAS = [
+  {k:'dom', n:'Domingo',  curto:'Dom'},
+  {k:'seg', n:'Segunda',  curto:'Seg'},
+  {k:'ter', n:'Terça',    curto:'Ter'},
+  {k:'qua', n:'Quarta',   curto:'Qua'},
+  {k:'qui', n:'Quinta',   curto:'Qui'},
+  {k:'sex', n:'Sexta',    curto:'Sex'},
+  {k:'sab', n:'Sábado',   curto:'Sáb'}
+];
+const CICLO = {PENDENTE:'PEDIDO', PEDIDO:'RECEBIDO', RECEBIDO:'PENDENTE'};
+const KEY = 'holandesa_checklist_v1';
+
+/* ---- semana de referência: segunda-feira da semana atual ---- */
+function segundaDaSemana(d){
+  const x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const dow = x.getDay();              // 0=dom
+  const diff = (dow === 0 ? -6 : 1 - dow);
+  x.setDate(x.getDate() + diff);
+  return x.toISOString().slice(0,10);
+}
+
+let estado = {semana:'', st:{}};
+function carregar(){
+  const semanaAtual = segundaDaSemana(new Date());
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw){
+      const o = JSON.parse(raw);
+      if(o && o.semana === semanaAtual){ estado = o; return; }
+    }
+  }catch(e){}
+  estado = {semana: semanaAtual, st:{}};   // semana nova -> zera
+  salvar();
+}
+function salvar(){ try{ localStorage.setItem(KEY, JSON.stringify(estado)); }catch(e){} }
+function getSt(dia,i){ return (estado.st[dia]||{})[i] || 'PENDENTE'; }
+function setSt(dia,i,v){ (estado.st[dia] = estado.st[dia]||{})[i] = v; salvar(); }
+
+let aba = DIAS[new Date().getDay()].k;
+const hojeK = DIAS[new Date().getDay()].k;
+let filtro = '';
+
+/* ---- cabeçalho ---- */
+const MESES=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+(function(){
+  const h = new Date();
+  document.getElementById('hoje').textContent =
+    DIAS[h.getDay()].n + ', ' + h.getDate() + ' de ' + MESES[h.getMonth()] + '.';
+})();
+
+/* ---- abas ---- */
+function montarNav(){
+  const nav = document.getElementById('nav');
+  nav.innerHTML = '';
+  DIAS.forEach(d=>{
+    const b = document.createElement('button');
+    b.className = 'tab' + (d.k===aba?' on':'') + (d.k===hojeK?' today':'');
+    b.textContent = d.curto;
+    b.onclick = ()=>{ aba=d.k; filtro=''; document.getElementById('busca').value=''; render(); };
+    nav.appendChild(b);
+  });
+  const b = document.createElement('button');
+  b.className = 'tab' + (aba==='contatos'?' on':'');
+  b.textContent = '📞 Contatos';
+  b.onclick = ()=>{ aba='contatos'; filtro=''; document.getElementById('busca').value=''; render(); };
+  nav.appendChild(b);
+}
+
+function waLink(f){
+  const txt = encodeURIComponent('Olá ' + f.n + ', aqui é da Panificadora Holandesa. Gostaria de fazer um pedido:');
+  return 'https://wa.me/55' + f.w + '?text=' + txt;
+}
+
+function render(){
+  montarNav();
+  const app = document.getElementById('app');
+  const busca = document.getElementById('busca');
+  app.innerHTML = '';
+
+  if(aba === 'contatos'){
+    busca.placeholder = 'Buscar contato…';
+    document.querySelector('.prog').style.display='none';
+    document.getElementById('btnLimpar').style.display='none';
+    const q = filtro.toLowerCase();
+    const lista = D.forn.filter(f => !q || (f.n+' '+f.c+' '+f.d).toLowerCase().includes(q));
+    const porDem = lista.filter(f=> /demanda/i.test(f.d));
+    const rot    = lista.filter(f=> !/demanda/i.test(f.d));
+    const bloco = (titulo, arr)=>{
+      if(!arr.length) return;
+      const h = document.createElement('div'); h.className='sec'; h.textContent=titulo; app.appendChild(h);
+      const g = document.createElement('div'); g.className='grid';
+      arr.forEach(f=>{
+        const el = document.createElement('div'); el.className='cc';
+        el.innerHTML =
+          '<div class="info"><div class="nome">'+esc(f.n)+'</div>'+
+          '<div class="meta">'+esc(f.c)+(f.d?' · '+esc(f.d):'')+'</div>'+
+          (f.t?'<div class="tel">'+esc(f.t)+'</div>':'')+'</div>'+
+          '<a class="wa'+(f.w?'':' off')+'" '+(f.w?'href="'+waLink(f)+'" target="_blank" rel="noopener"':'')+'>💬</a>';
+        g.appendChild(el);
+      });
+      app.appendChild(g);
+    };
+    bloco('Fornecedores de rota', rot);
+    bloco('Manutenção e sob demanda', porDem);
+    if(!lista.length) app.innerHTML = '<div class="empty">Nenhum contato encontrado.</div>';
+    return;
+  }
+
+  busca.placeholder = 'Buscar fornecedor…';
+  document.querySelector('.prog').style.display='';
+  document.getElementById('btnLimpar').style.display='';
+
+  const todos = D.dias[aba] || [];
+  const q = filtro.toLowerCase();
+
+  // progresso sempre sobre o dia inteiro, não sobre o filtro
+  let nPed=0, nRec=0;
+  todos.forEach((f,i)=>{ const s=getSt(aba,i); if(s==='PEDIDO')nPed++; else if(s==='RECEBIDO')nRec++; });
+  const tot = todos.length || 1;
+  document.getElementById('fRec').style.width = (nRec/tot*100)+'%';
+  document.getElementById('fPed').style.width = (nPed/tot*100)+'%';
+  document.getElementById('legend').innerHTML =
+    '<span><b>'+(nPed+nRec)+'</b> de <b>'+todos.length+'</b> resolvidos</span>'+
+    '<span><i class="dot" style="background:var(--pend)"></i>'+(todos.length-nPed-nRec)+' pendente</span>'+
+    '<span><i class="dot" style="background:var(--ped)"></i>'+nPed+' pedido</span>'+
+    '<span><i class="dot" style="background:var(--rec)"></i>'+nRec+' recebido</span>';
+
+  const vis = todos.map((f,i)=>({f,i})).filter(o => !q || (o.f.n+' '+o.f.c).toLowerCase().includes(q));
+  if(!vis.length){ app.innerHTML = '<div class="empty">Nada por aqui.</div>'; return; }
+
+  vis.forEach(({f,i})=>{
+    const s = getSt(aba,i);
+    const row = document.createElement('div');
+    row.className='row'; row.dataset.s = s;
+    row.innerHTML =
+      '<span class="num">'+(i+1)+'</span>'+
+      '<div class="info"><div class="nome">'+esc(f.n)+'</div>'+
+      '<div class="meta">'+esc(f.c||'')+(f.t?' · '+esc(f.t):'')+'</div></div>'+
+      '<div class="acts">'+
+        (f.w ? '<a class="wa" href="'+waLink(f)+'" target="_blank" rel="noopener" title="Abrir WhatsApp">💬</a>' : '<span class="wa off">💬</span>')+
+        '<button class="st" data-s="'+s+'">'+s+'</button>'+
+      '</div>';
+    row.querySelector('.st').onclick = ()=>{
+      const novo = CICLO[getSt(aba,i)];
+      setSt(aba,i,novo);
+      render();
+    };
+    app.appendChild(row);
+  });
+}
+
+function esc(s){ return String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+document.getElementById('busca').addEventListener('input', e=>{ filtro = e.target.value.trim(); render(); });
+document.getElementById('btnLimpar').onclick = ()=>{
+  if(confirm('Voltar todos os itens de ' + DIAS.find(d=>d.k===aba).n + ' para PENDENTE?')){
+    estado.st[aba] = {}; salvar(); render();
+  }
+};
+
+carregar();
+render();
+</script>
+</body>
+</html>
