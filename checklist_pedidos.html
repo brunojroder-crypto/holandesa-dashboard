@@ -73,6 +73,37 @@ main{max-width:1200px;margin:0 auto;padding:0 14px}
 .st[data-s="RECEBIDO"]{background:var(--rec)}
 .st:active{transform:scale(.96)}
 
+
+/* ---------- agenda ---------- */
+.ag-form{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:14px}
+.ag-form .linha{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:9px}
+.ag-form input[type=text],.ag-form input[type=time]{background:var(--card2);border:1px solid var(--line);border-radius:9px;padding:10px 11px;color:var(--txt);font-size:14px;font-family:inherit}
+.ag-form input[type=text]{flex:1;min-width:170px}
+.ag-form input[type=time]{width:120px;font-variant-numeric:tabular-nums}
+.ag-form input:focus{outline:none;border-color:var(--accent)}
+.dias{display:flex;gap:5px;flex-wrap:wrap}
+.dias label{cursor:pointer}
+.dias input{display:none}
+.dias span{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:12px;font-weight:700;color:var(--dim);user-select:none}
+.dias input:checked + span{background:var(--accent);border-color:var(--accent);color:#06283d}
+.btn-add{background:var(--accent);border:none;color:#06283d;border-radius:9px;padding:10px 16px;font-size:13.5px;font-weight:800;cursor:pointer}
+.btn-add:active{transform:scale(.97)}
+.ag-row{display:flex;align-items:center;gap:11px;background:var(--card);border:1px solid var(--line);border-left-width:4px;border-left-color:var(--line);border-radius:11px;padding:11px 12px;margin-bottom:8px}
+.ag-row.agora{border-left-color:var(--ped);background:#2a2416}
+.ag-row.atrasada{border-left-color:var(--pend);background:#2a1a1a}
+.ag-row.feita{opacity:.45;border-left-color:var(--rec)}
+.ag-row.feita .ag-txt{text-decoration:line-through}
+.ag-hora{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums;min-width:58px;letter-spacing:-.5px}
+.ag-txt{font-weight:600;font-size:14.5px;line-height:1.25}
+.ag-dias{font-size:11px;color:var(--dim);margin-top:2px}
+.chk{width:34px;height:34px;border-radius:9px;border:2px solid var(--line);background:transparent;cursor:pointer;font-size:16px;display:grid;place-items:center;color:var(--rec);flex:0 0 auto}
+.ag-row.feita .chk{border-color:var(--rec);background:#13311f}
+.del{background:none;border:none;color:#5a6e84;font-size:17px;cursor:pointer;padding:4px 6px;flex:0 0 auto}
+.del:hover{color:var(--pend)}
+.aviso{background:#2a2416;border:1px solid #5c4a1a;color:#fcd34d;border-radius:10px;padding:11px 13px;font-size:13px;margin-bottom:13px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.aviso button{background:#fcd34d;border:none;color:#3a2d06;border-radius:8px;padding:7px 13px;font-size:12.5px;font-weight:800;cursor:pointer}
+.sec-ag{font-size:11.5px;font-weight:800;letter-spacing:1.2px;color:var(--dim);text-transform:uppercase;margin:16px 0 9px}
+
 /* lista de contatos */
 .grid{display:grid;gap:8px;grid-template-columns:1fr}
 @media(min-width:760px){.grid{grid-template-columns:1fr 1fr}}
@@ -174,6 +205,12 @@ function montarNav(){
     b.onclick = ()=>{ aba=d.k; filtro=''; document.getElementById('busca').value=''; render(); };
     nav.appendChild(b);
   });
+  const ag = document.createElement('button');
+  ag.className = 'tab' + (aba==='agenda'?' on':'');
+  ag.textContent = '⏰ Agenda';
+  ag.onclick = ()=>{ aba='agenda'; filtro=''; document.getElementById('busca').value=''; render(); };
+  nav.appendChild(ag);
+
   const b = document.createElement('button');
   b.className = 'tab' + (aba==='contatos'?' on':'');
   b.textContent = '📞 Contatos';
@@ -191,6 +228,16 @@ function render(){
   const app = document.getElementById('app');
   const busca = document.getElementById('busca');
   app.innerHTML = '';
+
+  if(aba === 'agenda'){
+    document.querySelector('.prog').style.display='none';
+    document.getElementById('btnLimpar').style.display='none';
+    document.querySelector('.searchwrap').style.display='none';
+    renderAgenda(app);
+    atualizarTitulo();
+    return;
+  }
+  document.querySelector('.searchwrap').style.display='';
 
   if(aba === 'contatos'){
     busca.placeholder = 'Buscar contato…';
@@ -263,6 +310,194 @@ function render(){
     app.appendChild(row);
   });
 }
+
+
+/* =================== AGENDA =================== */
+const AG_KEY = 'holandesa_agenda_v1';     // tarefas (NAO zera por semana)
+const AG_DONE = 'holandesa_agenda_done';  // feitas do dia
+const NOMES_D = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+
+function agLer(){ try{ return JSON.parse(localStorage.getItem(AG_KEY)) || []; }catch(e){ return []; } }
+function agSalvar(v){ try{ localStorage.setItem(AG_KEY, JSON.stringify(v)); }catch(e){} }
+function hojeISO(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function feitosLer(){
+  try{ const o=JSON.parse(localStorage.getItem(AG_DONE)); if(o && o.data===hojeISO()) return o; }catch(e){}
+  return {data:hojeISO(), ids:[], avisados:[]};
+}
+function feitosSalvar(o){ try{ localStorage.setItem(AG_DONE, JSON.stringify(o)); }catch(e){} }
+
+function minutosAgora(){ const d=new Date(); return d.getHours()*60+d.getMinutes(); }
+function hhmmParaMin(s){ const [h,m]=s.split(':').map(Number); return h*60+m; }
+
+function tarefasDeHoje(){
+  const dow = new Date().getDay();
+  return agLer().filter(t => t.dias.includes(dow)).sort((a,b)=> a.hora.localeCompare(b.hora));
+}
+
+/* ---- som ---- */
+function bipe(){
+  try{
+    const ctx = new (window.AudioContext||window.webkitAudioContext)();
+    [0,260,520].forEach(atraso=>{
+      const o=ctx.createOscillator(), g=ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.value = 880; o.type='sine';
+      const t = ctx.currentTime + atraso/1000;
+      g.gain.setValueAtTime(0.0001,t);
+      g.gain.exponentialRampToValueAtTime(0.35, t+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t+0.22);
+      o.start(t); o.stop(t+0.25);
+    });
+  }catch(e){}
+}
+
+function notificar(titulo, corpo){
+  bipe();
+  if(('Notification' in window) && Notification.permission === 'granted'){
+    try{
+      const n = new Notification(titulo, {body: corpo, icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🥖</text></svg>', requireInteraction:true, tag:'ag-'+corpo});
+      n.onclick = ()=>{ window.focus(); n.close(); };
+    }catch(e){}
+  }
+}
+
+/* ---- verificacao periodica ---- */
+function checarAlertas(){
+  const f = feitosLer();
+  if(f.data !== hojeISO()){ feitosSalvar({data:hojeISO(), ids:[], avisados:[]}); return; }
+  const agora = minutosAgora();
+  let mudou=false;
+  tarefasDeHoje().forEach(t=>{
+    if(f.ids.includes(t.id)) return;
+    const alvo = hhmmParaMin(t.hora);
+    const kPre = t.id+'|pre', kHora = t.id+'|hora';
+    if(agora >= alvo-10 && agora < alvo && !f.avisados.includes(kPre)){
+      f.avisados.push(kPre); mudou=true;
+      notificar('⏰ Em 10 minutos', t.texto + ' — às ' + t.hora);
+    }
+    if(agora >= alvo && !f.avisados.includes(kHora)){
+      f.avisados.push(kHora); mudou=true;
+      notificar('🔔 Agora: ' + t.hora, t.texto);
+    }
+  });
+  if(mudou) feitosSalvar(f);
+  atualizarTitulo();
+  if(aba === 'agenda') render();
+}
+
+function atualizarTitulo(){
+  const f = feitosLer(), agora = minutosAgora();
+  const atrasadas = tarefasDeHoje().filter(t => !f.ids.includes(t.id) && minutosAgora() >= hhmmParaMin(t.hora)).length;
+  document.title = (atrasadas ? '('+atrasadas+') ' : '') + 'Checklist de Pedidos — Panificadora Holandesa';
+}
+
+/* ---- tela da agenda ---- */
+function renderAgenda(app){
+  const f = feitosLer();
+  const agora = minutosAgora();
+  const dow = new Date().getDay();
+
+  if(('Notification' in window) && Notification.permission !== 'granted'){
+    const av = document.createElement('div'); av.className='aviso';
+    av.innerHTML = '<span>🔕 Os avisos estão desligados. Libere as notificações para a agenda te alertar.</span>';
+    const b = document.createElement('button'); b.textContent='Ativar avisos';
+    b.onclick = ()=> Notification.requestPermission().then(()=>{ bipe(); render(); });
+    av.appendChild(b); app.appendChild(av);
+  }
+
+  // formulario
+  const fm = document.createElement('div'); fm.className='ag-form';
+  fm.innerHTML =
+    '<div class="linha"><input type="text" id="agTxt" placeholder="O que precisa fazer?" maxlength="80">'+
+    '<input type="time" id="agHora" value="08:00"></div>'+
+    '<div class="linha dias" id="agDias">'+
+      NOMES_D.map((n,i)=>'<label><input type="checkbox" value="'+i+'"'+(i>=1&&i<=6?' checked':'')+'><span>'+n+'</span></label>').join('')+
+    '</div>'+
+    '<div class="linha"><button class="btn-add" id="agAdd">+ Adicionar à agenda</button></div>';
+  app.appendChild(fm);
+
+  const addTarefa = ()=>{
+    const texto = document.getElementById('agTxt').value.trim();
+    const hora  = document.getElementById('agHora').value;
+    const dias  = [...document.querySelectorAll('#agDias input:checked')].map(i=>+i.value);
+    if(!texto){ document.getElementById('agTxt').focus(); return; }
+    if(!dias.length){ alert('Escolha pelo menos um dia da semana.'); return; }
+    const lista = agLer();
+    lista.push({id:'t'+Date.now(), texto, hora, dias});
+    agSalvar(lista);
+    document.getElementById('agTxt').value='';
+    if(('Notification' in window) && Notification.permission === 'default') Notification.requestPermission();
+    render();
+  };
+  document.getElementById('agAdd').onclick = addTarefa;
+  document.getElementById('agTxt').addEventListener('keydown', e=>{ if(e.key==='Enter') addTarefa(); });
+
+  // lista de hoje
+  const hoje = tarefasDeHoje();
+  const h1 = document.createElement('div'); h1.className='sec-ag';
+  h1.textContent = 'Hoje — ' + ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'][dow];
+  app.appendChild(h1);
+
+  if(!hoje.length){
+    const e = document.createElement('div'); e.className='empty';
+    e.innerHTML = 'Nenhuma tarefa para hoje.<br><span style="font-size:12px">Escreva acima, escolha a hora e os dias, e clique em Adicionar.</span>';
+    app.appendChild(e);
+  }
+
+  hoje.forEach(t=>{
+    const feita = f.ids.includes(t.id);
+    const alvo = hhmmParaMin(t.hora);
+    let cls = 'ag-row';
+    if(feita) cls += ' feita';
+    else if(agora >= alvo) cls += ' atrasada';
+    else if(agora >= alvo-10) cls += ' agora';
+
+    const el = document.createElement('div'); el.className = cls;
+    el.innerHTML =
+      '<span class="ag-hora">'+t.hora+'</span>'+
+      '<div class="info"><div class="ag-txt">'+esc(t.texto)+'</div>'+
+      '<div class="ag-dias">'+t.dias.map(d=>NOMES_D[d]).join(' · ')+'</div></div>'+
+      '<button class="chk">'+(feita?'✓':'')+'</button>'+
+      '<button class="del" title="Excluir">✕</button>';
+    el.querySelector('.chk').onclick = ()=>{
+      const g = feitosLer();
+      const i = g.ids.indexOf(t.id);
+      if(i>=0) g.ids.splice(i,1); else g.ids.push(t.id);
+      feitosSalvar(g); render();
+    };
+    el.querySelector('.del').onclick = ()=>{
+      if(confirm('Excluir "'+t.texto+'" da agenda?')){
+        agSalvar(agLer().filter(x=>x.id!==t.id)); render();
+      }
+    };
+    app.appendChild(el);
+  });
+
+  // outros dias
+  const resto = agLer().filter(t=>!t.dias.includes(dow)).sort((a,b)=>a.hora.localeCompare(b.hora));
+  if(resto.length){
+    const h2 = document.createElement('div'); h2.className='sec-ag'; h2.textContent='Outros dias';
+    app.appendChild(h2);
+    resto.forEach(t=>{
+      const el = document.createElement('div'); el.className='ag-row';
+      el.style.opacity='.6';
+      el.innerHTML =
+        '<span class="ag-hora">'+t.hora+'</span>'+
+        '<div class="info"><div class="ag-txt">'+esc(t.texto)+'</div>'+
+        '<div class="ag-dias">'+t.dias.map(d=>NOMES_D[d]).join(' · ')+'</div></div>'+
+        '<button class="del" title="Excluir">✕</button>';
+      el.querySelector('.del').onclick = ()=>{
+        if(confirm('Excluir "'+t.texto+'" da agenda?')){
+          agSalvar(agLer().filter(x=>x.id!==t.id)); render();
+        }
+      };
+      app.appendChild(el);
+    });
+  }
+}
+
+setInterval(checarAlertas, 30000);
+setTimeout(checarAlertas, 1500);
 
 function esc(s){ return String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
