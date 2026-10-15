@@ -104,6 +104,12 @@ main{max-width:1200px;margin:0 auto;padding:0 14px}
 .aviso.erro{background:#2e1a1a;border-color:#7a2d2d;color:#fca5a5}
 .aviso.erro button{background:#fca5a5;color:#3a0d0d}
 .aviso button{background:#fcd34d;border:none;color:#3a2d06;border-radius:8px;padding:7px 13px;font-size:12.5px;font-weight:800;cursor:pointer}
+.export{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px;margin-top:20px}
+.export h4{margin:0 0 4px;font-size:13.5px;font-weight:800}
+.export p{margin:0 0 10px;font-size:12px;color:var(--dim);line-height:1.5}
+.export .bts{display:flex;gap:8px;flex-wrap:wrap}
+.btn-exp{background:var(--card2);border:1px solid var(--accent);color:var(--accent);border-radius:9px;padding:10px 14px;font-size:12.5px;font-weight:700;cursor:pointer}
+.btn-exp:hover{background:var(--accent);color:#06283d}
 .sec-ag{font-size:11.5px;font-weight:800;letter-spacing:1.2px;color:var(--dim);text-transform:uppercase;margin:16px 0 9px}
 
 /* lista de contatos */
@@ -527,6 +533,106 @@ function renderAgenda(app){
       app.appendChild(el);
     });
   }
+
+  blocoExportar(app);
+}
+
+
+/* ============ EXPORTAR PARA FORA DO NAVEGADOR ============ */
+const DIAS_ICS = ['SU','MO','TU','WE','TH','FR','SA'];
+const DIAS_WIN = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+
+function baixar(nome, conteudo, tipo){
+  const blob = new Blob([conteudo], {type: tipo + ';charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = nome;
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+}
+function dobra(n){ return String(n).padStart(2,'0'); }
+
+/* ---- Google Agenda (.ics) ---- */
+function gerarICS(){
+  const ts = agLer();
+  if(!ts.length){ alert('Cadastre pelo menos uma tarefa primeiro.'); return; }
+  const hoje = new Date();
+  const base = hoje.getFullYear() + dobra(hoje.getMonth()+1) + dobra(hoje.getDate());
+  const carimbo = base + 'T000000Z';
+  let s = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Panificadora Holandesa//Agenda//PT',
+    'CALSCALE:GREGORIAN','METHOD:PUBLISH','X-WR-CALNAME:Agenda Panificadora Holandesa',
+    'X-WR-TIMEZONE:America/Sao_Paulo',
+    'BEGIN:VTIMEZONE','TZID:America/Sao_Paulo','BEGIN:STANDARD','DTSTART:19700101T000000',
+    'TZOFFSETFROM:-0300','TZOFFSETTO:-0300','TZNAME:-03','END:STANDARD','END:VTIMEZONE'];
+  ts.forEach(function(t){
+    const p = t.hora.split(':');
+    const dias = t.dias.map(function(d){ return DIAS_ICS[d]; }).join(',');
+    const txt = String(t.texto).replace(/([\\;,])/g,'\\$1').replace(/\n/g,'\\n');
+    s.push('BEGIN:VEVENT','UID:'+t.id+'@holandesa','DTSTAMP:'+carimbo,
+      'DTSTART;TZID=America/Sao_Paulo:'+base+'T'+p[0]+p[1]+'00','DURATION:PT15M',
+      'RRULE:FREQ=WEEKLY;BYDAY='+dias,'SUMMARY:'+txt,
+      'DESCRIPTION:Agenda da Panificadora Holandesa',
+      'BEGIN:VALARM','TRIGGER:-PT10M','ACTION:DISPLAY','DESCRIPTION:Em 10 min - '+txt,'END:VALARM',
+      'BEGIN:VALARM','TRIGGER:PT0M','ACTION:DISPLAY','DESCRIPTION:'+txt,'END:VALARM','END:VEVENT');
+  });
+  s.push('END:VCALENDAR');
+  baixar('agenda_holandesa.ics', s.join('\r\n'), 'text/calendar');
+}
+
+/* ---- Agendador de Tarefas do Windows (.ps1) ---- */
+function gerarPS1(){
+  const ts = agLer();
+  if(!ts.length){ alert('Cadastre pelo menos uma tarefa primeiro.'); return; }
+  function limpo(s){ return (String(s).replace(/[^A-Za-z0-9 _-]/g,'').trim().slice(0,40)) || 'Tarefa'; }
+  function esc2(s){ return String(s).replace(/"/g,'').replace(/'/g,''); }
+  let L = [];
+  L.push('# Alertas da Agenda - Panificadora Holandesa');
+  L.push('# Botao direito neste arquivo > Executar com o PowerShell');
+  L.push('');
+  L.push('$pasta = Split-Path -Parent $MyInvocation.MyCommand.Definition');
+  L.push('$vbs = Join-Path $pasta "alerta_holandesa.vbs"');
+  L.push('');
+  L.push('$corpo = @"');
+  L.push('Set a = WScript.Arguments');
+  L.push('t = a(0)');
+  L.push('Set sh = CreateObject("WScript.Shell")');
+  L.push('sh.Run "powershell -WindowStyle Hidden -Command ""(New-Object Media.SoundPlayer \u0027C:\\Windows\\Media\\Alarm01.wav\u0027).PlaySync()""", 0, False');
+  L.push('sh.Popup t, 0, "AGENDA - Panificadora Holandesa", 48 + 4096');
+  L.push('"@');
+  L.push('Set-Content -Path $vbs -Value $corpo -Encoding Default');
+  L.push('');
+  L.push('Get-ScheduledTask -TaskPath "\\Holandesa\\" -ErrorAction SilentlyContinue | Unregister-ScheduledTask -Confirm:$false');
+  L.push('');
+  ts.forEach(function(t){
+    const nome = limpo(t.texto) + ' ' + t.hora.replace(':','h');
+    const dias = t.dias.map(function(d){ return DIAS_WIN[d]; }).join(',');
+    L.push('schtasks /Create /F /TN "Holandesa\\' + nome + '" /TR "wscript.exe \\"$vbs\\" \\"' + esc2(t.texto) + '\\"" /SC WEEKLY /D ' + dias + ' /ST ' + t.hora + ' | Out-Null');
+  });
+  L.push('');
+  L.push('Write-Host ""');
+  L.push('Write-Host "Pronto! ' + ts.length + ' alerta(s) criado(s)." -ForegroundColor Green');
+  L.push('Write-Host "Tocam mesmo com o Chrome fechado, com o computador ligado."');
+  L.push('Write-Host ""');
+  L.push('Write-Host "Conferir: Agendador de Tarefas > Biblioteca > Holandesa"');
+  L.push('Read-Host "Aperte Enter para fechar"');
+  baixar('ALERTAS_WINDOWS.ps1', '\ufeff' + L.join('\r\n'), 'text/plain');
+}
+
+function blocoExportar(app){
+  const ts = agLer();
+  const d = document.createElement('div'); d.className='export';
+  d.innerHTML = '<h4>&#128276; Avisos fora do navegador</h4>'+
+    '<p>Cadastre as tarefas acima e gere os avisos. <b>Refaca isso sempre que mudar a agenda.</b><br>'+
+    'Tarefas na agenda agora: <b>'+ts.length+'</b></p>'+
+    '<div class="bts">'+
+      '<button class="btn-exp" id="expIcs">&#128241; Gerar p/ Google Agenda (celular)</button>'+
+      '<button class="btn-exp" id="expPs1">&#128187; Gerar alerta do Windows</button>'+
+    '</div>'+
+    '<p style="margin-top:11px"><b>Celular:</b> baixe o arquivo, abra <b>calendar.google.com</b> no computador &rarr; engrenagem &rarr; Configuracoes &rarr; Importar e exportar &rarr; escolha o arquivo &rarr; Importar. O alarme passa a tocar no seu celular.<br>'+
+    '<b>Windows:</b> baixe o arquivo, salve na pasta DESPERDICIO, clique com o <b>botao direito</b> nele &rarr; <b>Executar com o PowerShell</b>.</p>';
+  app.appendChild(d);
+  document.getElementById('expIcs').onclick = gerarICS;
+  document.getElementById('expPs1').onclick = gerarPS1;
 }
 
 setInterval(checarAlertas, 30000);
