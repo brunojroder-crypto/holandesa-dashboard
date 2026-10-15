@@ -101,6 +101,8 @@ main{max-width:1200px;margin:0 auto;padding:0 14px}
 .del{background:none;border:none;color:#5a6e84;font-size:17px;cursor:pointer;padding:4px 6px;flex:0 0 auto}
 .del:hover{color:var(--pend)}
 .aviso{background:#2a2416;border:1px solid #5c4a1a;color:#fcd34d;border-radius:10px;padding:11px 13px;font-size:13px;margin-bottom:13px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.aviso.erro{background:#2e1a1a;border-color:#7a2d2d;color:#fca5a5}
+.aviso.erro button{background:#fca5a5;color:#3a0d0d}
 .aviso button{background:#fcd34d;border:none;color:#3a2d06;border-radius:8px;padding:7px 13px;font-size:12.5px;font-weight:800;cursor:pointer}
 .sec-ag{font-size:11.5px;font-weight:800;letter-spacing:1.2px;color:var(--dim);text-transform:uppercase;margin:16px 0 9px}
 
@@ -313,6 +315,7 @@ function render(){
 
 
 /* =================== AGENDA =================== */
+const AG_URL = 'https://brunojroder-crypto.github.io/holandesa-dashboard/checklist_pedidos.html';
 const AG_KEY = 'holandesa_agenda_v1';     // tarefas (NAO zera por semana)
 const AG_DONE = 'holandesa_agenda_done';  // feitas do dia
 const NOMES_D = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
@@ -397,11 +400,41 @@ function renderAgenda(app){
   const agora = minutosAgora();
   const dow = new Date().getDay();
 
-  if(('Notification' in window) && Notification.permission !== 'granted'){
+  const ehArquivoLocal = location.protocol === 'file:';
+
+  if(ehArquivoLocal){
+    // file:// nao e origem segura -> o Chrome nunca libera notificacao aqui
+    const av = document.createElement('div'); av.className='aviso erro';
+    av.innerHTML =
+      '<span><b>Esta é a cópia salva no computador</b> — aqui o Chrome não deixa mandar aviso nenhum.<br>'+
+      'Abra o endereço publicado e <b>fixe aquela aba</b>; é lá que a agenda funciona.</span>';
+    const b = document.createElement('button'); b.textContent='Abrir o endereço certo';
+    b.onclick = ()=> location.href = AG_URL;
+    av.appendChild(b); app.appendChild(av);
+  } else if(('Notification' in window) && Notification.permission === 'denied'){
+    const av = document.createElement('div'); av.className='aviso erro';
+    av.innerHTML =
+      '<span><b>As notificações estão bloqueadas para este site.</b><br>'+
+      'Clique no <b>cadeado</b> ao lado do endereço, em <b>Notificações</b> escolha <b>Permitir</b>, e recarregue a página.</span>';
+    app.appendChild(av);
+  } else if(('Notification' in window) && Notification.permission !== 'granted'){
     const av = document.createElement('div'); av.className='aviso';
-    av.innerHTML = '<span>🔕 Os avisos estão desligados. Libere as notificações para a agenda te alertar.</span>';
+    const txt = document.createElement('span');
+    txt.innerHTML = '🔕 Os avisos estão desligados. Libere as notificações para a agenda te alertar.';
+    av.appendChild(txt);
     const b = document.createElement('button'); b.textContent='Ativar avisos';
-    b.onclick = ()=> Notification.requestPermission().then(()=>{ bipe(); render(); });
+    b.onclick = ()=>{
+      Notification.requestPermission().then(p=>{
+        bipe();
+        if(p === 'default'){
+          // o Chrome engoliu o pedido (modo "mensagens mais silenciosas")
+          txt.innerHTML = '<b>O Chrome não mostrou o pedido.</b><br>'+
+            'Procure o sino riscado 🔔 no canto direito da barra de endereços e clique em <b>Permitir</b>.<br>'+
+            'Se não aparecer: clique no <b>cadeado</b> ao lado do endereço → <b>Notificações</b> → <b>Permitir</b>.';
+          b.remove();
+        } else { render(); }
+      });
+    };
     av.appendChild(b); app.appendChild(av);
   }
 
