@@ -180,7 +180,7 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
 <div class="hdr">
   <div>
     <h1>🥐 Panificadora Holandesa</h1>
-    <div class="sub">Controle de Desperdício · Jun/2024 — Out/2026 · 125 produtos · 674 dias</div>
+    <div class="sub">Controle de Desperdício · Jun/2024 — Out/2026 · 125 produtos · 675 dias</div>
   </div>
   <div style="display:flex;align-items:center;gap:12px">
   <div style="display:flex;align-items:center;gap:10px">
@@ -341,12 +341,12 @@ footer{text-align:center;color:var(--muted);font-size:11px;margin-top:36px;paddi
 // DADOS COMPLETOS
 // ═══════════════════════════════════════════
 const LABELS = ['Jun/24','Jul/24','Ago/24','Set/24','Out/24','Nov/24','Jan/25','Fev/25','Mar/25','Abr/25','Mai/25','Jun/25','Jul/25','Ago/25','Set/25','Out/25','Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26','Mai/26','Jun/26','Jul/26','Ago/26','Set/26','Out/26*'];
-const DIAS   = [24,24,25,26,30,30,28,22,31,27,30,26,31,29,23,30,27,30,29,28,26,26,20,14,11,9,9,9];
+const DIAS   = [24,24,25,26,30,30,28,22,31,27,30,26,31,29,23,30,27,30,29,28,26,26,20,14,11,9,9,10];
 const CAL_DIAS = [30,31,31,30,31,30,31,28,31,30,31,30,31,31,30,31,30,31,31,28,31,30,31,30,31,31,30,31];
 
 const ALL = {
-  vl:[4404.55,4794.98,4036.47,6060.48,7066.15,5201.4,6205.38,4773.78,9733.74,5329.03,4296.28,4702.34,6599.74,4308.6,4782.76,6201.01,5517.93,13507.06,5742.91,9561.4,5275.97,5916.57,3394.54,10375.29,9307.83,9172.37,14322.27,5427.07],
-  qt:[1868,1895,1494,1932,2230,1679,1630,1418,1700,1153,1037,1311,1912,1106,1168,1987,1457,3681,1123,1587,1417,1317,841,3430,1670,1211,5290,590]
+  vl:[4404.55,4794.98,4036.47,6060.48,7066.15,5201.4,6205.38,4773.78,9733.74,5329.03,4296.28,4702.34,6599.74,4308.6,4782.76,6201.01,5517.93,13507.06,5742.91,9561.4,5275.97,5916.57,3394.54,10375.29,9307.83,9172.37,14322.27,5733.05],
+  qt:[1868,1895,1494,1932,2230,1679,1630,1418,1700,1153,1037,1311,1912,1106,1168,1987,1457,3681,1123,1587,1417,1317,841,3430,1670,1211,5290,629]
 };
 
 // Dados por categoria (mensais)
@@ -375,11 +375,11 @@ const CAT_MENSAL = {
 
 const TOP_GERAL = {
   pr:["Pão Queijo Gde", "Mini Coxinha", "Mini Pão Queijo", "Mini Risolis", "Mini Kibe", "Salgado Gde Assado", "Bolo De Fubá", "Salgado Gde Frito", "Bolo de Laranja", "Mini Bolinha Queijo"],
-  vl:[20796.2,14432.6,13367.5,12780.3,9384.7,8178.8,7728.0,6988.8,6776.0,6173.7]
+  vl:[20796.2,14432.6,13442.5,12780.3,9384.7,8178.8,7728.0,6988.8,6776.0,6173.7]
 };
 const TOP_CAT = {
-  "PADARIA / PÃES":{pr:["Pão Queijo Gde", "Mini Pão Queijo", "Brioche Calabresa", "Pão Cuca", "Pão Fazenda", "Cueca Virada", "Pao Cuca/ Cenoura", "Massa de Pizza", "Pão De Milho", "Pão Caseiro", "Pingo De Ouro", "Mini Pão De Queijo C/ Goib", "Medialuna", "Croissant", "Pao De Nata", "Pao De Leite Ninho", "Pão De Forma", "Pão De Queijo Palito", "Pão Fiesta", "Pao De Forma Integral", "Pirogue", "Pão Integral De Forma", "Pão De Nata", "Focaccia", "Lua De Mel", "Pão de Milho c/ Goiabada", "Pain Suisse", "Baguete Lanche", "Pao Doce", "Fatia Húngara", "Pão De Cenoura (Kg)", "Sonho", "Pão Integral", "Broa De Fuba", "Pao Suico", "Pão De Forma Integral", "Panqueca", "Trança De Creme", "Beliscão", "Bisnaguinha", "Mini Rosca De Creme", "Gravatinha"],vl:[20796.2,13367.5,3725.2,3219.2,3137.4,3107.1,2231.8,2079.0,1945.6,1587.8,1564.5,1373.1,1035.0,969.2,945.0,678.2,542.0,437.0,357.0,280.0,275.5,252.0,226.8,165.0,160.5,150.0,146.3,132.0,107.2,84.0,75.8,74.5,70.0,61.5,58.5,42.0,30.0,28.0,16.9,14.4,7.0,3.5]},
-  "CONFEITARIA / BOLOS":{pr:["Bolo De Fubá", "Bolo de Laranja", "Bolo de Cenoura", "Bolo de Chocolate", "Bolo Nega Maluca", "Bolo de Aipim", "Bolo Tira Misto", "Bolo Gluten Less", "Bolo de Iogurte", "Bolo Redondo Misto", "Queijadinha", "Rocambole", "Bolo Toalha Felpuda", "Bolo De Milho", "Carolina Açucarada", "Cuca", "Bolo De Tangerina", "Bolo De Limão Tira", "Crunch Cake Potinho", "Morango do Amor", "Bolo Formigueiro", "Fatia Torta Doce", "Bala De Brigadeiro 100G", "Bolo Multigrãos", "Bala de Brigadeiro Kg", "Uva Com Sucrilhos", "Cookies Cacau", "Maçã Do Amor", "Barra Chocolate C/ Pipoca", "Palha Italiana De Pistache", "Torta De Morango", "Danish De Morango", "Alfajor Branco", "Crunch Cake", "Pote Pavê De Morango/Suspiro 140G", "Brigadeiro Caramelo Salgado", "Bolo De Cenoura Pequeno", "Trio Wafer Sortido 80G", "Bolo De Maçã", "Pavê Russo", "Brigadeiro Pistache", "Rosquinha De Pinga", "Bicho De Pé", "Beijinho", "Bolo De Banana Funcional", "Bolo De Laranja2", "Eclair Pistache Com Morango", "Cajuzinho", "Bolo Nega Maluca Pequeno", "Brigadeiro De Milho", "Bombom Morango Belga", "Bombom Morango Pistache", "Tortelete De Morango", "Pote Pave Morango/Suspiro", "Bolo De Bana Funcional", "Casadinho", "Pote De Pave De Morango/Suspiro", "Nuts Ao Leite", "Maria Mole Caseira"],vl:[7728.0,6776.0,4200.0,3725.0,3416.0,3024.0,2950.0,2800.0,2184.0,2100.0,1860.0,1301.0,1260.0,1148.0,1044.0,912.0,868.0,700.0,581.9,556.5,504.0,321.7,298.0,256.1,249.4,235.7,218.9,187.5,174.5,168.1,148.3,147.1,126.5,99.5,92.8,92.5,88.0,84.8,84.0,74.2,70.4,70.0,66.0,60.0,57.0,56.0,52.5,48.0,44.0,42.0,40.5,40.5,40.4,37.1,28.0,26.2,18.6,14.4,13.9]},
+  "PADARIA / PÃES":{pr:["Pão Queijo Gde", "Mini Pão Queijo", "Brioche Calabresa", "Pão Cuca", "Pão Fazenda", "Cueca Virada", "Pao Cuca/ Cenoura", "Massa de Pizza", "Pão De Milho", "Pão Caseiro", "Pingo De Ouro", "Mini Pão De Queijo C/ Goib", "Croissant", "Medialuna", "Pao De Nata", "Pao De Leite Ninho", "Pão De Forma", "Pão De Queijo Palito", "Pão Fiesta", "Pao De Forma Integral", "Pirogue", "Pão Integral De Forma", "Pão De Nata", "Focaccia", "Lua De Mel", "Pão de Milho c/ Goiabada", "Pain Suisse", "Baguete Lanche", "Pao Doce", "Fatia Húngara", "Pão De Cenoura (Kg)", "Sonho", "Pão Integral", "Pão De Forma Integral", "Broa De Fuba", "Pao Suico", "Panqueca", "Trança De Creme", "Beliscão", "Bisnaguinha", "Mini Rosca De Creme", "Gravatinha"],vl:[20796.2,13442.5,3725.2,3219.2,3137.4,3107.1,2231.8,2079.0,1945.6,1587.8,1564.5,1373.1,1086.7,1035.0,945.0,678.2,542.0,437.0,357.0,280.0,275.5,252.0,226.8,165.0,160.5,150.0,146.3,132.0,107.2,84.0,75.8,74.5,70.0,70.0,61.5,58.5,30.0,28.0,16.9,14.4,7.0,3.5]},
+  "CONFEITARIA / BOLOS":{pr:["Bolo De Fubá", "Bolo de Laranja", "Bolo de Cenoura", "Bolo de Chocolate", "Bolo Nega Maluca", "Bolo de Aipim", "Bolo Tira Misto", "Bolo Gluten Less", "Bolo de Iogurte", "Bolo Redondo Misto", "Queijadinha", "Rocambole", "Bolo Toalha Felpuda", "Bolo De Milho", "Carolina Açucarada", "Cuca", "Bolo De Tangerina", "Bolo De Limão Tira", "Crunch Cake Potinho", "Morango do Amor", "Bolo Formigueiro", "Fatia Torta Doce", "Bala De Brigadeiro 100G", "Bolo Multigrãos", "Bala de Brigadeiro Kg", "Uva Com Sucrilhos", "Cookies Cacau", "Maçã Do Amor", "Barra Chocolate C/ Pipoca", "Palha Italiana De Pistache", "Torta De Morango", "Danish De Morango", "Bolo De Banana Funcional", "Alfajor Branco", "Crunch Cake", "Pote Pavê De Morango/Suspiro 140G", "Brigadeiro Caramelo Salgado", "Bolo De Cenoura Pequeno", "Trio Wafer Sortido 80G", "Bolo De Maçã", "Pavê Russo", "Brigadeiro Pistache", "Rosquinha De Pinga", "Bicho De Pé", "Beijinho", "Bolo De Laranja2", "Eclair Pistache Com Morango", "Cajuzinho", "Bolo Nega Maluca Pequeno", "Brigadeiro De Milho", "Bombom Morango Belga", "Bombom Morango Pistache", "Tortelete De Morango", "Pote Pave Morango/Suspiro", "Bolo De Bana Funcional", "Casadinho", "Pote De Pave De Morango/Suspiro", "Nuts Ao Leite", "Maria Mole Caseira"],vl:[7728.0,6776.0,4200.0,3725.0,3416.0,3024.0,2950.0,2800.0,2184.0,2100.0,1860.0,1301.0,1260.0,1148.0,1044.0,912.0,868.0,700.0,581.9,556.5,504.0,321.7,298.0,256.1,249.4,235.7,218.9,187.5,174.5,168.1,148.3,147.1,142.5,126.5,99.5,92.8,92.5,88.0,84.8,84.0,74.2,70.4,70.0,66.0,60.0,56.0,52.5,48.0,44.0,42.0,40.5,40.5,40.4,37.1,28.0,26.2,18.6,14.4,13.9]},
   "SALGADOS":{pr:["Mini Coxinha", "Mini Risolis", "Mini Kibe", "Salgado Gde Assado", "Salgado Gde Frito", "Mini Bolinha Queijo", "Mini Pastel", "Torta Inteira", "Salgado Frito Grande", "Mini Salgado Assado", "Salgado Frito", "Mini Esfirra", "Mini Pizza", "Mini Trouxinha Frango Com Palmito", "Mini Pastel De Queijo", "Mini Quiche Legumes", "Mini Empada De Frango"],vl:[14432.6,12780.3,9384.7,8178.8,6988.8,6173.7,2854.8,2518.6,985.6,595.7,409.6,143.0,114.4,63.7,61.2,26.9,2.5]},
   "FRIOS & EMBUTIDOS":{pr:[],vl:[]},
   "OUTROS":{pr:["Nozes Peca (Kg)", "Avela (Kg)", "Nozes Quartz (Kg)", "Salada de Frutas", "Parmegiana De Boi", "Parmegiana De Frango", "Lanche Natural"],vl:[300.0,258.0,208.6,94.8,94.5,92.8,84.0]}
@@ -395,13 +395,13 @@ const CMP_CAT = {
 };
 
 const CAT_INFO = [
-  {name:'PADARIA / PÃES', color:'#00cfff', total:65559.14, icon:'🍞'},
-  {name:'CONFEITARIA / BOLOS', color:'#ff8800', total:53611.25, icon:'🎂'},
+  {name:'PADARIA / PÃES', color:'#00cfff', total:65779.62, icon:'🍞'},
+  {name:'CONFEITARIA / BOLOS', color:'#ff8800', total:53696.75, icon:'🎂'},
   {name:'SALGADOS', color:'#00ff99', total:65714.86, icon:'🥐'},
   {name:'FRIOS & EMBUTIDOS', color:'#c800ff', total:0.0, icon:'🧀'},
   {name:'OUTROS', color:'#ffcc00', total:1132.65, icon:'🍬'}
 ];
-const TOTAL_GERAL = 186017.9;
+const TOTAL_GERAL = 186323.88;
 
 // Dados detalhados por produto (mensal + anual)
 const PROD_DATA = {
@@ -416,7 +416,7 @@ const PROD_DATA = {
   "Bicho De Pé":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,57.0,9.0,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,19,3,0,0],an:[0.0,0.0,66.0],aqt:[0,0,22],tv:66.0,tq:22,dias:4,md:16.5},
   "Bisnaguinha":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,14.36,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],an:[0.0,0.0,14.36],aqt:[0,0,1],tv:14.36,tq:1,dias:1,md:14.36},
   "Bolo De Bana Funcional":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,28.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0],an:[0.0,0.0,28.0],aqt:[0,0,1],tv:28.0,tq:1,dias:1,md:28.0},
-  "Bolo De Banana Funcional":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,57.0,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0],an:[0.0,0.0,57.0],aqt:[0,0,2],tv:57.0,tq:2,dias:1,md:57.0},
+  "Bolo De Banana Funcional":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,57.0,0.0,85.5],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,3],an:[0.0,0.0,142.5],aqt:[0,0,5],tv:142.5,tq:5,dias:2,md:71.25},
   "Bolo De Cenoura Pequeno":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,88.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0],an:[0.0,0.0,88.0],aqt:[0,0,4],tv:88.0,tq:4,dias:1,md:88.0},
   "Bolo De Fubá":{vl:[112.0,196.0,0.0,560.0,420.0,84.0,420.0,560.0,0.0,168.0,224.0,0.0,196.0,140.0,280.0,532.0,560.0,448.0,56.0,196.0,196.0,644.0,112.0,84.0,336.0,644.0,364.0,196.0],qt:[4,7,0,20,15,3,15,20,0,6,8,0,7,5,10,19,20,16,2,7,7,23,4,3,12,23,13,7],an:[1372.0,3528.0,2828.0],aqt:[49,126,101],tv:7728.0,tq:276,dias:119,md:64.94},
   "Bolo De Laranja2":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,56.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],an:[0.0,56.0,0.0],aqt:[0,2,0],tv:56.0,tq:2,dias:2,md:28.0},
@@ -448,7 +448,7 @@ const PROD_DATA = {
   "Carolina Açucarada":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,228.0,180.0,60.0,36.0,24.0,0.0,168.0,72.0,156.0,120.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,19,15,5,3,2,0,14,6,13,10],an:[0.0,0.0,1044.0],aqt:[0,0,87],tv:1044.0,tq:87,dias:17,md:61.41},
   "Casadinho":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,26.2,0.0,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,0,0,0],an:[0.0,0.0,26.2],aqt:[0,0,10],tv:26.2,tq:10,dias:1,md:26.2},
   "Cookies Cacau":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,99.5,119.4,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,6,0,0],an:[0.0,0.0,218.9],aqt:[0,0,11],tv:218.9,tq:11,dias:2,md:109.45},
-  "Croissant":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,88.11,205.59,29.37,0.0,0.0,264.33,117.48,0.0,264.33,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,7,1,0,0,9,4,0,9,0],an:[0.0,0.0,969.21],aqt:[0,0,33],tv:969.21,tq:33,dias:7,md:138.46},
+  "Croissant":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,88.11,205.59,29.37,0.0,0.0,264.33,117.48,0.0,264.33,117.48],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,7,1,0,0,9,4,0,9,4],an:[0.0,0.0,1086.69],aqt:[0,0,37],tv:1086.69,tq:37,dias:8,md:135.84},
   "Crunch Cake":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,59.7,0.0,0.0,0.0,0.0,0.0,0.0,39.8,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,2,0,0],an:[0.0,0.0,99.5],aqt:[0,0,5],tv:99.5,tq:5,dias:2,md:49.75},
   "Crunch Cake Potinho":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,303.6,0.0,278.3,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,12,0,11,0,0],an:[0.0,0.0,581.9],aqt:[0,0,23],tv:581.9,tq:23,dias:2,md:290.95},
   "Cuca":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,256.5,342.0,228.0,85.5,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,12,8,3,0],an:[0.0,0.0,912.0],aqt:[0,0,32],tv:912.0,tq:32,dias:11,md:82.91},
@@ -474,7 +474,7 @@ const PROD_DATA = {
   "Mini Pastel De Queijo":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,23.4,37.8],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,13,21],an:[0.0,0.0,61.2],aqt:[0,0,34],tv:61.2,tq:34,dias:8,md:7.65},
   "Mini Pizza":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,114.4,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,52,0],an:[0.0,0.0,114.4],aqt:[0,0,52],tv:114.4,tq:52,dias:1,md:114.4},
   "Mini Pão De Queijo C/ Goib":{vl:[142.6,0.0,149.5,512.9,568.1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[62,0,65,223,247,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],an:[1373.1,0.0,0.0],aqt:[597,0,0],tv:1373.1,tq:597,dias:37,md:37.11},
-  "Mini Pão Queijo":{vl:[580.0,210.0,385.0,1020.0,315.0,667.5,437.5,702.5,522.5,397.5,385.0,410.0,392.5,435.0,317.5,822.5,302.5,1207.5,292.5,220.0,607.5,215.0,327.5,300.0,587.5,460.0,570.0,277.5],qt:[232,84,154,408,126,267,175,281,209,159,154,164,157,174,127,329,121,483,117,88,243,86,131,120,235,184,228,111],an:[3177.5,6332.5,3857.5],aqt:[1271,2533,1543],tv:13367.5,tq:5347,dias:267,md:50.07},
+  "Mini Pão Queijo":{vl:[580.0,210.0,385.0,1020.0,315.0,667.5,437.5,702.5,522.5,397.5,385.0,410.0,392.5,435.0,317.5,822.5,302.5,1207.5,292.5,220.0,607.5,215.0,327.5,300.0,587.5,460.0,570.0,352.5],qt:[232,84,154,408,126,267,175,281,209,159,154,164,157,174,127,329,121,483,117,88,243,86,131,120,235,184,228,141],an:[3177.5,6332.5,3932.5],aqt:[1271,2533,1573],tv:13442.5,tq:5377,dias:268,md:50.16},
   "Mini Quiche Legumes":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,26.95,0.0,0.0,0.0,0.0,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,0,0,0,0,0,0],an:[0.0,0.0,26.95],aqt:[0,0,11],tv:26.95,tq:11,dias:2,md:13.47},
   "Mini Risolis":{vl:[535.6,833.3,500.5,516.1,414.7,481.0,618.8,296.4,227.5,187.2,387.4,629.2,631.8,313.3,427.7,811.2,518.7,1171.3,423.8,466.7,436.8,426.4,184.6,117.0,344.5,288.6,431.6,158.6],qt:[412,641,385,397,319,370,476,228,175,144,298,484,486,241,329,624,399,901,326,359,336,328,142,90,265,222,332,122],an:[3281.2,6220.5,3278.6],aqt:[2524,4785,2522],tv:12780.3,tq:9831,dias:431,md:29.65},
   "Mini Rosca De Creme":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,7.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0],an:[0.0,0.0,7.0],aqt:[0,0,2],tv:7.0,tq:2,dias:1,md:7.0},
@@ -505,7 +505,7 @@ const PROD_DATA = {
   "Pão Cuca":{vl:[98.75,59.25,118.5,98.75,177.75,138.25,138.25,79.0,138.25,395.0,0.0,0.0,414.75,0.0,0.0,0.0,0.0,395.0,0.0,0.0,0.0,0.0,0.0,98.75,513.5,79.0,237.0,39.5],qt:[5,3,6,5,9,7,7,4,7,20,0,0,21,0,0,0,0,20,0,0,0,0,0,5,26,4,12,2],an:[691.25,1560.25,967.75],aqt:[35,79,49],tv:3219.25,tq:163,dias:64,md:50.3},
   "Pão De Cenoura (Kg)":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,75.84,0.0,0.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0],an:[0.0,0.0,75.84],aqt:[0,0,1],tv:75.84,tq:1,dias:1,md:75.84},
   "Pão De Forma":{vl:[0.0,48.0,0.0,0.0,72.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,84.0,0.0,12.0,0.0,182.0,144.0,0.0],qt:[0,4,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,1,0,14,12,0],an:[120.0,0.0,422.0],aqt:[10,0,34],tv:542.0,tq:44,dias:19,md:28.53},
-  "Pão De Forma Integral":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,42.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],an:[0.0,0.0,42.0],aqt:[0,0,3],tv:42.0,tq:3,dias:1,md:42.0},
+  "Pão De Forma Integral":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,70.0],qt:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5],an:[0.0,0.0,70.0],aqt:[0,0,5],tv:70.0,tq:5,dias:2,md:35.0},
   "Pão De Milho":{vl:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,197.5,59.25,217.25,118.5,158.0,237.0,118.5,0.0,39.5,79.0,118.5,163.83,138.25,23.32,39.6,237.6],qt:[0,0,0,0,0,0,0,0,0,0,0,0,10,3,11,6,8,12,6,0,2,4,6,8,7,1,2,12],an:[0.0,987.5,958.1],aqt:[0,50,48],tv:1945.6,tq:98,dias:49,md:39.71},
   "Pão De Nata":{vl:[0.0,18.9,0.0,0.0,0.0,75.6,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,94.5,37.8,0.0,0.0],qt:[0,1,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,2,0,0],an:[94.5,0.0,132.3],aqt:[5,0,7],tv:226.8,tq:12,dias:6,md:37.8},
   "Pão De Queijo Palito":{vl:[418.6,18.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],qt:[182,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],an:[437.0,0.0,0.0],aqt:[190,0,0],tv:437.0,tq:190,dias:16,md:27.31},
@@ -4283,6 +4283,10 @@ const DAILY = [
 ["2026-10-18","Mini Pão Queijo",45.0,18],
 ["2026-10-18","Mini Risolis",3.9,3],
 ["2026-10-18","Pão Queijo Gde",36.84,4],
+["2026-10-19","Bolo De Banana Funcional",85.5,3],
+["2026-10-19","Croissant",117.48,4],
+["2026-10-19","Mini Pão Queijo",75.0,30],
+["2026-10-19","Pão De Forma Integral",28.0,2],
 ["2026-10-22","Bolo De Fubá",56.0,2],
 ["2026-10-22","Bolo de Laranja",56.0,2],
 ["2026-10-22","Brioche Calabresa",83.4,3],
@@ -4445,6 +4449,10 @@ function setF(n){
 {dt:"22/10",pr:"Pao De Leite Ninho",qt:25,vl:172.25},
 {dt:"22/10",pr:"Pingo De Ouro",qt:12,vl:408.12},
 {dt:"22/10",pr:"Brioche Calabresa",qt:3,vl:83.4},
+{dt:"19/10",pr:"Pão De Forma Integral",qt:2,vl:28.0},
+{dt:"19/10",pr:"Bolo De Banana Funcional",qt:3,vl:85.5},
+{dt:"19/10",pr:"Mini Pão Queijo",qt:30,vl:75.0},
+{dt:"19/10",pr:"Croissant",qt:4,vl:117.48},
 {dt:"18/10",pr:"Mini Pastel De Queijo",qt:8,vl:14.4},
 {dt:"18/10",pr:"Mini Risolis",qt:3,vl:3.9},
 {dt:"18/10",pr:"Mini Bolinha Queijo",qt:18,vl:23.4},
